@@ -1,0 +1,8 @@
+rasa_env/
+.env
+__pycache__/
+.rasa/
+models/*
+docker-compose.yml
+Dockerfile
+.dockerignore

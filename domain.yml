@@ -1,0 +1,344 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - thank
+  - search_product
+  - product_detail
+  - list_top_products
+  - list_shop_products
+  - check_order_status
+  - check_payment_status
+  - add_rating
+  - show_user_ratings
+  - login
+  - register
+  - bot_challenge
+  - provide_rating_comment
+  - faq_business_hours
+  - faq_payment_methods
+  - help
+  - affirm
+  - deny
+  - out_of_scope
+  - nlu_fallback
+  - tutorial_order_website
+
+entities:
+  - product
+  - product_id
+  - shop
+  - shop_id
+  - order_id
+  - rating_value
+  - quantity
+  - spicy_level
+
+slots:
+  product_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: product_id
+  shop_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: shop_id
+  order_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: order_id
+  user_id:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: custom
+  rating_value:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: rating_value
+  rating_comment:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        intent: provide_rating_comment
+  quantity:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: quantity
+  spicy_level:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: spicy_level
+  search_results:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: custom
+  current_product:
+    type: any
+    influence_conversation: false
+    mappings:
+      - type: custom
+  top_products:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: custom
+  shop_products:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: custom
+  conversation_stage:
+    type: categorical
+    values:
+      - initial
+      - post_faq
+      - post_search
+      - post_rating
+      - post_order_check
+    influence_conversation: true
+    initial_value: initial
+    mappings:
+      - type: custom
+  requested_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Halo! Selamat datang di layanan chatbot Ayam Bakar Nusantara. Ada yang bisa saya bantu hari ini?"
+    - text: "Selamat datang di Ayam Bakar Nusantara! Saya siap membantu Anda dengan informasi produk, status pesanan, atau pertanyaan lainnya."
+    - text: "Halo! Terima kasih telah menghubungi Ayam Bakar Nusantara. Bagaimana saya bisa membantu Anda hari ini?"
+    - text: "Selamat datang! Saya asisten virtual Ayam Bakar Nusantara. Apa yang bisa saya bantu untuk Anda?"
+    - text: "Hai! Selamat datang di layanan pelanggan Ayam Bakar Nusantara. Ada yang bisa dibantu?"
+    - text: "Halo, senang bertemu dengan Anda! Saya siap membantu dengan segala informasi tentang Ayam Bakar Nusantara."
+
+  utter_fallback:
+    - text: "Maaf, saya tidak mengerti maksud Anda. Bisa dijelaskan dengan cara lain?"
+    - text: "Mohon maaf, saya belum bisa memahami permintaan Anda. Anda bisa mencoba dengan frasa yang berbeda atau ketik 'bantuan' untuk melihat hal-hal yang bisa saya lakukan."
+    - text: "Maaf, saya tidak yakin apa yang Anda maksud. Bolehkah Anda menguraikan pertanyaan Anda dengan lebih spesifik?"
+    - text: "Sepertinya saya masih bingung dengan permintaan Anda. Ketik 'bantuan' untuk melihat daftar layanan yang tersedia."
+    - text: "Maaf, saya belum bisa memproses permintaan tersebut. Mungkin Anda bisa menyampaikannya dengan kata-kata yang berbeda?"
+    - text: "Saya masih dalam tahap belajar dan belum memahami permintaan Anda. Coba gunakan kalimat yang lebih sederhana atau ketik 'help' untuk bantuan."
+    - text: "Maaf, permintaan Anda di luar kemampuan saya saat ini. Silakan coba dengan cara lain atau tanyakan hal yang berbeda."
+
+  utter_goodbye:
+    - text: "Terima kasih telah menggunakan layanan kami. Sampai jumpa kembali!"
+    - text: "Terima kasih atas kunjungan Anda. Selamat beraktivitas!"
+    - text: "Senang bisa membantu Anda. Sampai jumpa lagi di lain kesempatan!"
+    - text: "Terima kasih telah berkomunikasi dengan kami. Jangan ragu untuk menghubungi kembali jika membutuhkan bantuan."
+    - text: "Terima kasih atas waktunya. Semoga hari Anda menyenangkan!"
+    - text: "Terima kasih telah menghubungi Ayam Bakar Nusantara. Kami menantikan pesanan Anda berikutnya!"
+    - text: "Sampai jumpa! Terima kasih telah menggunakan layanan chatbot Ayam Bakar Nusantara."
+    - text: "Terima kasih dan selamat menikmati hidangan Ayam Bakar Nusantara!"
+
+  utter_youre_welcome:
+    - text: "Sama-sama! Ada lagi yang bisa saya bantu?"
+    - text: "Dengan senang hati! Ada pertanyaan lain?"
+    - text: "Tidak masalah, itu sudah menjadi tugas saya. Ada hal lain yang ingin ditanyakan?"
+    - text: "Senang bisa membantu Anda. Ada yang lain?"
+    - text: "Sama-sama! Jangan ragu untuk bertanya jika ada yang kurang jelas."
+    - text: "Tentu, dengan senang hati! Apakah ada informasi lain yang Anda butuhkan?"
+    - text: "Merupakan kesenangan bagi kami untuk membantu. Ada lagi yang ingin Anda ketahui?"
+    - text: "Pelayanan terbaik adalah prioritas kami. Ada hal lain yang bisa saya bantu?"
+
+  utter_iamabot:
+    - text: "Saya adalah chatbot Ayam Bakar Nusantara yang siap membantu Anda mencari informasi produk, memeriksa status pesanan, dan menjawab pertanyaan umum seputar layanan kami."
+    - text: "Saya adalah asisten virtual Ayam Bakar Nusantara. Saya dirancang untuk membantu Anda dengan informasi produk, status pesanan, dan pertanyaan seputar layanan kami."
+    - text: "Perkenalkan, saya adalah chatbot yang diprogram untuk memberikan bantuan dan informasi tentang produk dan layanan Ayam Bakar Nusantara."
+    - text: "Saya adalah sistem AI yang dikembangkan untuk melayani pelanggan Ayam Bakar Nusantara. Saya bisa membantu dengan berbagai informasi tentang menu, pesanan, dan layanan kami."
+    - text: "Saya adalah asisten virtual yang bekerja 24/7 untuk membantu pelanggan Ayam Bakar Nusantara dengan informasi menu, status pesanan, dan layanan lainnya."
+    - text: "Saya bukan manusia, melainkan sebuah chatbot yang dirancang untuk memberikan bantuan terkait layanan Ayam Bakar Nusantara kepada Anda."
+
+  utter_help:
+    - text: "Berikut adalah hal-hal yang bisa saya bantu:\n\n- Mencari produk (cth: 'cari ayam bakar')\n- Melihat detail produk (cth: 'lihat detail produk 12')\n- Memeriksa status pesanan (cth: 'cek status pesanan 1234')\n- Memeriksa status pembayaran (cth: 'cek pembayaran 1234')\n- Memberikan rating produk (cth: 'beri rating 5 untuk ayam bakar')\n- Menampilkan produk populer (cth: 'produk terlaris')\n- Menjawab pertanyaan umum tentang jam operasional dan metode pembayaran\n- Tutorial cara memesan di website (cth: 'bagaimana cara memesan online')\n\nAda yang bisa saya bantu?"
+    - text: "Saya dapat membantu Anda dengan beberapa layanan berikut:\n\n- Pencarian menu (contoh: 'cari ayam bakar madu')\n- Informasi detail produk (contoh: 'detail ayam geprek')\n- Pengecekan status pesanan (contoh: 'status order 5678')\n- Verifikasi pembayaran (contoh: 'cek bayar 1234')\n- Pemberian rating dan ulasan (contoh: 'rating 4 untuk ayam goreng')\n- Rekomendasi menu terbaik (contoh: 'menu favorit')\n- Informasi jam buka dan metode pembayaran\n- Panduan pemesanan online (contoh: 'tutorial pesan di website')\n\nBagaimana saya bisa membantu Anda hari ini?"
+    - text: "Berikut layanan yang dapat saya berikan:\n\n- Pencarian produk dan menu\n- Informasi detail tentang setiap menu\n- Pemeriksaan status pesanan dan pembayaran\n- Sistem rating dan ulasan produk\n- Daftar produk terlaris dan rekomendasi\n- Informasi tentang toko dan jam operasional\n- Panduan metode pembayaran\n- Tutorial pemesanan melalui website\n\nSilakan beritahu apa yang Anda butuhkan."
+    - text: "Saya siap membantu Anda dengan berbagai hal seperti:\n\n- Menemukan menu yang Anda cari\n- Memberikan informasi lengkap tentang produk\n- Mengecek status pesanan Anda\n- Memverifikasi status pembayaran\n- Menerima rating dan feedback\n- Merekomendasikan menu populer\n- Menjawab pertanyaan umum tentang layanan kami\n- Memberikan panduan cara memesan melalui website\n\nApa yang ingin Anda ketahui sekarang?"
+
+  utter_out_of_scope:
+    - text: "Maaf, saya tidak dapat membantu dengan permintaan tersebut. Saya hanya bisa membantu dengan informasi produk, status pesanan, dan layanan Ayam Bakar Nusantara."
+    - text: "Sepertinya topik itu di luar kemampuan saya. Saya bisa membantu Anda dengan informasi mengenai produk Ayam Bakar Nusantara, status pesanan, dan pertanyaan umum terkait layanan kami."
+    - text: "Mohon maaf, pertanyaan tersebut berada di luar lingkup layanan saya. Saya hanya dapat menyediakan informasi seputar Ayam Bakar Nusantara dan layanannya."
+    - text: "Saya tidak diprogram untuk menjawab pertanyaan tersebut. Saya fokus pada informasi tentang menu, pesanan, dan layanan Ayam Bakar Nusantara."
+    - text: "Maaf, saya tidak memiliki informasi mengenai hal tersebut. Saya hanya dapat membantu dengan hal-hal yang berkaitan dengan Ayam Bakar Nusantara."
+    - text: "Permintaan tersebut berada di luar cakupan layanan saya. Saya dikhususkan untuk membantu dengan pertanyaan seputar produk dan layanan Ayam Bakar Nusantara."
+    - text: "Mohon maaf, saya tidak dapat merespon permintaan tersebut. Dapatkah saya membantu Anda dengan informasi tentang menu atau layanan Ayam Bakar Nusantara?"
+
+  utter_faq_business_hours:
+    - text: "Toko Ayam Bakar Nusantara buka setiap hari dari pukul 10.00 - 22.00 WIB. Untuk pemesanan online melalui website atau aplikasi bisa dilakukan 24 jam."
+    - text: "Jam operasional kami adalah pukul 10.00 hingga 22.00 WIB setiap harinya. Namun, Anda bisa melakukan pemesanan online kapan saja melalui website atau aplikasi kami."
+    - text: "Seluruh outlet Ayam Bakar Nusantara beroperasi mulai pukul 10 pagi hingga 10 malam setiap hari. Pemesanan online dapat dilakukan 24 jam non-stop."
+    - text: "Kami melayani pelanggan dari jam 10 pagi sampai jam 10 malam (22.00 WIB) setiap hari. Untuk pemesanan online, website dan aplikasi kami buka 24 jam."
+    - text: "Ayam Bakar Nusantara buka setiap hari, termasuk hari libur, mulai pukul 10.00 WIB hingga 22.00 WIB. Sistem pemesanan online kami beroperasi 24/7."
+    - text: "Jam buka outlet fisik kami adalah 10.00-22.00 WIB (setiap hari). Untuk pemesanan delivery, Anda bisa order kapan saja melalui platform online kami."
+    - text: "Semua cabang Ayam Bakar Nusantara melayani pelanggan dari jam 10 pagi sampai jam 10 malam setiap harinya. Pemesanan online dapat dilakukan sepanjang waktu."
+
+  utter_faq_payment_methods:
+    - text: "Kami menerima pembayaran melalui beberapa metode:\n- Transfer bank (BCA, Mandiri, BNI, BRI)\n- Virtual Account\n- QRIS\n- E-wallet (GoPay, OVO, Dana, ShopeePay)\n- Kartu kredit/debit\n\nSaat ini kami belum menerima pembayaran COD (Cash On Delivery)."
+    - text: "Ayam Bakar Nusantara menerima berbagai metode pembayaran seperti:\n- Transfer ke rekening bank (BCA, Mandiri, BNI, BRI)\n- Pembayaran melalui Virtual Account\n- Pembayaran via QRIS\n- E-wallet (GoPay, OVO, Dana, ShopeePay, LinkAja)\n- Kartu kredit dan kartu debit\n\nMohon maaf, untuk saat ini kami belum menyediakan opsi COD."
+    - text: "Berikut adalah metode pembayaran yang dapat Anda gunakan:\n- Transfer bank (BCA, Mandiri, BNI, BRI)\n- Virtual Account semua bank\n- QRIS untuk pembayaran menggunakan aplikasi e-wallet\n- Pembayaran langsung melalui GoPay, OVO, Dana, atau ShopeePay\n- Kartu kredit dan debit Visa/Mastercard\n\nSaat ini, kami belum mendukung pembayaran tunai saat pengantaran (COD)."
+    - text: "Anda dapat melakukan pembayaran menggunakan:\n- Transfer bank ke rekening resmi kami (BCA, Mandiri, BNI, BRI)\n- Virtual Account yang akan digenerate saat checkout\n- Scan QRIS untuk pembayaran cepat\n- E-wallet populer: GoPay, OVO, Dana, ShopeePay\n- Kartu kredit/debit dari bank manapun\n\nMaaf, opsi COD belum tersedia untuk saat ini."
+    - text: "Metode pembayaran yang tersedia di Ayam Bakar Nusantara adalah:\n- Transfer bank (BCA, Mandiri, BNI, BRI)\n- Virtual Account (proses otomatis 24 jam)\n- QRIS untuk semua e-wallet\n- E-wallet: GoPay, OVO, Dana, ShopeePay, LinkAja\n- Kartu kredit & debit (Visa, Mastercard, JCB)\n\nSaat ini kami belum menyediakan layanan bayar di tempat (COD)."
+
+  utter_login_required:
+    - text: "Untuk menggunakan fitur ini, Anda perlu login terlebih dahulu. Silakan login melalui website atau aplikasi kami."
+    - text: "Maaf, fitur ini hanya tersedia untuk pengguna yang sudah login. Silakan login terlebih dahulu melalui website atau aplikasi Ayam Bakar Nusantara."
+    - text: "Fitur tersebut memerlukan autentikasi. Mohon login ke akun Anda melalui platform resmi kami untuk mengaksesnya."
+    - text: "Untuk keamanan dan personalisasi layanan, fitur ini memerlukan login. Silakan masuk ke akun Anda melalui website atau aplikasi kami."
+    - text: "Akses ke fitur ini terbatas untuk pengguna yang telah login. Mohon login terlebih dahulu untuk melanjutkan."
+    - text: "Anda perlu masuk ke akun Anda untuk menggunakan fitur ini. Silakan login melalui website atau aplikasi Ayam Bakar Nusantara."
+    - text: "Fitur ini hanya dapat diakses setelah Anda login. Harap masuk ke akun Anda terlebih dahulu untuk melanjutkan."
+
+  utter_redirect_login:
+    - text: "Untuk login, silakan akses halaman login melalui website atau aplikasi Ayam Bakar Nusantara. Saya tidak dapat memproses login melalui chat ini karena alasan keamanan."
+    - text: "Demi keamanan data Anda, proses login tidak dapat dilakukan melalui chat ini. Silakan kunjungi website atau aplikasi resmi Ayam Bakar Nusantara untuk login ke akun Anda."
+    - text: "Untuk masuk ke akun Anda, silakan gunakan website (www.ayambakarnusantara.com) atau aplikasi resmi kami. Proses login tidak tersedia melalui layanan chat untuk keamanan."
+    - text: "Proses login harus dilakukan melalui website atau aplikasi resmi Ayam Bakar Nusantara untuk memastikan keamanan data Anda. Chatbot tidak dapat memproses login."
+    - text: "Untuk alasan keamanan, Anda tidak dapat login melalui chat ini. Silakan kunjungi platform resmi kami untuk mengakses akun Anda."
+    - text: "Login hanya dapat dilakukan melalui website dan aplikasi resmi kami. Saya tidak dapat memproses permintaan login di sini untuk melindungi informasi pribadi Anda."
+    - text: "Maaf, saya tidak dapat membantu proses login dari sini. Demi keamanan, silakan login melalui website atau aplikasi resmi Ayam Bakar Nusantara."
+
+  utter_redirect_register:
+    - text: "Untuk mendaftar akun baru, silakan kunjungi website atau aplikasi Ayam Bakar Nusantara dan ikuti petunjuk pendaftaran yang tersedia. Proses pendaftaran tidak dapat dilakukan melalui chat ini."
+    - text: "Pendaftaran akun baru harus dilakukan melalui website (www.ayambakarnusantara.com) atau aplikasi resmi kami. Silakan kunjungi platform tersebut untuk melakukan registrasi."
+    - text: "Untuk membuat akun baru, silakan akses halaman registrasi melalui website atau aplikasi Ayam Bakar Nusantara. Proses pendaftaran melalui chat tidak tersedia."
+    - text: "Anda dapat membuat akun baru dengan mengunjungi website atau mengunduh aplikasi Ayam Bakar Nusantara. Ikuti panduan registrasi yang ada di sana."
+    - text: "Untuk keamanan data Anda, proses registrasi hanya bisa dilakukan melalui website atau aplikasi resmi kami. Silakan daftar melalui platform tersebut."
+    - text: "Pendaftaran akun tidak tersedia melalui layanan chat ini. Untuk mendaftar, silakan kunjungi website atau aplikasi resmi Ayam Bakar Nusantara."
+    - text: "Maaf, saya tidak dapat memproses pendaftaran akun baru dari sini. Silakan gunakan website atau aplikasi kami untuk membuat akun baru."
+
+  utter_ask_rating_value:
+    - text: "Berapa rating yang ingin Anda berikan untuk produk ini? (1-5 bintang)"
+    - text: "Pada skala 1-5 bintang, berapa rating yang ingin Anda berikan untuk produk tersebut?"
+    - text: "Mohon beri nilai untuk produk ini dari 1 hingga 5 bintang."
+    - text: "Seberapa puas Anda dengan produk ini? Silakan beri nilai dari 1 (tidak puas) hingga 5 (sangat puas)."
+    - text: "Berapa bintang yang Anda berikan untuk produk ini? (1-5)"
+    - text: "Dari 1 sampai 5 bintang, bagaimana Anda menilai produk ini?"
+    - text: "Tolong berikan rating 1-5 untuk produk ini (1=sangat tidak puas, 5=sangat puas)."
+    - text: "Bagaimana kualitas produk menurut Anda? Berikan nilai 1-5 bintang."
+
+  utter_ask_rating_comment:
+    - text: "Terima kasih atas rating Anda. Apakah Anda ingin memberikan komentar atau ulasan tentang produk ini? (opsional)"
+    - text: "Terima kasih telah memberikan rating. Bisakah Anda berbagi lebih detail mengapa Anda memberikan nilai tersebut? (tidak wajib)"
+    - text: "Rating Anda sudah kami terima. Ada komentar tambahan yang ingin Anda sampaikan tentang produk ini?"
+    - text: "Terima kasih atas penilaian Anda. Kami sangat menghargai jika Anda bersedia memberikan ulasan singkat tentang pengalaman Anda."
+    - text: "Rating Anda sangat berarti bagi kami. Apakah Anda ingin menambahkan komentar untuk melengkapi penilaian tersebut?"
+    - text: "Terima kasih telah memberikan rating. Silakan berikan komentar atau saran untuk produk ini jika Anda berkenan."
+    - text: "Kami telah menerima rating Anda. Apakah ada hal khusus yang ingin Anda sampaikan terkait produk ini?"
+    - text: "Terima kasih atas rating yang diberikan. Kami akan sangat menghargai jika Anda bersedia memberikan feedback lebih detail."
+
+  utter_ask_more_help:
+    - text: "Ada lagi yang bisa saya bantu?"
+    - text: "Apakah ada hal lain yang ingin Anda tanyakan?"
+    - text: "Ada pertanyaan lain yang bisa saya jawab untuk Anda?"
+    - text: "Adakah informasi lain yang Anda butuhkan hari ini?"
+    - text: "Apakah Anda memerlukan bantuan lainnya?"
+    - text: "Apakah saya bisa membantu Anda dengan hal lain?"
+    - text: "Apakah ada pertanyaan lain seputar layanan Ayam Bakar Nusantara?"
+    - text: "Ada yang bisa saya bantu lagi hari ini?"
+    - text: "Bagaimana jika ada yang masih kurang jelas dan ingin ditanyakan lagi?"
+    - text: "Saya siap membantu jika Anda memiliki pertanyaan lainnya."
+    - text: "Masih ada yang ingin Anda ketahui tentang produk atau layanan kami?"
+
+  utter_ask_order_id:
+    - text: "Mohon berikan nomor pesanan Anda agar saya bisa memeriksa statusnya."
+    - text: "Untuk memeriksa status pesanan, saya memerlukan nomor pesanan Anda. Bisa tolong berikan nomor pesanannya?"
+    - text: "Silakan berikan nomor ID pesanan Anda agar saya dapat mengecek statusnya untuk Anda."
+    - text: "Agar saya bisa memeriksa status pesanan, tolong berikan nomor pesanan atau order ID Anda."
+    - text: "Untuk melacak status pesanan, saya perlu nomor pesanan Anda. Mohon informasikan nomor tersebut."
+    - text: "Tolong berikan nomor referensi pesanan Anda agar saya bisa memeriksa statusnya dalam sistem."
+    - text: "Bisa sebutkan nomor order Anda agar saya bisa mengecek status terkininya?"
+    - text: "Untuk pengecekan status pesanan, saya membutuhkan nomor pesanan. Bisa Anda berikan nomor tersebut?"
+    - text: "Mohon informasikan nomor ID pesanan Anda untuk saya cek statusnya saat ini."
+
+  utter_ask_product_id:
+    - text: "Untuk produk mana Anda ingin memberikan rating? Mohon sebutkan nama produknya atau ID produk."
+    - text: "Silakan sebutkan nama produk atau ID produk yang ingin Anda beri rating."
+    - text: "Produk apa yang ingin Anda beri penilaian? Mohon sebutkan nama atau ID produknya."
+    - text: "Untuk memberikan rating, saya perlu tahu produk mana yang ingin Anda nilai. Tolong sebutkan nama atau ID produknya."
+    - text: "Silakan informasikan nama menu atau kode produk yang ingin Anda berikan rating."
+    - text: "Menu apa yang ingin Anda beri rating? Mohon sebutkan nama atau kode produknya."
+    - text: "Untuk melanjutkan proses rating, tolong beritahu saya produk mana yang ingin Anda nilai."
+    - text: "Mohon sampaikan nama produk atau ID produk yang ingin Anda berikan rating."
+
+  utter_thank_for_review:
+    - text: "Terima kasih atas ulasan Anda! Masukan dari pelanggan sangat berharga bagi kami untuk meningkatkan kualitas produk dan layanan."
+    - text: "Terima kasih telah berbagi pengalaman Anda! Ulasan Anda sangat membantu kami dan pelanggan lainnya."
+    - text: "Kami sangat menghargai waktu yang Anda luangkan untuk memberikan ulasan ini. Terima kasih banyak!"
+    - text: "Terima kasih atas feedback Anda! Kami selalu berusaha meningkatkan kualitas berdasarkan masukan dari pelanggan seperti Anda."
+    - text: "Ulasan Anda sangat berarti bagi kami. Terima kasih telah membantu kami menjadi lebih baik!"
+    - text: "Terima kasih banyak atas penilaian dan ulasan yang Anda berikan. Kami akan terus berupaya meningkatkan layanan kami."
+    - text: "Kami menghargai kejujuran dalam ulasan Anda. Terima kasih telah membantu kami meningkatkan kualitas!"
+    - text: "Terima kasih atas masukan berharga Anda! Ulasan dari pelanggan adalah kompas yang mengarahkan peningkatan layanan kami."
+    - text: "Terima kasih telah meluangkan waktu untuk memberikan ulasan. Feedback Anda sangat berarti bagi perkembangan kami."
+
+  utter_acknowledge_affirmation:
+    - text: "Baik! Apa yang bisa saya bantu?"
+    - text: "Siap! Bagaimana saya bisa membantu Anda?"
+    - text: "Tentu! Apa yang Anda butuhkan?"
+    - text: "Baiklah, saya siap membantu. Apa yang ingin Anda tanyakan?"
+    - text: "Dengan senang hati! Apa yang bisa saya lakukan untuk Anda?"
+    - text: "Tentu saja! Bagaimana saya bisa membantu Anda hari ini?"
+    - text: "Siap melayani! Apa yang Anda perlukan?"
+    - text: "Baik! Saya siap mendengarkan permintaan Anda."
+    - text: "Oke! Ada yang bisa saya bantu?"
+    - text: "Siap membantu! Silakan sampaikan apa yang Anda butuhkan."
+
+  utter_acknowledge_denial:
+    - text: "Baik, tidak masalah. Jika nanti Anda membutuhkan bantuan, jangan ragu untuk menghubungi saya kembali."
+    - text: "Saya mengerti. Jika ada pertanyaan lain di lain waktu, saya siap membantu."
+    - text: "Baiklah, tidak apa-apa. Saya tetap tersedia jika Anda membutuhkan bantuan nanti."
+    - text: "Saya menghormati keputusan Anda. Jangan ragu untuk kembali jika Anda memerlukan bantuan."
+    - text: "Tidak masalah. Saya ada di sini jika Anda berubah pikiran atau memiliki pertanyaan lain."
+    - text: "Baik, saya mengerti. Silakan hubungi saya lagi jika diperlukan."
+    - text: "Tentu, tidak apa-apa. Saya tersedia kapan saja Anda membutuhkan bantuan."
+    - text: "Baiklah. Saya akan tetap di sini jika Anda memerlukan informasi atau bantuan lainnya."
+    - text: "Saya memahami. Jangan ragu untuk menghubungi kembali jika diperlukan."
+
+  utter_redirect_order_page:
+    - text: "Untuk melakukan pemesanan kompleks dengan beberapa menu, silakan kunjungi halaman pemesanan di website atau aplikasi kami. Di sana Anda bisa menambahkan berbagai menu ke keranjang dan menyesuaikan pesanan sesuai kebutuhan."
+    - text: "Untuk pemesanan dengan beberapa menu sekaligus, lebih baik menggunakan website atau aplikasi kami. Di sana Anda bisa menyesuaikan jumlah, tingkat kepedasan, dan pilihan menu lengkap lainnya."
+    - text: "Pesanan dengan beberapa menu akan lebih mudah diproses melalui website atau aplikasi kami. Silakan kunjungi platform tersebut untuk pengalaman pemesanan yang lebih baik."
+    - text: "Untuk memastikan akurasi pemesanan dengan banyak item, kami sarankan untuk menggunakan website atau aplikasi resmi Ayam Bakar Nusantara yang memiliki fitur keranjang belanja lengkap."
+    - text: "Pesanan Anda terlihat cukup kompleks. Untuk pengalaman terbaik, silakan gunakan aplikasi atau website kami yang menyediakan fitur pemesanan yang lebih lengkap."
+    - text: "Untuk pesanan dengan multiple item, silakan gunakan platform pemesanan online kami di website atau aplikasi. Di sana Anda bisa mengatur jumlah dan spesifikasi pesanan dengan lebih mudah."
+    - text: "Untuk memudahkan pemesanan dengan beberapa menu, lebih baik menggunakan website atau aplikasi kami. Anda akan mendapatkan tampilan visual menu dan bisa mengatur detail pesanan dengan lebih baik."
+    - text: "Pemesanan dengan banyak item akan lebih efisien melalui website atau aplikasi kami. Platform tersebut menyediakan fitur keranjang dan kalkulasi otomatis untuk kenyamanan Anda."
+
+  utter_tutorial_order_website:
+    - text: "Berikut tutorial cara memesan Ayam Bakar di website kami:\n\n1. Pertama, Anda harus login/daftar ke akun Anda. Klik tombol 'Masuk' di pojok kanan atas website kami.\n\n2. Setelah login, masuk ke halaman 'Menu' atau 'Shop' untuk melihat daftar menu yang tersedia.\n\n3. Pilih menu yang Anda inginkan dan klik tombol 'Tambah ke Keranjang'. Anda bisa memilih beberapa menu sekaligus.\n\n4. Setelah selesai memilih, klik ikon keranjang di pojok kanan atas untuk checkout dan melakukan pembayaran.\n\n5. Selesaikan pembayaran menggunakan metode yang tersedia dan tunggu konfirmasi dari kami bahwa pesanan Anda siap untuk diambil.\n\nCatatan: Sistem kami tidak menyediakan layanan pengantaran. Semua pesanan harus diambil langsung di outlet kami."
+    - text: "Panduan memesan Ayam Bakar di website kami:\n\n1. Login atau daftar terlebih dahulu - Klik 'Login' di sudut kanan atas website. Jika belum memiliki akun, klik 'Daftar' dan ikuti proses registrasi.\n\n2. Buka halaman Menu atau Shop - Setelah login, klik menu 'Shop' atau 'Menu' di navigasi utama untuk melihat produk yang tersedia.\n\n3. Tambahkan ke keranjang - Pilih menu yang Anda inginkan dan klik tombol 'Tambah ke Keranjang'. Anda bisa mengatur jumlah dan opsi tambahan jika tersedia.\n\n4. Proses checkout - Klik ikon keranjang belanja di pojok kanan atas, kemudian klik 'Checkout' untuk melanjutkan ke halaman pembayaran.\n\n5. Bayar dan tunggu konfirmasi - Pilih metode pembayaran yang tersedia, lakukan pembayaran, dan tunggu notifikasi dari kami bahwa pesanan Anda siap diambil.\n\nPenting: Layanan kami hanya melayani pesanan untuk diambil sendiri (self pick-up), tidak tersedia layanan pengantaran."
+    - text: "Cara memesan di website Ayam Bakar Nusantara:\n\n1. Login/Registrasi - Untuk memesan, Anda perlu memiliki akun terlebih dahulu. Klik 'Login' atau 'Daftar' di bagian atas website.\n\n2. Pilih Menu - Kunjungi halaman 'Menu' atau 'Shop' untuk melihat semua produk yang tersedia. Anda bisa menggunakan fitur filter untuk menemukan menu favorit Anda.\n\n3. Tambahkan ke Keranjang - Klik menu yang ingin dipesan, lalu klik tombol 'Tambah ke Keranjang'. Ulangi untuk setiap menu yang ingin Anda pesan.\n\n4. Checkout Pesanan - Klik ikon keranjang belanja, periksa pesanan Anda, lalu klik tombol 'Checkout' untuk melanjutkan ke pembayaran.\n\n5. Pembayaran dan Pengambilan - Selesaikan pembayaran menggunakan metode yang tersedia. Anda akan menerima notifikasi saat pesanan siap diambil di outlet kami.\n\nHarap diperhatikan bahwa saat ini kami tidak menyediakan layanan pengantaran. Semua pesanan harus diambil langsung di outlet."
+    - text: "Tutorial pemesanan Ayam Bakar melalui website kami:\n\n1. Login ke Akun\n   - Kunjungi website kami dan klik 'Login'\n   - Masukkan username dan password Anda\n   - Jika belum memiliki akun, klik 'Daftar' untuk membuat akun baru\n\n2. Akses Halaman Menu\n   - Klik menu 'Shop' atau 'Produk' di navigasi utama\n   - Anda dapat menjelajahi semua kategori menu yang tersedia\n\n3. Pilih dan Tambahkan ke Keranjang\n   - Pilih menu yang ingin dipesan\n   - Klik tombol 'Tambah ke Keranjang'\n   - Anda dapat menambahkan beberapa menu berbeda\n\n4. Proses Checkout\n   - Klik ikon keranjang di pojok kanan atas\n   - Periksa pesanan Anda dan klik 'Lanjut ke Pembayaran'\n\n5. Pembayaran dan Konfirmasi\n   - Pilih metode pembayaran yang tersedia\n   - Selesaikan transaksi dan tunggu konfirmasi dari kami\n   - Anda akan diberi tahu saat pesanan siap diambil\n\nPenting: Sistem kami hanya menyediakan opsi ambil sendiri (pickup), tidak ada layanan pengantaran."
+
+actions:
+  - action_product_search
+  - action_product_detail
+  - action_list_top_products
+  - action_list_shop_products
+  - action_check_order_status
+  - action_check_payment_status
+  - action_add_rating
+  - action_show_user_ratings
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

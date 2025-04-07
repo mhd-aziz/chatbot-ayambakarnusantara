@@ -1,0 +1,505 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hai
+      - halo
+      - hi
+      - selamat pagi
+      - selamat siang
+      - selamat sore
+      - selamat malam
+      - assalamualaikum
+      - hello
+      - apa kabar
+      - halo, masih buka kah?
+      - permisi, selamat siang
+      - halo admin
+      - pagi, boleh tanya?
+      - salam kenal
+      - hai, boleh minta bantuan?
+      - halo, saya punya pertanyaan
+      - waalaikumsalam
+      - met siang
+
+  - intent: goodbye
+    examples: |
+      - sampai jumpa
+      - selamat tinggal
+      - bye
+      - goodbye
+      - see you later
+      - ok bye
+      - dadah
+      - terima kasih bye
+      - saya pergi dulu
+      - sudah dulu ya
+      - cukup segitu saja
+      - ok, sampai jumpa lagi
+      - saya sudah selesai
+      - pamit dulu
+      - sampai bertemu kembali
+      - udah cukup deh
+      - terimakasih, saya pamit
+      - have a nice day
+      - see u
+      - udah ya
+
+  - intent: thank
+    examples: |
+      - terima kasih
+      - makasih
+      - thanks
+      - thank you
+      - thx
+      - thanks ya
+      - makasih ya
+      - terima kasih banyak
+      - ok terima kasih
+      - terima kasih atas bantuannya
+      - terima kasih telah membantu
+      - terima kasih infonya
+      - sangat membantu, terima kasih
+      - thank you so much
+      - makasih sudah dibantu
+      - terima kasih atas penjelasannya
+      - oke makasih
+      - terimakasih atas waktu Anda
+      - trims bantuannya
+
+  - intent: search_product
+    examples: |
+      - cari [ayam bakar](product)
+      - saya mau cari [ayam goreng](product)
+      - tolong carikan [ayam geprek](product)
+      - ada [nasi uduk](product) gak?
+      - jual [ayam penyet](product) tidak?
+      - mau beli [ayam taliwang](product)
+      - tersedia [ayam pop](product)?
+      - info [ayam rica](product)
+      - [ayam kremes](product) masih ada?
+      - mau lihat [ayam betutu](product)
+      - cari menu [ayam](product)
+      - tolong bantu carikan menu [ayam kecap](product) yang enak
+      - apa kalian punya menu [bebek goreng](product)?
+      - lagi cari [sayap ayam pedas](product), ada rekomendasinya?
+      - berapa harga [ayam panggang](product)?
+      - [ayam](product) yang paling laris apa?
+      - rekomendasi [ikan bakar](product) di menu kalian
+      - saya cari [sambal matah](product) yang pedas
+      - dimana saya bisa mendapatkan [ayam rendang](product)?
+      - mau [ayam bakar](product) yang halal
+
+  - intent: product_detail
+    examples: |
+      - detail [ayam bakar](product)
+      - info lengkap [ayam goreng](product)
+      - lihat detail [ayam geprek](product)
+      - deskripsi [nasi uduk](product)
+      - spesifikasi [ayam penyet](product)
+      - rincian [ayam kalasan](product)
+      - detail produk dengan id [12](product_id)
+      - lihat produk nomor [15](product_id)
+      - tampilkan detail produk [23](product_id)
+      - bisa lihat detail produk [ayam betutu](product)?
+      - info lengkap produk [43](product_id)
+      - untuk produk [32](product_id) apa detailnya?
+      - menu [ayam bakar madu](product) bahannya apa saja?
+      - [ayam geprek](product) level pedas berapa?
+      - detail untuk produk [ayam rica-rica](product) dan [18](product_id)
+      - apakah [ayam goreng](product) ini menggunakan minyak kelapa?
+      - nutrisi dalam [ayam goreng tepung](product) berapa?
+      - detail menu [gurame bakar](product) secara lengkap
+      - [nasi ayam](product) porsinya untuk berapa orang?
+      - info alergen pada [ayam kalasan](product)
+
+  - intent: list_top_products
+    examples: |
+      - produk terlaris
+      - produk populer
+      - rekomendasi produk
+      - menu favorit
+      - menu terlaris
+      - produk dengan rating tertinggi
+      - best seller
+      - ayam bakar terbaik
+      - makanan terpopuler
+      - menu yang direkomendasikan
+      - apa saja menu unggulan
+      - apa menu yang paling banyak dipesan minggu ini?
+      - menu apa yang paling disukai pelanggan?
+      - apa produk signature dari toko ini?
+      - menu apa yang rating nya paling tinggi?
+      - menu spesial apa yang tersedia saat ini?
+      - apa produk dengan ulasan terbaik?
+      - produk paling recommended di sini apa?
+      - menu yang paling trending
+      - top 5 menu terlaris
+
+  - intent: list_shop_products
+    examples: |
+      - produk dari toko [Ayam Bakar Jakarta](shop)
+      - menu dari toko [Ayam Goreng Surabaya](shop)
+      - apa saja yang dijual toko [Ayam Geprek Jogja](shop)
+      - lihat produk toko [2](shop_id)
+      - tampilkan menu toko [3](shop_id)
+      - produk-produk toko [Ayam Penyet Solo](shop)
+      - daftar produk toko [1](shop_id)
+      - toko [Ayam Bakar Padang](shop) jual [ayam penyet](product) tidak?
+      - [Ayam Bakar Wong Solo](shop) ada menu apa saja?
+      - di [5](shop_id) ada jual [ayam kremes](product)?
+      - menu spesial dari cabang [Ayam Geprek Bensu](shop)
+      - produk [ayam](product) terbaik di [8](shop_id)
+      - [4](shop_id) terkenal dengan [ayam bakar](product) apa?
+      - yang jual [nasi padang](product) di [Ayam Bakar Primarasa](shop)
+      - toko [12](shop_id) punya [sayap pedas](product) tidak?
+      - menu [ayam bakar](product) terlaris di [Ayam Bakar Mas Mono](shop)
+      - produk halal dari [Ayam Goreng Fatmawati](shop)
+      - [Ayam Betutu Khas Gilimanuk](shop) rekomendasi menu apa?
+      - [9](shop_id) ada promo untuk [ayam geprek](product)?
+      - toko [Ayam Taliwang Lombok](shop) jual [sambal matah](product) tidak?
+
+  - intent: check_order_status
+    examples: |
+      - cek status pesanan [1234](order_id)
+      - bagaimana status order [5678](order_id)
+      - pesanan [2345](order_id) sudah sampai mana
+      - lihat status order [8765](order_id)
+      - cek pesanan dengan id [3456](order_id)
+      - update pesanan [9876](order_id)
+      - track order [7654](order_id)
+      - cek status pengiriman [6789](order_id)
+      - pesanan [4321](order_id) sudah siap diambil?
+      - order [AB-12345](order_id) posisi dimana?
+      - pesanan [ORD78923](order_id) estimasi sampai jam berapa?
+      - order kode [TX-456](order_id) sudah diproses?
+      - posisi pesanan [ANT-2023-078](order_id) sekarang?
+      - status tracking pesanan [ORDER/89765](order_id)
+      - driver sudah ambil order [4680](order_id) belum?
+      - pesanan [1357](order_id) masih diproses atau sudah dikirim?
+      - cek pesanan ID: [ONL-453](order_id) sudah keluar dapur?
+      - tracking untuk nomor [567-ABC](order_id)
+      - pesanan [5432](order_id) sudah berangkat belum?
+      - update terbaru order [8901](order_id)
+
+  - intent: check_payment_status
+    examples: |
+      - cek status pembayaran [1234](order_id)
+      - pembayaran order [5678](order_id) sudah diterima?
+      - status bayar pesanan [2345](order_id)
+      - pembayaran [8765](order_id) berhasil?
+      - konfirmasi pembayaran [3456](order_id)
+      - cek apakah pembayaran [9876](order_id) sudah masuk
+      - status transaksi [4567](order_id)
+      - pembayaran untuk pesanan [6789](order_id)
+      - pesanan [INV-7812](order_id) sudah dibayar?
+      - transfer untuk order [PAY-3254](order_id) sudah masuk?
+      - pembayaran via QRIS untuk [8877](order_id) terverifikasi?
+      - status bayar e-wallet untuk [TX-6321](order_id)
+      - konfirmasi pembayaran LinkAja order [PAYMENT-2277](order_id)
+      - pembayaran kartu kredit untuk [5511](order_id) sukses?
+      - bayaran pesanan [PAY/8833/2023](order_id) sudah dikonfirmasi?
+      - status bayar virtual account [4422](order_id)
+      - pembayaran OVO untuk [7171](order_id) berhasil?
+      - transaksi DANA order [INV-6363](order_id) sudah diverifikasi?
+      - cek payment untuk [BYR-2468](order_id) sukses?
+      - pembayaran ShopeePay pesanan [PAY-7531](order_id) berhasil?
+
+  - intent: add_rating
+    examples: |
+      - beri rating [5](rating_value) untuk [ayam bakar](product)
+      - rating [4](rating_value) untuk produk [ayam goreng](product)
+      - kasih nilai [3](rating_value) untuk [ayam geprek](product)
+      - nilai [5](rating_value) untuk produk id [12](product_id)
+      - rating [4](rating_value) bintang untuk produk [15](product_id)
+      - beri [3](rating_value) bintang untuk [ayam penyet](product)
+      - [2](rating_value) untuk [ayam taliwang](product) yang kurang bumbu
+      - produk [43](product_id) saya beri [1](rating_value)
+      - saya beri [5](rating_value) untuk [ayam rica-rica](product)
+      - [4](rating_value) bintang untuk [nasi uduk](product) lumayan enak
+      - [ayam bakar madu](product) layak dapat [5](rating_value) bintang
+      - [3](rating_value) untuk [18](product_id) karena porsinya sedikit
+      - saya kasih [1](rating_value) untuk [bebek goreng](product) alot
+      - berikan [2](rating_value) stars untuk [ayam pop](product)
+      - [5](rating_value) untuk [ayam penyet sambal ijo](product) mantap!
+      - nilai produk [32](product_id) dengan [4](rating_value)
+      - [4](rating_value) untuk rasa [ayam woku](product) yang otentik
+      - [1](rating_value) bintang untuk [ayam kampung](product) tidak segar
+      - [3](rating_value) untuk [nasi](product), [5](rating_value) untuk [ayam](product)
+      - [2](rating_value) stars untuk [55](product_id) pelayanan lambat
+
+  - intent: show_user_ratings
+    examples: |
+      - lihat rating saya
+      - tampilkan rating yang saya berikan
+      - review yang saya berikan
+      - ulasan saya
+      - rating-rating saya
+      - nilai yang saya berikan
+      - lihat semua rating saya
+      - tampilkan review saya
+      - lihat ulasan yang pernah saya berikan
+      - ulasan apa saja yang sudah saya berikan
+      - tolong tampilkan semua penilaian yang pernah saya berikan
+      - rating saya bulan ini
+      - review saya untuk [ayam bakar](product)
+      - cek history rating saya
+      - produk apa saja yang sudah saya nilai?
+      - berapa rata-rata rating yang saya beri?
+      - ulasan saya untuk toko [Ayam Bakar Jakarta](shop)
+      - review untuk pesanan terakhir
+      - riwayat rating saya selama sebulan terakhir
+
+  - intent: login
+    examples: |
+      - login
+      - masuk
+      - sign in
+      - saya mau login
+      - masuk ke akun
+      - akses akun saya
+      - masuk dengan akun saya
+      - login ke akun saya
+      - autentikasi
+      - saya ingin masuk ke akun
+      - bagaimana cara login?
+      - bisakah saya login sekarang?
+      - tolong bantu saya login
+      - cara masuk ke aplikasi
+      - login dengan akun Google
+      - masuk dengan sosial media
+      - login via WhatsApp
+      - login dengan fingerprint bisa?
+      - cara masuk dengan OTP
+      - login ke akun premium
+
+  - intent: register
+    examples: |
+      - daftar
+      - register
+      - sign up
+      - buat akun
+      - daftar akun baru
+      - registrasi
+      - saya ingin mendaftar
+      - buat akun baru
+      - daftar sebagai pengguna baru
+      - register akun
+      - bikin akun
+      - cara daftar akun baru gimana?
+      - saya mau mendaftar sebagai member
+      - bagaimana cara membuat akun baru?
+      - ingin registrasi sebagai pelanggan
+      - prosedur pendaftaran akun
+      - bikin akun baru untuk pemesanan
+      - daftar untuk mendapatkan promo
+      - register via email
+      - daftar pakai nomor HP
+
+  - intent: bot_challenge
+    examples: |
+      - apakah kamu bot?
+      - apakah kamu manusia?
+      - saya berbicara dengan bot?
+      - saya berbicara dengan manusia?
+      - kamu robot ya?
+      - kamu siapa?
+      - ini siapa?
+      - ngomong sama siapa ini?
+      - apakah saya berbicara dengan AI?
+      - kamu asisten virtual ya?
+      - ini chat dengan bot atau manusia?
+      - apakah ada manusia di balik chat ini?
+      - kamu bot atau orang sungguhan?
+      - ini sistem otomatis atau ada admin?
+      - saya chat dengan mesin atau manusia?
+      - apakah kamu program komputer?
+      - ini respon otomatis?
+      - kamu chatbot ya?
+      - apakah ini layanan chatbot?
+      - saya sedang berkomunikasi dengan siapa?
+
+  - intent: provide_rating_comment
+    examples: |
+      - Ayamnya enak dan gurih
+      - Makanannya lezat sekali
+      - Ayamnya kurang matang
+      - Porsinya banyak dan mengenyangkan
+      - Harga sesuai dengan kualitas
+      - Sambalnya mantap dan pedas
+      - Rasanya kurang bumbu
+      - Pengiriman cepat dan makanan masih hangat
+      - Pelayanan memuaskan
+      - Masakannya kurang memuaskan
+      - Packaging-nya bagus dan rapi
+      - Ayamnya kecil sekali
+      - Rasanya enak dan nagih
+      - Tidak sesuai ekspektasi
+      - Lebih enak dari yang saya bayangkan
+      - Tekstur ayamnya sempurna, tidak kering
+      - Sayangnya kali ini ayamnya terlalu asin
+      - Sambal yang disediakan pas pedasnya
+      - Porsinya lebih kecil dari yang di foto
+      - Harganya sepadan dengan kualitasnya
+
+  - intent: faq_business_hours
+    examples: |
+      - jam buka toko
+      - jam operasional
+      - buka jam berapa
+      - tutup jam berapa
+      - toko buka sampai jam berapa
+      - jam kerja
+      - kapan toko buka
+      - jam berapa mulai buka
+      - sampai jam berapa buka
+      - operasional toko
+      - hari minggu buka jam berapa?
+      - apakah hari libur nasional tetap buka?
+      - jam operasional di bulan Ramadhan
+      - apakah 24 jam buka?
+      - outlet buka sampai jam berapa malam?
+      - apakah ada perbedaan jam buka untuk hari kerja dan weekend?
+      - bisa pesan kapan saja atau ada batas waktu?
+      - jam berapa terakhir bisa pesan?
+      - apakah buka setiap hari?
+      - jam operasional untuk delivery
+
+  - intent: faq_payment_methods
+    examples: |
+      - metode pembayaran apa saja
+      - cara bayar gimana
+      - pembayaran via apa
+      - bisa bayar pakai apa
+      - opsi pembayaran
+      - menerima pembayaran apa
+      - bisa bayar pakai kartu kredit?
+      - ada pembayaran via transfer?
+      - bisa cod?
+      - pembayaran e-wallet
+      - apakah menerima pembayaran dengan QRIS?
+      - bisa bayar pakai aplikasi DANA?
+      - apakah ada opsi cicilan untuk pembelian?
+      - apa bisa bayar pakai kartu debit?
+      - bagaimana cara bayar dengan virtual account?
+      - metode pembayaran apa yang paling cepat diproses?
+      - pembayaran bisa di tempat atau harus di muka?
+      - bisa bayar dengan LinkAja?
+      - bisa bayar pakai Gopay?
+      - apa ada discount untuk metode pembayaran tertentu?
+
+  - intent: help
+    examples: |
+      - bantuan
+      - tolong
+      - butuh bantuan
+      - help
+      - bagaimana cara memesan
+      - cara menggunakan bot ini
+      - panduan penggunaan
+      - cara kerja bot
+      - bantu saya
+      - bingung cara pesan
+      - menu bantuan
+      - instruksi penggunaan
+      - bagaimana cara menggunakan chatbot ini?
+      - saya kesulitan mencari produk
+      - bagaimana cara melihat status pesanan?
+      - tutorial penggunaan aplikasi
+      - cara melakukan pembayaran online?
+      - panduan lengkap pemesanan
+      - bagaimana cara memberikan rating?
+      - cara mengubah alamat pengiriman?
+
+  - intent: affirm
+    examples: |
+      - ya
+      - oke
+      - ok
+      - siap
+      - baik
+      - lanjut
+      - benar
+      - setuju
+      - tentu
+      - bisa
+      - boleh
+      - iya
+      - betul
+      - lanjutkan
+      - ya, tentu saja
+      - silakan
+      - oke, tidak masalah
+      - ya, saya setuju
+      - benar sekali
+      - baiklah
+
+  - intent: deny
+    examples: |
+      - tidak
+      - nggak
+      - ngga
+      - gak
+      - gk
+      - enggak
+      - ga mau
+      - jangan
+      - batal
+      - tidak usah
+      - nanti dulu
+      - belum
+      - tidak perlu
+      - tidak, terima kasih
+      - tidak dulu
+      - saya tidak tertarik
+      - jangan dulu
+      - dibatalkan saja
+      - tidak setuju
+      - tidak sekarang
+
+  - intent: out_of_scope
+    examples: |
+      - Cuaca hari ini cerah ya
+      - Gimana cara membuat kue
+      - Berapa harga dollar sekarang
+      - Siapa presiden Indonesia
+      - Tolong transfer uang
+      - Kemarin saya ke mall
+      - Berita hari ini apa
+      - Berapa 5 + 7
+      - Apa ibukota Perancis
+      - Apa warna bendera Indonesia
+      - Besok mau kemana
+      - Saya suka nonton film
+      - Lagu apa yang sedang hits
+      - Bisa bantu saya mengerjakan PR matematika?
+      - Apakah akan hujan besok di Jakarta?
+      - Saya butuh tiket pesawat ke Bali
+      - Bagaimana cara membuat SIM?
+      - Tolong carikan saya hotel di Bandung
+      - Kapan pengumuman SNMPTN?
+      - Jelaskan tentang sejarah Indonesia
+
+  - intent: tutorial_order_website
+    examples: |
+      - bagaimana cara memesan ayam bakar di website?
+      - tutorial memesan ayam bakar online
+      - cara pesan online
+      - bagaimana cara order di website anda?
+      - saya ingin memesan online, bagaimana caranya?
+      - tolong jelaskan cara memesan di website
+      - bagaimana cara checkout di website anda?
+      - prosedur pemesanan online
+      - tutorial order dari website
+      - langkah-langkah memesan ayam bakar online
+      - saya bingung cara memesan, bisa bantu?
+      - petunjuk pemesanan online
+      - cara beli ayam bakar di website
+      - gimana sih cara pesan online?
+      - cara order ayam bakar di website
+      - saya mau pesan online, harus bagaimana?
+      - apakah ada tutorial cara memesan?
+      - panduan pesan online
+      - tutorial pembelian di website
+      - gimana caranya pesan dari website?

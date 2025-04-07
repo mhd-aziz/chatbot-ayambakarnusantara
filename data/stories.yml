@@ -1,0 +1,403 @@
+version: "3.1"
+
+stories:
+  # Basic product search and information flows
+  - story: greet and search product
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_product
+        entities:
+          - product: "ayam bakar"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: search product and view product detail
+    steps:
+      - intent: search_product
+        entities:
+          - product: "ayam bakar"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: product_detail
+        entities:
+          - product_id: "1"
+      - action: action_product_detail
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: search product by name and affirm further assistance
+    steps:
+      - intent: search_product
+        entities:
+          - product: "ayam kalasan"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: affirm
+      - action: utter_help
+      - intent: list_top_products
+      - action: action_list_top_products
+      - action: utter_ask_more_help
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: search product by name and deny further assistance
+    steps:
+      - intent: search_product
+        entities:
+          - product: "ayam kalasan"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: deny
+      - action: utter_goodbye
+
+  # Complex product search and ordering interactions
+  - story: search product, view detail, and rate product
+    steps:
+      - intent: search_product
+        entities:
+          - product: "ayam goreng"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: product_detail
+        entities:
+          - product_id: "2"
+      - action: action_product_detail
+      - action: utter_ask_more_help
+      - intent: add_rating
+        entities:
+          - product_id: "2"
+          - rating_value: "5"
+      - slot_was_set:
+          - product_id: "2"
+      - slot_was_set:
+          - rating_value: "5"
+      - slot_was_set:
+          - user_id: "101" # Assuming user is logged in
+      - action: action_add_rating
+      - action: utter_ask_rating_comment
+      - intent: provide_rating_comment
+      - action: action_add_rating
+      - action: utter_thank_for_review
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Order and payment status flows
+  - story: check order status
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: check_order_status
+        entities:
+          - order_id: "1234"
+      - slot_was_set:
+          - order_id: "1234"
+      - action: action_check_order_status
+      - action: utter_ask_more_help
+      - intent: check_payment_status
+      - action: action_check_payment_status
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: check order status without ID
+    steps:
+      - intent: check_order_status
+      - action: utter_ask_order_id
+      - intent: check_order_status
+        entities:
+          - order_id: "5678"
+      - slot_was_set:
+          - order_id: "5678"
+      - action: action_check_order_status
+      - action: utter_ask_more_help
+      - intent: deny
+      - action: utter_goodbye
+
+  - story: check payment status without ID
+    steps:
+      - intent: check_payment_status
+      - action: utter_ask_order_id
+      - intent: check_payment_status
+        entities:
+          - order_id: "9012"
+      - slot_was_set:
+          - order_id: "9012"
+      - action: action_check_payment_status
+      - action: utter_ask_more_help
+      - intent: affirm
+      - action: utter_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Product browsing flows
+  - story: browse top products and view product detail
+    steps:
+      - intent: list_top_products
+      - action: action_list_top_products
+      - action: utter_ask_more_help
+      - intent: product_detail
+        entities:
+          - product_id: "3"
+      - action: action_product_detail
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: browse shop products by ID
+    steps:
+      - intent: list_shop_products
+        entities:
+          - shop_id: "1"
+      - slot_was_set:
+          - shop_id: "1"
+      - action: action_list_shop_products
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: browse shop products by name
+    steps:
+      - intent: list_shop_products
+        entities:
+          - shop: "Ayam Bakar Jakarta"
+      - action: action_list_shop_products
+      - action: utter_ask_more_help
+      - intent: list_top_products
+      - action: action_list_top_products
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Rating and review flows
+  - story: need to login for rating
+    steps:
+      - intent: add_rating
+        entities:
+          - product_id: "4"
+          - rating_value: "4"
+      - slot_was_set:
+          - product_id: "4"
+      - slot_was_set:
+          - rating_value: "4"
+      - slot_was_set:
+          - user_id: null
+      - action: utter_login_required
+      - action: utter_redirect_login
+      - intent: login
+      - action: utter_redirect_login
+
+  - story: add rating with missing product ID
+    steps:
+      - intent: add_rating
+        entities:
+          - rating_value: "5"
+      - slot_was_set:
+          - rating_value: "5"
+      - slot_was_set:
+          - user_id: "101" # Assuming user is logged in
+      - action: utter_ask_product_id
+      - intent: add_rating
+        entities:
+          - product_id: "6"
+          - rating_value: "5"
+      - slot_was_set:
+          - product_id: "6"
+      - action: action_add_rating
+      - action: utter_ask_rating_comment
+      - intent: provide_rating_comment
+      - action: action_add_rating
+      - action: utter_thank_for_review
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: add rating with missing rating value
+    steps:
+      - intent: add_rating
+        entities:
+          - product_id: "7"
+      - slot_was_set:
+          - product_id: "7"
+      - slot_was_set:
+          - user_id: "101" # Assuming user is logged in
+      - action: utter_ask_rating_value
+      - intent: add_rating
+        entities:
+          - rating_value: "4"
+      - slot_was_set:
+          - rating_value: "4"
+      - action: action_add_rating
+      - action: utter_ask_rating_comment
+      - intent: deny
+      - action: utter_thank_for_review
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: check user ratings
+    steps:
+      - intent: show_user_ratings
+      - slot_was_set:
+          - user_id: "101" # Assuming user is logged in
+      - action: action_show_user_ratings
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: check user ratings when not logged in
+    steps:
+      - intent: show_user_ratings
+      - slot_was_set:
+          - user_id: null
+      - action: utter_login_required
+      - action: utter_redirect_login
+      - intent: login
+      - action: utter_redirect_login
+
+  # FAQ and help flows
+  - story: user asks multiple FAQs
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: faq_business_hours
+      - action: utter_faq_business_hours
+      - intent: faq_payment_methods
+      - action: utter_faq_payment_methods
+      - action: action_listen
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: user needs help
+    steps:
+      - intent: help
+      - action: utter_help
+      - intent: search_product
+        entities:
+          - product: "ayam penyet"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: out of scope query followed by help
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      - action: utter_help
+      - intent: faq_business_hours
+      - action: utter_faq_business_hours
+      - action: action_listen
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # User account flows
+  - story: new user registration
+    steps:
+      - intent: register
+      - action: utter_redirect_register
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: user login
+    steps:
+      - intent: login
+      - action: utter_redirect_login
+      - intent: thank
+      - action: utter_youre_welcome
+
+  # Fallback flow
+  - story: fallback recovery
+    steps:
+      - intent: nlu_fallback
+      - action: utter_fallback
+      - action: utter_help
+      - intent: list_top_products
+      - action: action_list_top_products
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Bot challenge flow
+  - story: bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+      - intent: help
+      - action: utter_help
+
+  # Tutorial ordering flows
+  - story: user asks for ordering tutorial
+    steps:
+      - intent: tutorial_order_website
+      - action: utter_tutorial_order_website
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: greeting and ask for ordering tutorial
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: tutorial_order_website
+      - action: utter_tutorial_order_website
+      - action: utter_ask_more_help
+      - intent: affirm
+      - action: utter_help
+      - intent: search_product
+        entities:
+          - product: "ayam bakar"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: help then ask for ordering tutorial
+    steps:
+      - intent: help
+      - action: utter_help
+      - intent: tutorial_order_website
+      - action: utter_tutorial_order_website
+      - action: utter_ask_more_help
+      - intent: deny
+      - action: utter_goodbye
+
+  # Alternative flow for users attempting to place complex orders
+  - story: user needs help with ordering multiple items
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_product
+        entities:
+          - product: "ayam bakar"
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - intent: tutorial_order_website
+      - action: utter_tutorial_order_website
+      - action: utter_ask_more_help
+      - intent: thank
+      - action: utter_youre_welcome
+      - intent: goodbye
+      - action: utter_goodbye

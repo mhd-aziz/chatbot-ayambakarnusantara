@@ -1,0 +1,284 @@
+version: "3.1"
+
+rules:
+  # Basic conversation rules
+  - rule: Respond to greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: action_listen
+
+  - rule: Respond to goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+      - action: action_listen
+
+  - rule: Respond to thank
+    steps:
+      - intent: thank
+      - action: utter_youre_welcome
+      - action: action_listen
+
+  - rule: Respond to bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+      - action: action_listen
+
+  - rule: Respond to help
+    steps:
+      - intent: help
+      - action: utter_help
+      - action: action_listen
+
+  - rule: Respond to out of scope
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope
+      - action: utter_help
+      - action: action_listen
+
+  # New rule for tutorial order website
+  - rule: Respond to tutorial order website
+    steps:
+      - intent: tutorial_order_website
+      - action: utter_tutorial_order_website
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  # FAQ rules with action_listen
+  - rule: Respond to business hours FAQ
+    steps:
+      - intent: faq_business_hours
+      - action: utter_faq_business_hours
+      - action: action_listen
+
+  - rule: Respond to payment methods FAQ
+    steps:
+      - intent: faq_payment_methods
+      - action: utter_faq_payment_methods
+      - action: action_listen
+
+  # Product search and information rules
+  - rule: Search product by name
+    steps:
+      - intent: search_product
+      - action: action_product_search
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: Search product detail by name
+    steps:
+      - intent: product_detail
+      - action: action_product_detail
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: Search product detail by ID
+    condition:
+      - slot_was_set:
+          - product_id: true
+    steps:
+      - intent: product_detail
+      - action: action_product_detail
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: List top products
+    steps:
+      - intent: list_top_products
+      - action: action_list_top_products
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: List shop products by name
+    steps:
+      - intent: list_shop_products
+      - action: action_list_shop_products
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: List shop products by ID
+    condition:
+      - slot_was_set:
+          - shop_id: true
+    steps:
+      - intent: list_shop_products
+      - action: action_list_shop_products
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  # Order and payment status rules
+  - rule: Check order status by ID
+    condition:
+      - slot_was_set:
+          - order_id: true
+    steps:
+      - intent: check_order_status
+      - action: action_check_order_status
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: Ask for order ID when checking status without ID
+    condition:
+      - slot_was_set:
+          - order_id: null
+    steps:
+      - intent: check_order_status
+      - action: utter_ask_order_id
+      - action: action_listen
+
+  - rule: Check payment status by ID
+    condition:
+      - slot_was_set:
+          - order_id: true
+    steps:
+      - intent: check_payment_status
+      - action: action_check_payment_status
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: Ask for order ID when checking payment without ID
+    condition:
+      - slot_was_set:
+          - order_id: null
+    steps:
+      - intent: check_payment_status
+      - action: utter_ask_order_id
+      - action: action_listen
+
+  # Rating and review rules
+  - rule: Show user ratings when user is logged in
+    condition:
+      - slot_was_set:
+          - user_id: true
+    steps:
+      - intent: show_user_ratings
+      - action: action_show_user_ratings
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  - rule: Ask for login when showing user ratings without user_id
+    condition:
+      - slot_was_set:
+          - user_id: null
+    steps:
+      - intent: show_user_ratings
+      - action: utter_login_required
+      - action: utter_redirect_login
+      - action: action_listen
+
+  - rule: Add rating to product when all slots are filled
+    condition:
+      - slot_was_set:
+          - user_id: true
+      - slot_was_set:
+          - product_id: true
+      - slot_was_set:
+          - rating_value: true
+    steps:
+      - intent: add_rating
+      - action: action_add_rating
+      - action: utter_ask_rating_comment
+      - action: action_listen
+
+  - rule: Ask for login when user is not logged in for rating
+    condition:
+      - slot_was_set:
+          - user_id: null
+    steps:
+      - intent: add_rating
+      - action: utter_login_required
+      - action: utter_redirect_login
+      - action: action_listen
+
+  - rule: Ask for product ID when adding rating without product ID
+    condition:
+      - slot_was_set:
+          - user_id: true
+      - slot_was_set:
+          - product_id: null
+    steps:
+      - intent: add_rating
+      - action: utter_ask_product_id
+      - action: action_listen
+
+  - rule: Ask for rating value when no rating provided
+    condition:
+      - slot_was_set:
+          - user_id: true
+      - slot_was_set:
+          - product_id: true
+      - slot_was_set:
+          - rating_value: null
+    steps:
+      - intent: add_rating
+      - action: utter_ask_rating_value
+      - action: action_listen
+
+  - rule: Process rating comment after rating is provided
+    condition:
+      - slot_was_set:
+          - user_id: true
+      - slot_was_set:
+          - product_id: true
+      - slot_was_set:
+          - rating_value: true
+    steps:
+      - intent: provide_rating_comment
+      - action: action_add_rating
+      - action: utter_thank_for_review
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  # User account rules
+  - rule: Redirect to login page
+    steps:
+      - intent: login
+      - action: utter_redirect_login
+      - action: action_listen
+
+  - rule: Redirect to register page
+    steps:
+      - intent: register
+      - action: utter_redirect_register
+      - action: action_listen
+
+  # Context-specific affirmation rules
+  - rule: Handle affirmation after ask more help
+    condition:
+      - slot_was_set:
+          - requested_slot: null
+    steps:
+      - intent: affirm
+      - action: utter_help
+      - action: action_listen
+
+  # Context-specific denial rules
+  - rule: Handle denial after ask more help
+    condition:
+      - slot_was_set:
+          - conversation_stage: post_search
+    steps:
+      - intent: deny
+      - action: utter_goodbye
+      - action: action_listen
+
+  - rule: Handle denial after rating comment request
+    condition:
+      - slot_was_set:
+          - conversation_stage: post_rating
+    steps:
+      - intent: deny
+      - action: utter_thank_for_review
+      - action: utter_ask_more_help
+      - action: action_listen
+
+  # Fallback rules
+  - rule: Fallback
+    steps:
+      - intent: nlu_fallback
+      - action: utter_fallback
+      - action: utter_help
+      - action: action_listen
