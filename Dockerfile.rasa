@@ -1,0 +1,18 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        wget \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir rasa mysql-connector-python python-dotenv
+
+COPY . .
+
+EXPOSE 5005
+
+ENTRYPOINT ["rasa"]
+CMD ["run", "--enable-api", "--cors", "*", "--port", "5005", "--debug"]
