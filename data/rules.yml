@@ -15,17 +15,22 @@ rules:
     steps:
       - intent: search_product
       - action: utter_acknowledge_search
-      - action: action_cari_produk_api
+      - action: action_search_product_api
 
   - rule: Jalankan pencarian toko dengan acknowledgment ketika intent search_shop terdeteksi
     steps:
       - intent: search_shop
       - action: utter_acknowledge_shop_search
-      - action: action_cari_toko_api
+      - action: action_search_shop_api
 
   - rule: Berikan rekomendasi produk ketika diminta dan diikuti pertanyaan
     steps:
       - intent: product_recommendations
       - action: utter_give_recommendations
       - action: action_recommend_products
-      - action: utter_ask_after_recommendations 
+      - action: utter_ask_after_recommendations
+
+  - rule: Tampilkan semua produk ketika diminta
+    steps:
+      - intent: list_products
+      - action: action_list_products_api

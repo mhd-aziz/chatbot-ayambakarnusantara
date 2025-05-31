@@ -9,19 +9,19 @@ stories:
       - slot_was_set:
           - product_name_slot: "Pepes Tahu"
       - action: utter_acknowledge_search
-      - action: action_cari_produk_api
+      - action: action_search_product_api
 
   - story: Pengguna mencari produk, awalnya tidak spesifik, lalu memberikan nama produk setelah ditanya
     steps:
       - intent: search_product
       - action: utter_acknowledge_search
-      - action: action_cari_produk_api
+      - action: action_search_product_api
       - intent: inform_product_name
         entities:
           - product_name: "Ayam Bakar Madu"
       - slot_was_set:
           - product_name_slot: "Ayam Bakar Madu"
-      - action: action_cari_produk_api
+      - action: action_search_product_api
 
   - story: Sapaan oleh pengguna
     steps:
@@ -37,7 +37,7 @@ stories:
     steps:
       - intent: search_shop
       - action: utter_acknowledge_shop_search
-      - action: action_cari_toko_api
+      - action: action_search_shop_api
 
   - story: Pengguna mencari toko berdasarkan nama toko
     steps:
@@ -45,7 +45,7 @@ stories:
         entities:
           - shop_name: "Ayam Bakar Mama Zain"
       - action: utter_acknowledge_shop_search
-      - action: action_cari_toko_api
+      - action: action_search_shop_api
 
   - story: Pengguna meminta rekomendasi produk (alur dasar yang mengarah ke pertanyaan)
     steps:
@@ -82,16 +82,16 @@ stories:
     steps:
       - intent: search_product
         entities:
-          - product_name: "ayam"
+          - product_name: "ayam bakar bekakak"
       - action: utter_acknowledge_search
-      - action: action_cari_produk_api
+      - action: action_search_product_api
       - intent: inform_product_name
         entities:
-          - product_name: "ayam bakar original"
+          - product_name: "ayam goreng original"
       - slot_was_set:
-          - product_name_slot: "ayam bakar original"
+          - product_name_slot: "ayam goreng original"
       - action: utter_product_clarified_searching_now
-      - action: action_cari_produk_api
+      - action: action_search_product_api
 
   - story: Pencarian produk ambigu, aksi melakukan klarifikasi, pengguna menolak dan ingin mencari yang lain
     steps:
@@ -99,9 +99,9 @@ stories:
         entities:
           - product_name: "ayam"
       - action: utter_acknowledge_search
-      - action: action_cari_produk_api
+      - action: action_search_product_api
       - intent: deny
-      - action: utter_ask_product_name
+      - action: utter_ask_product_name_slot
 
   - story: Pengguna mengonfirmasi sesuatu secara umum
     steps:
@@ -112,3 +112,8 @@ stories:
     steps:
       - intent: deny
       - action: utter_deny
+
+  - story: Pengguna ingin melihat daftar semua produk
+    steps:
+      - intent: list_products
+      - action: action_list_products_api

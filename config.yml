@@ -11,12 +11,14 @@ pipeline:
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
-    analyzer: char_wb
+    analyzer: "char_wb"
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
+    epochs: 150
     constrain_similarities: true
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
   - name: CompactLLMCommandGenerator
     llm:
       model_group: gemini_llm
@@ -31,15 +33,23 @@ pipeline:
 
 policies:
   - name: MemoizationPolicy
+    max_history: 8
+  - name: IntentlessPolicy
+    llm:
+      model_group: gemini_llm
+    embeddings:
+      model_group: gemini_embedding_model
+    prompt_template: prompts/intentless_policy.jinja2
   - name: RulePolicy
     enable_fallback_prediction: true
     core_fallback_threshold: 0.3
     core_fallback_action_name: "action_default_fallback"
   - name: UnexpecTEDIntentPolicy
-    max_history: 5
-    epochs: 100
+    max_history: 8
+    epochs: 150
+    constrain_similarities: true
   - name: TEDPolicy
-    max_history: 5
-    epochs: 100
+    max_history: 8
+    epochs: 150
     constrain_similarities: true
 assistant_id: 20250531-034907-fried-sting
