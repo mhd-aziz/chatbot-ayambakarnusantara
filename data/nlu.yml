@@ -1,20 +1,24 @@
 version: "3.1"
 
 nlu:
-  - regex: shop_keywords
+  - regex: shop_name
     examples: |
-      - \b(toko|toko-toko|cabang|gerai|outlet|alamat toko|lokasi toko|tempat makan)\b
-      - (dimana|di mana|mana aja) (toko|cabang|restoran)
-      - daftar (toko|cabang|outlet)
-      - (resto|warung|tempat) ayam bakar nusantara
+      - \b(toko|toko-toko|cabang|gerai|outlet|alamat toko|lokasi toko|tempat makan|resto|restoran|warung|spot|tempat nongkrong)\b
+      - (dimana|di mana|mana aja|lokasinya di) (toko|cabang|restoran|gerai|outlet)
+      - daftar (toko|cabang|outlet|gerai|lokasi)
+      - (resto|warung|tempat) ayam bakar nusantara (ada dimana saja|terdekat)
+      - info lokasi (lengkap|detail)
+      - cari (gerai|cabang)
 
-  - regex: product_keywords
+  - regex: product_name
     examples: |
-      - \b(produk|menu|harga|stok|varian|rasa|pesan|beli|cari produk|info produk|daftar menu|menu makanan|menu minuman)\b
-      - (ada|jual|sedia|punya) (menu|produk)
-      - berapa harga
-      - mau (pesan|beli|coba|icip|order)
-      - (lihat|cek) menu
+      - \b(produk|menu|harga|stok|varian|rasa|pesan|beli|cari produk|info produk|daftar menu|menu makanan|menu minuman|item|hidangan|pilihan|menu spesial|paling laris|rekomendasi chef|menu hari ini)\b
+      - (ada|jual|sedia|punya|tersedia) (menu|produk|item|varian)
+      - berapa harga|harga nya berapa|cek harga|info harga|price list
+      - mau (pesan|beli|coba|icip|order|nyobain|lihat)
+      - (lihat|cek|tanya|info|detail) menu (lengkap|hari ini)
+      - detail produk (ini|itu)
+      - (ada|punya) (menu apa aja|apa saja menunya)
 
   - intent: greet
     examples: |
@@ -56,31 +60,39 @@ nlu:
       - Pagi min, mau nanya dong.
       - Permisi, mau interupsi sebentar.
       - Halo, ada orang?
+      - Halo min, mau nanya-nanya dong soal Ayam Bakar Nusantara.
+      - Permisi, apakah ini dengan CS Ayam Bakar Nusantara?
+      - Selamat {time_of_day}, saya ada perlu nih, bisa bantu?
+      - Assalamualaikum Warahmatullahi Wabarakatuh, selamat pagi
+      - Permisi, mau numpang tanya soal menu Ayam Bakar Nusantara ya
+      - Halo, saya tertarik dengan promo yang ada, bisa dijelaskan detailnya?
+      - Eh, ketemu lagi, masih inget saya gak? Mau pesen nih.
+      - Halo, ada yang jaga?
 
   - intent: search_product
     examples: |
-      - saya mau cari [tumpeng](product_name)
+      - saya mau cari [ikan nila bakar](product_name)
       - ada [ayam bakar](product_name)?
       - info tentang [sate ayam](product_name)
       - apakah tersedia [es teh manis](product_name)
-      - [jus mangga](product_name) ada ga?
+      - [teh pucuk](product_name) ada ga?
       - carikan saya produk [nasi goreng spesial](product_name)
       - produk [tumpeng](product_name)
       - Saya ingin mencari [Pepes Ikan Patin](product_name)
       - Cek [Ayam Goreng Kremes](product_name)
-      - mau tanya [sop buntut](product_name) ada?
+      - mau tanya [ayam bakar bekakak](product_name) ada?
       - saya lagi pengen [gado-gado](product_name) spesial
       - lihat menu [minuman dingin](product_name) dong
-      - produk [kerupuk udang](product_name) ada apa aja?
-      - tolong carikan [nasi uduk komplit](product_name)
+      - produk [ayam bakar bekakak](product_name) ada apa aja?
+      - tolong carikan [ayam bakar bekakak](product_name)
       - info [ayam geprek keju](product_name) dong
       - apakah ada stok untuk [es kelapa jeruk](product_name)?
       - menu [ikan nilai bakar](product_name) nya ada?
       - ketersediaan [tahu isi pedas](product_name) gimana?
       - cek harga [tempe bacem](product_name)
-      - pengen [mie ayam](product_name)
-      - ada [kwetiau goreng](product_name) gak?
-      - mau dong [capcay seafood](product_name)
+      - pengen [pepes tahu](product_name)
+      - ada [pepes ikan mas duri lunak](product_name) gak?
+      - mau dong [pepes tahu](product_name)
       - [bihun bebek](product_name) nya ready?
       - lihat [aneka jus](product_name)
       - Saya lagi pengen banget makan [ayam bakar madu](product_name) nih, kira-kira ada gak ya di menu kalian sekarang?
@@ -99,6 +111,29 @@ nlu:
       - kalau [paket nasi timbel](product_name) itu lauknya apa aja ya?
       - mau lihat daftar [minuman tradisional](product_name) yang ada.
       - untuk [ayam bakar nusantara spesial](product_name) apa bedanya sama yang biasa?
+      - Di Ayam Bakar Nusantara, [menu seafood](product_name) yang paling favorit apa ya, dan harganya berapaan?
+      - Saya lagi nyari [paket nasi komplit](product_name) tapi yang ayamnya jangan terlalu pedas, ada pilihan gak?
+      - Untuk [sate maranggi](product_name), satu porsi isinya berapa tusuk ya? Penasaran pengen coba nih.
+      - Kalo mau pesen [tumpeng mini](product_name) buat acara arisan besok masih bisa gak ya kira-kira?
+      - Cek dong, [es buah campur](product_name) kalian itu pake susu atau santan sih?
+      - Ada [menu diet](product_name) atau yang pilihan rendah kalori gak di sini? Soalnya lagi jaga makan.
+      - Selain [ayam bakar original](product_name), varian [ayam bakar](product_name) lain yang bumbunya meresap banget dan dagingnya empuk apa ya?
+      - Tolong carikan info dong, [minuman signature](product_name) di Ayam Bakar Nusantara itu apa aja pilihannya?
+      - Apakah [sambal matah](product_name) kalian dibuat dadakan atau sudah jadi? Terus level pedasnya gimana?
+      - Saya mau tau lebih detail soal [paket bukber](product_name) untuk sekitar 10 orang, isinya apa aja dan harganya berapa ya?
+      - Jual [kopi susu gula aren](product_name) gak? Yang less sugar ada?
+      - Mau tanya dong, [bebek goreng](product_name) nya itu pake bebek muda atau tua ya?
+      - Ada [cemilan ringan](product_name) buat nunggu makanan utama gak? Kayak [tahu crispy](product_name) atau [bakwan](product_name) gitu.
+      - Saya pengen [ayam bakar pedas manis](product_name) tapi jangan terlalu gosong ya bakarnya.
+      - Info dong, [paket berdua hemat](product_name) itu minumnya bisa diganti [jus buah](product_name)?
+      - Untuk [sop iga](product_name), kuahnya bening atau santan ya? Terus dagingnya banyak gak porsinya?
+      - Ada [menu sarapan](product_name) gak? Misalnya [bubur ayam spesial](product_name) atau [lontong sayur medan](product_name).
+      - Kalau [gurame asam manis](product_name) itu ikannya digoreng dulu atau langsung dibakar baru disiram saus?
+      - Saya alergi udang, [ayam bakar madu](product_name) kalian ada campuran udangnya gak di bumbunya?
+      - Mau cari [teh hangat](product_name) selain teh, ada [es jeruk](product_name) atau [coklat panas klasik](product_name) gak?
+      - Untuk [paket ulang tahun anak](product_name) yang silver, ada bonus kue atau souvenirnya gak ya?
+      - Saya mau tanya soal [ayam bakar bumbu padang](product_name), itu tingkat kepedasannya bisa diatur?
+      - Apakah [es dawet ayu](product_name) nya pakai pemanis buatan?
 
   - intent: search_shop
     examples: |
@@ -118,7 +153,7 @@ nlu:
       - cek toko [nusantara jaya](shop_name)
       - ada cabang [ayam bakar nusantara](shop_name) di dekat sini?
       - Saya denger-denger Ayam Bakar Nusantara baru buka cabang baru di deket [Mall Metropolis Town Square](shop_name), itu bener gak sih infonya?
-      - Kalau saya mau makan di tempat, cabang [Ayam Bakar Nusantara Karawaci](shop_name) itu tempatnya cukup luas gak ya buat acara reunian?
+      - Kalau saya mau makan di tempat, cabang [Ayam Bakar Nusantara Karawaci](shop_name) itu tempatnya cukup luas gak ya buat acara reunian keluarga?
       - Bisa kasih tau gak, cabang [Ayam Bakar Nusantara](shop_name) mana yang buka sampai tengah malam di sekitaran [BSD City](shop_name)?
       - Saya mau adain acara bukber di salah satu cabang, ada rekomendasi cabang [Ayam Bakar Nusantara](shop_name) yang punya ruangan VIP di daerah [Bintaro](shop_name) gitu?
       - Apakah semua cabang [Restoran Ayam Bakar Nusantara](shop_name) itu menunya sama persis atau ada beberapa yang beda ya?
@@ -129,7 +164,44 @@ nlu:
       - cabang kalian yang paling gede di [Tangerang](shop_name) mana?
       - info dong, [Ayam Bakar Nusantara cabang Bandara](shop_name) itu di terminal berapa?
       - mau tau jam buka [Ayam Bakar Nusantara Ciledug](shop_name) hari ini.
-      - ada [Ayam Bakar Nusantara](shop_name) yang bisa delivery ke [rumah saya](shop_name)? (Mungkin shop_name tidak tepat di sini, tapi contoh variasi)
+      - ada [Ayam Bakar Nusantara](shop_name) yang bisa delivery ke [rumah saya](shop_name)?
+      - Cabang [Ayam Bakar Nusantara](shop_name) yang di [Jakarta Selatan](shop_name) itu ada fasilitas mushola sama parkir mobil yang luas gak ya?
+      - Kalo dari [Stasiun Gondangdia](shop_name), cabang [Ayam Bakar Nusantara](shop_name) mana yang paling gampang dijangkau pake KRL atau Transjakarta?
+      - Mau tanya dong, [Ayam Bakar Nusantara cabang Gading Serpong](shop_name) itu weekend biasanya waiting list gak? Perlu reservasi dulu kalo mau makan di sana?
+      - Selain yang di [pusat kota](shop_name), ada gak sih cabang [Ayam Bakar Nusantara](shop_name) yang suasananya lebih tenang dan cozy buat kerja atau meeting?
+      - Tolong info dong, [Ayam Bakar Nusantara](shop_name) yang di [Bandung](shop_name) itu ratingnya berapa ya di Google Maps atau platform review lainnya?
+      - Jam operasional [ABN cabang Veteran](shop_name) pas hari libur nasional seperti lebaran atau tahun baru sama kayak hari biasa atau ada perubahan?
+      - Apakah [cabang Bogor](shop_name) menyediakan layanan pesan antar untuk area [Sentul City](shop_name)?
+      - Di [outlet Cikini](shop_name) ada playground buat anak-anak gak?
+      - Toko kalian yang di [Bekasi](shop_name) itu ada smoking area nya?
+      - Cabang [Ayam Bakar Nusantara](shop_name) yang di [area Puncak](shop_name) itu ada fasilitas WiFi gratis dan colokan buat laptop?
+      - Kalau mau adain acara arisan untuk 30 orang, cabang [Ayam Bakar Nusantara](shop_name) mana di [Surabaya](shop_name) yang punya area semi-outdoor?
+      - Ada [Ayam Bakar Nusantara](shop_name) yang pemandangannya bagus gak, misalnya dekat [pantai](shop_name) atau [sawah](shop_name) di [Bali](shop_name)?
+      - Toko [Ayam Bakar Nusantara](shop_name) yang paling hits di kalangan anak muda [Jogja](shop_name) itu yang mana ya?
+      - Bisa reservasi tempat di [cabang utama ABN](shop_name) untuk makan malam romantis weekend ini? Ada menu spesialnya?
+      - Di [outlet bandara Soekarno-Hatta](shop_name) itu bisa bayar pakai kartu kredit internasional jenis Amex?
+
+  - intent: list_products
+    examples: |
+      - mau lihat semua produk dong
+      - tampilkan daftar semua menu
+      - daftar menu dong
+      - ada produk apa aja di sini?
+      - list semua makanan dan minuman
+      - saya mau lihat katalog produk lengkap
+      - apa saja yang dijual?
+      - lihat seluruh item
+      - daftar produk lengkap
+      - tunjukkan semua yang ada di menu
+      - menu lengkapnya apa saja?
+      - Tunjukin semua menu yang kalian punya dari A sampai Z.
+      - Saya mau lihat daftar lengkap makanan dan minuman yang tersedia.
+      - Ada apa aja sih di Ayam Bakar Nusantara? Kasih lihat semuanya.
+      - Kasih lihat semua item yang bisa dipesan, termasuk yang spesial.
+      - Menu komplitnya dong, dari makanan pembuka sampai penutup.
+      - Penasaran nih, semua produknya apa aja ya? Termasuk minuman juga.
+      - Bisa tampilkan seluruh pilihan menu yang ada?
+      - Saya ingin browse semua opsi menu yang ditawarkan.
 
   - intent: product_recommendations
     examples: |
@@ -157,6 +229,21 @@ nlu:
       - menu [ayam bakar](product_name) yang paling direkomendasikan apa?
       - ada rekomendasi untuk [minuman segar](product_name)?
       - kalau mau yang pedas, rekomendasi [sambal](product_name) nya apa?
+      - Saya mau traktir temen nih, budget per orang sekitar 75 ribu, enaknya pesen [menu paket](product_name) atau [ala carte](product_name) apa ya?
+      - Lagi pengen yang kuah-kuah anget gurih gitu, ada rekomendasi [sup iga](product_name) atau mungkin [soto betawi](product_name) yang enak?
+      - Kasih saran dong, buat anak-anak yang gak terlalu suka pedes dan banyak sayur, [menu ayam](product_name) atau [ikan](product_name) apa yang cocok?
+      - Menu baru kalian apa aja nih bulan ini? Ada yang lagi promo khusus atau jadi [best seller](product_name) dadakan?
+      - Saya vegetarian dan teman saya alergi seafood, ada rekomendasi [menu tanpa daging](product_name) dan [menu non-seafood](product_name) yang oke buat kita berdua?
+      - Antara [iga bakar madu](product_name) sama [ayam bakar rempah nusantara](product_name), mana yang bumbunya lebih medok dan meresap?
+      - Untuk perayaan ulang tahun, mending pesan [tumpeng](product_name) atau beberapa [paket nasi box](product_name) ya? Mana yang lebih worth it?
+      - Minuman [tradisional](product_name) yang paling seger dan gak terlalu manis apa ya? Selain es teh.
+      - Ada rekomendasi [dessert](product_name) penutup yang khas dari Ayam Bakar Nusantara?
+      - Lagi musim panas gini enaknya minum [yang dingin-dingin nyegerin](product_name), ada saran?
+      - Saya bawa orang tua yang giginya sensitif, rekomendasi [makanan utama](product_name) yang gak pedas dan teksturnya lembut apa ya?
+      - Mau yang beda dari biasanya, ada [menu unik](product_name) atau [menu fusion](product_name) yang direkomendasikan dan jarang ada di tempat lain?
+      - Budget saya terbatas banget nih, ada rekomendasi [paket super hemat](product_name) tapi tetap enak dan ngenyangin buat mahasiswa?
+      - Kalau mau [makanan penutup](product_name) yang khas Indonesia banget dan Instagrammable, apa ya rekomendasinya?
+      - Minuman pendamping [ayam bakar original](product_name) yang paling pas apa ya selain es teh manis? Mungkin [jus kedondong](product_name)?
 
   - intent: affirm
     examples: |
@@ -190,6 +277,15 @@ nlu:
       - oke, lanjutkan prosesnya
       - ya, saya mengerti
       - baiklah kalau begitu
+      - hooh, bener itu
+      - iya, persis seperti itu
+      - mantap, lanjutkeun!
+      - Iya, benar sekali itu pilihannya.
+      - Betul sekali, tolong proses.
+      - Oke deh, saya setuju dengan yang itu.
+      - Siap, laksanakan segera komandan!
+      - Ya, itu yang saya maksud, bukan yang lain.
+      - Cocok!
 
   - intent: deny
     examples: |
@@ -220,6 +316,12 @@ nlu:
       - jangan lakukan itu
       - saya rasa tidak
       - sepertinya tidak
+      - eh jangan deh, gak jadi pesen itu
+      - hmm, kayaknya bukan itu yang saya mau, ada opsi lain?
+      - gak sreg ah sama yang itu, batalin aja.
+      - Nggak, bukan yang itu.
+      - Tolong jangan proses yang itu.
+      - Saya berubah pikiran, gak jadi.
 
   - intent: goodbye
     examples: |
@@ -249,6 +351,10 @@ nlu:
       - Thanks berat infonya, sangat bermanfaat. Saya log out dulu.
       - Udah cukup, makasih.
       - Saya akhiri ya.
+      - Okelah kalau begitu, terima kasih atas waktunya. Sampai jumpa di lain kesempatan.
+      - Cukup sekian dulu dari saya, selamat istirahat, bye!
+      - Terima kasih banyak atas pelayanannya, saya undur diri dulu.
+      - Sip, nanti saya kontak lagi kalau ada perlu. Daah!
 
   - intent: inform_product_name
     examples: |
@@ -262,6 +368,16 @@ nlu:
       - [tahu bacem](product_name) maksudnya
       - produknya [ikan gurame bakar](product_name)
       - yang saya maksud [kerupuk kulit](product_name)
+      - Oh yang itu tuh, yang [ayam bakar bumbu rujak pedas](product_name) maksud saya.
+      - Bukan yang [sate ayam biasa](product_name), tapi yang [sate lilit khas Bali](product_name).
+      - Saya tertarik sama yang [es kopyor float](product_name) dari daftar tadi.
+      - Pilih yang [gurame terbang saus asam manis](product_name) aja deh kayaknya, keliatan enak.
+      - Yang [minuman herbal jahe sereh hangat](product_name) itu aja satu, buat ngangetin badan.
+      - Maksudku yang [paket komplit B](product_name) bukan yang A.
+      - Oh, itu yang [sambal terasi](product_name) level 3.
+      - Iya, yang [ayam goreng lengkuas](product_name) itu.
+      - Maksudnya [paket keluarga hemat C](product_name).
+      - Yang [jus mangga kweni](product_name).
 
   - intent: inform_product_name_from_recommendation
     examples: |
@@ -275,3 +391,11 @@ nlu:
       - coba jelasin yang [sop buntut](product_name)
       - oke, saya mau yang [ayam bakar madu](product_name) dari rekomendasi tadi
       - yang [minuman cincau](product_name) itu kayaknya seger
+      - Dari yang tadi disebutin, saya mau tau lebih banyak soal [paket keluarga ceria](product_name).
+      - Yang [es cendol nangka](product_name) itu kayaknya cocok buat cuaca panas gini.
+      - Oke, saya ambil rekomendasi yang [ikan bakar jimbaran](product_name).
+      - Jelasin dong tentang [menu spesial koki hari ini](product_name) yang tadi direkomendasiin.
+      - Saya mau yang [nasi goreng kampung](product_name) aja dari pilihan itu.
+      - Untuk yang direkomendasikan tadi, saya pilih [ayam taliwang utuh](product_name).
+      - Yang [es campur Nusantara](product_name) itu aja, kelihatannya komplit.
+      - Tertarik sama [paket bukber C](product_name) yang ada di daftar rekomendasi.
