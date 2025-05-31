@@ -1,0 +1,114 @@
+version: "3.1"
+
+stories:
+  - story: Pengguna mencari produk dan ditemukan dengan nama produk
+    steps:
+      - intent: search_product
+        entities:
+          - product_name: "Pepes Tahu"
+      - slot_was_set:
+          - product_name_slot: "Pepes Tahu"
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+
+  - story: Pengguna mencari produk, awalnya tidak spesifik, lalu memberikan nama produk setelah ditanya
+    steps:
+      - intent: search_product
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+      - intent: inform_product_name
+        entities:
+          - product_name: "Ayam Bakar Madu"
+      - slot_was_set:
+          - product_name_slot: "Ayam Bakar Madu"
+      - action: action_cari_produk_api
+
+  - story: Sapaan oleh pengguna
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - story: Pengguna mengucapkan selamat tinggal
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna mencari semua toko yang tersedia
+    steps:
+      - intent: search_shop
+      - action: utter_acknowledge_shop_search
+      - action: action_cari_toko_api
+
+  - story: Pengguna mencari toko berdasarkan nama toko
+    steps:
+      - intent: search_shop
+        entities:
+          - shop_name: "Ayam Bakar Mama Zain"
+      - action: utter_acknowledge_shop_search
+      - action: action_cari_toko_api
+
+  - story: Pengguna meminta rekomendasi produk (alur dasar yang mengarah ke pertanyaan)
+    steps:
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+
+  - story: Pengguna meminta rekomendasi, bot menampilkan, pengguna tertarik dan ingin detail
+    steps:
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+      - intent: affirm
+      - action: utter_ask_which_recommendation_detail
+      - intent: inform_product_name_from_recommendation
+        entities:
+          - product_name: "Nama Produk Rekomendasi"
+      - slot_was_set:
+          - product_name_slot: "Nama Produk Rekomendasi"
+      - action: action_show_product_detail
+
+  - story: Pengguna meminta rekomendasi, bot menampilkan, pengguna tidak tertarik
+    steps:
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+      - intent: deny
+      - action: utter_offer_other_help_after_recommendation_deny
+
+  - story: Pencarian produk ambigu, aksi melakukan klarifikasi, pengguna mengonfirmasi pilihan
+    steps:
+      - intent: search_product
+        entities:
+          - product_name: "ayam"
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+      - intent: inform_product_name
+        entities:
+          - product_name: "ayam bakar original"
+      - slot_was_set:
+          - product_name_slot: "ayam bakar original"
+      - action: utter_product_clarified_searching_now
+      - action: action_cari_produk_api
+
+  - story: Pencarian produk ambigu, aksi melakukan klarifikasi, pengguna menolak dan ingin mencari yang lain
+    steps:
+      - intent: search_product
+        entities:
+          - product_name: "ayam"
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+      - intent: deny
+      - action: utter_ask_product_name
+
+  - story: Pengguna mengonfirmasi sesuatu secara umum
+    steps:
+      - intent: affirm
+      - action: utter_affirm
+
+  - story: Pengguna menolak sesuatu secara umum
+    steps:
+      - intent: deny
+      - action: utter_deny

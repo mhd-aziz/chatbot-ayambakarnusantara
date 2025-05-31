@@ -1,0 +1,45 @@
+recipe: default.v1
+language: id
+
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: RegexEntityExtractor
+    use_lookup_tables: false
+    use_regexes: true
+    case_sensitive: false
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: true
+  - name: CompactLLMCommandGenerator
+    llm:
+      model_group: gemini_llm
+    flow_retrieval:
+      embeddings:
+        model_group: gemini_embedding_model
+    prompt_template: prompts/command_generator.jinja2
+  - name: NLUCommandAdapter
+  - name: FallbackClassifier
+    threshold: 0.7
+    ambiguity_threshold: 0.1
+
+policies:
+  - name: MemoizationPolicy
+  - name: RulePolicy
+    enable_fallback_prediction: true
+    core_fallback_threshold: 0.3
+    core_fallback_action_name: "action_default_fallback"
+  - name: UnexpecTEDIntentPolicy
+    max_history: 5
+    epochs: 100
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true
+assistant_id: 20250531-034907-fried-sting

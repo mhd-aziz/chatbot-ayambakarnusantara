@@ -1,0 +1,21 @@
+version: "3.1"
+
+flows:
+  product_search_flow:
+    description: Flow ini digunakan ketika pengguna ingin mencari atau menanyakan informasi tentang produk spesifik yang dijual di restoran Ayam Bakar Nusantara. Asisten harus bisa mengidentifikasi nama produk yang disebutkan pengguna.
+    steps:
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+
+  shop_search_flow:
+    description: Flow ini digunakan ketika pengguna ingin mencari informasi tentang toko atau cabang restoran Ayam Bakar Nusantara, baik secara umum maupun berdasarkan nama toko. Asisten akan memberikan informasi toko yang relevan.
+    steps:
+      - action: utter_acknowledge_shop_search
+      - action: action_cari_toko_api
+
+  product_recommendation_flow:
+    description: Flow ini diaktifkan ketika pengguna meminta rekomendasi produk dari Ayam Bakar Nusantara. Asisten akan memberikan daftar produk yang direkomendasikan, misalnya berdasarkan popularitas atau rating tertinggi.
+    steps:
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations

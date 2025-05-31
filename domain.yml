@@ -1,0 +1,158 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - search_product:
+      use_entities:
+        - product_name
+  - search_shop:
+      use_entities:
+        - shop_name
+  - product_recommendations
+  - affirm
+  - deny
+  - inform_product_name 
+  - inform_product_name_from_recommendation
+
+entities:
+  - product_name
+  - shop_name
+
+slots:
+  product_name_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: product_name
+  shop_name_slot:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: shop_name
+
+actions:
+  - action_cari_produk_api
+  - action_cari_toko_api
+  - action_default_fallback
+  - action_recommend_products
+  - action_show_product_detail
+  - utter_greet
+  - utter_goodbye
+  - utter_ask_product_name
+  - utter_acknowledge_search
+  - utter_acknowledge_shop_search
+  - utter_give_recommendations
+  - utter_affirm
+  - utter_deny
+  - utter_chitchat
+  - utter_provide_info_general
+  - utter_human_handoff_initiated
+  - utter_core_fallback
+  - utter_ask_after_recommendations
+  - utter_ask_which_recommendation_detail
+  - utter_offer_other_help_after_recommendation_deny
+  - utter_clarify_product_ambiguity
+  - utter_product_clarified_searching_now
+
+responses:
+  utter_greet:
+    - text: "Halo! Ada yang bisa saya bantu untuk Ayam Bakar Nusantara?"
+    - text: "Hai! Selamat datang di Ayam Bakar Nusantara, ada yang bisa dibantu?"
+    - text: "Selamat {time_of_day}! Siap membantu Anda di Ayam Bakar Nusantara."
+    - text: "Salam dari Ayam Bakar Nusantara! Ada yang bisa saya bantu hari ini?"
+
+  utter_goodbye:
+    - text: "Baik, sampai jumpa lagi! Semoga harimu menyenangkan."
+    - text: "Senang bisa membantu Anda. Sampai jumpa kembali!"
+    - text: "Terima kasih sudah mampir ke Ayam Bakar Nusantara! Sampai jumpa."
+    - text: "Oke, hati-hati di jalan ya. Sampai bertemu lagi!"
+
+  utter_ask_product_name:
+    - text: "Produk apa yang ingin Anda cari namanya?"
+    - text: "Boleh tahu nama produk yang Anda maksud?"
+    - text: "Anda mencari produk apa ya?"
+
+  utter_acknowledge_search:
+    - text: "Baik, saya carikan informasi produknya untuk Anda..."
+    - text: "Oke, sebentar ya, saya cek dulu produknya..."
+    - text: "Siap! Saya cari dulu ya produknya..."
+    - text: "Tunggu sebentar, saya sedang mencari info produk tersebut."
+
+  utter_acknowledge_shop_search:
+    - text: "Baik, saya carikan informasi tokonya untuk Anda..."
+    - text: "Oke, sedang saya cari data tokonya ya."
+    - text: "Siap! Saya bantu cek informasi tokonya."
+    - text: "Segera saya carikan info tokonya untuk Anda."
+
+  utter_give_recommendations:
+    - text: "Tentu! Saya carikan beberapa produk rekomendasi terbaik untuk Anda ya."
+    - text: "Siap! Ini dia beberapa rekomendasi produk favorit dari Ayam Bakar Nusantara."
+    - text: "Oke, berikut beberapa pilihan yang mungkin Anda suka:"
+    - text: "Dengan senang hati! Saya akan berikan beberapa rekomendasi menu spesial kami."
+
+  utter_affirm:
+    - text: "Baik!"
+    - text: "Oke, siap laksanakan!"
+    - text: "Dimengerti."
+    - text: "Sip, saya lanjutkan."
+    - text: "Tentu saja!"
+
+  utter_deny:
+    - text: "Baik, dibatalkan kalau begitu."
+    - text: "Oke, tidak jadi ya."
+    - text: "Tidak masalah, saya mengerti."
+    - text: "Oke, saya hentikan."
+    - text: "Baik, permintaan Anda saya batalkan."
+
+  utter_chitchat:
+    - text: "Oke, ada lagi yang bisa saya bantu terkait menu Ayam Bakar Nusantara?"
+    - text: "Baiklah. Apakah ada pertanyaan seputar produk kami yang lain?"
+    - text: "Ada hal lain yang ingin ditanyakan atau dipesan?"
+
+  utter_provide_info_general:
+    - text: "Tentu, apa yang ingin Anda ketahui lebih lanjut dari kami?"
+    - text: "Saya akan coba bantu carikan informasinya. Ada detail spesifik yang Anda butuhkan?"
+    - text: "Boleh, silakan tanyakan apa saja mengenai Ayam Bakar Nusantara."
+
+  utter_human_handoff_initiated:
+    - text: "Baik, saya akan coba sambungkan Anda dengan tim customer service kami. Mohon tunggu sebentar."
+    - text: "Oke, saya bantu proses untuk berbicara dengan agen manusia kami ya."
+    - text: "Mohon tunggu sebentar, Anda akan segera terhubung dengan tim support."
+
+  utter_core_fallback:
+    - text: "Maaf, sepertinya saya agak bingung. Bisa Anda ulangi atau sampaikan dengan cara lain?"
+    - text: "Hmm, saya belum mengerti maksud Anda. Mungkin bisa coba tanyakan hal lain terkait Ayam Bakar Nusantara?"
+    - text: "Waduh, saya tidak paham. Bisa diperjelas lagi pertanyaannya?"
+    - text: "Sepertinya saya belum dilatih untuk itu. Ada hal lain yang bisa saya bantu?"
+
+  utter_ask_after_recommendations:
+    - text: "Ada dari rekomendasi tersebut yang menarik perhatian Anda?"
+    - text: "Apakah ada produk dari daftar ini yang ingin Anda ketahui lebih lanjut?"
+    - text: "Bagaimana dengan rekomendasi tadi? Ada yang Anda suka?"
+
+  utter_ask_which_recommendation_detail:
+    - text: "Baik, produk yang mana dari rekomendasi tadi yang ingin Anda ketahui lebih lanjut? Sebutkan namanya."
+    - text: "Oke, produk mana yang Anda pilih dari rekomendasi tersebut?"
+    - text: "Silakan sebutkan nama produk dari rekomendasi yang ingin Anda lihat detailnya."
+
+  utter_offer_other_help_after_recommendation_deny:
+    - text: "Baiklah. Apakah ada hal lain yang bisa saya bantu carikan untuk Anda?"
+    - text: "Oke, tidak masalah. Mungkin Anda ingin mencari produk lain atau informasi toko?"
+    - text: "Saya mengerti. Ada lagi yang bisa saya bantu?"
+
+  utter_clarify_product_ambiguity:
+    - text: "Hmm, maksud Anda [Produk A] atau [Produk B]? Mohon sebutkan salah satu."
+    - text: "Untuk 'ayam', apakah maksud Anda [ayam bakar original] atau mungkin [ayam goreng kremes]?"
+    - text: "Saya menemukan beberapa jenis 'ayam'. Apakah Anda mencari [ayam penyet] atau [ayam geprek]?"
+
+  utter_product_clarified_searching_now:
+    - text: "Oke, saya carikan {product_name_slot} untuk Anda sekarang."
+    - text: "Baik, dimengerti. Saya akan mencari {product_name_slot}."
+    - text: "Siap! Info untuk {product_name_slot} segera tampil."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

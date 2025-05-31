@@ -1,0 +1,31 @@
+version: "3.1"
+
+rules:
+  - rule: Sapa pengguna saat terdeteksi intent greet
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+  - rule: Ucapkan selamat tinggal saat terdeteksi intent goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Jalankan pencarian produk dengan acknowledgment ketika intent search_product terdeteksi
+    steps:
+      - intent: search_product
+      - action: utter_acknowledge_search
+      - action: action_cari_produk_api
+
+  - rule: Jalankan pencarian toko dengan acknowledgment ketika intent search_shop terdeteksi
+    steps:
+      - intent: search_shop
+      - action: utter_acknowledge_shop_search
+      - action: action_cari_toko_api
+
+  - rule: Berikan rekomendasi produk ketika diminta dan diikuti pertanyaan
+    steps:
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations 
