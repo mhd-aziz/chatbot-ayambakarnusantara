@@ -17,11 +17,11 @@ rules:
       - action: utter_acknowledge_search
       - action: action_search_product_api
 
-  - rule: Jalankan pencarian toko dengan acknowledgment ketika intent search_shop terdeteksi
+  - rule: Tampilkan semua toko ketika diminta
     steps:
-      - intent: search_shop
-      - action: utter_acknowledge_shop_search
-      - action: action_search_shop_api
+      - intent: list_shops
+      - action: utter_showing_all_shops
+      - action: action_list_shops_api
 
   - rule: Berikan rekomendasi produk ketika diminta dan diikuti pertanyaan
     steps:
@@ -33,4 +33,10 @@ rules:
   - rule: Tampilkan semua produk ketika diminta
     steps:
       - intent: list_products
+      - action: utter_showing_all_products
       - action: action_list_products_api
+
+  - rule: Tangani pertanyaan di luar konteks
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope

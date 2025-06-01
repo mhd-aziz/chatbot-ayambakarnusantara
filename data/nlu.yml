@@ -1,25 +1,6 @@
 version: "3.1"
 
 nlu:
-  - regex: shop_name
-    examples: |
-      - \b(toko|toko-toko|cabang|gerai|outlet|alamat toko|lokasi toko|tempat makan|resto|restoran|warung|spot|tempat nongkrong)\b
-      - (dimana|di mana|mana aja|lokasinya di) (toko|cabang|restoran|gerai|outlet)
-      - daftar (toko|cabang|outlet|gerai|lokasi)
-      - (resto|warung|tempat) ayam bakar nusantara (ada dimana saja|terdekat)
-      - info lokasi (lengkap|detail)
-      - cari (gerai|cabang)
-
-  - regex: product_name
-    examples: |
-      - \b(produk|menu|harga|stok|varian|rasa|pesan|beli|cari produk|info produk|daftar menu|menu makanan|menu minuman|item|hidangan|pilihan|menu spesial|paling laris|rekomendasi chef|menu hari ini)\b
-      - (ada|jual|sedia|punya|tersedia) (menu|produk|item|varian)
-      - berapa harga|harga nya berapa|cek harga|info harga|price list
-      - mau (pesan|beli|coba|icip|order|nyobain|lihat)
-      - (lihat|cek|tanya|info|detail) menu (lengkap|hari ini)
-      - detail produk (ini|itu)
-      - (ada|punya) (menu apa aja|apa saja menunya)
-
   - intent: greet
     examples: |
       - hai
@@ -68,6 +49,12 @@ nlu:
       - Halo, saya tertarik dengan promo yang ada, bisa dijelaskan detailnya?
       - Eh, ketemu lagi, masih inget saya gak? Mau pesen nih.
       - Halo, ada yang jaga?
+      - selamat {time_of_day}, ada yang online?
+      - bisa bantu saya?
+      - saya butuh bantuan
+      - permisi, mau tanya
+      - ada orang disana?
+      - halo, apakah ada yang bisa membantu?
 
   - intent: search_product
     examples: |
@@ -134,15 +121,12 @@ nlu:
       - Untuk [paket ulang tahun anak](product_name) yang silver, ada bonus kue atau souvenirnya gak ya?
       - Saya mau tanya soal [ayam bakar bumbu padang](product_name), itu tingkat kepedasannya bisa diatur?
       - Apakah [es dawet ayu](product_name) nya pakai pemanis buatan?
+      - jual [kerak telor](product_name) ga?
+      - pengen tau soal [paket ayam bakar](product_name)
+      - ada [pecel lele](product_name) gak disini?
 
   - intent: search_shop
     examples: |
-      - ada toko apa saja?
-      - daftar toko
-      - tampilkan semua toko
-      - info semua cabang
-      - mau lihat daftar toko
-      - di mana saja toko ayam bakar nusantara?
       - cari toko [MyAyam](shop_name)
       - di mana lokasi toko [Blackpink Food](shop_name)?
       - info toko [Ayam Taehyung](shop_name)
@@ -180,6 +164,35 @@ nlu:
       - Toko [Ayam Bakar Nusantara](shop_name) yang paling hits di kalangan anak muda [Jogja](shop_name) itu yang mana ya?
       - Bisa reservasi tempat di [cabang utama ABN](shop_name) untuk makan malam romantis weekend ini? Ada menu spesialnya?
       - Di [outlet bandara Soekarno-Hatta](shop_name) itu bisa bayar pakai kartu kredit internasional jenis Amex?
+      - saya mau cari info tentang [ayam bakar nusantara cabang bintaro](shop_name)
+      - info [ABN Gading Serpong](shop_name) dong
+      - [Ayam Bakar Nusantara Cikokol](shop_name) itu alamatnya dimana?
+      - kasih tau dong alamat [Ayam Bakar Nusantara Pamulang](shop_name)
+      - pengen tau lokasi [ABN Veteran](shop_name)
+      - [Ayam Bakar Nusantara deket Monas](shop_name) ada gak?
+
+  - intent: list_shops
+    examples: |
+      - ada toko apa saja?
+      - daftar toko
+      - tampilkan semua toko
+      - info semua cabang
+      - mau lihat daftar toko
+      - di mana saja toko ayam bakar nusantara?
+      - semua lokasi Ayam Bakar Nusantara
+      - list semua outlet
+      - cabang Ayam Bakar Nusantara ada dimana aja?
+      - tunjukkan semua gerai
+      - saya mau tahu semua cabang Ayam Bakar Nusantara
+      - kasih lihat daftar lengkap toko
+      - apa saja cabang yang dimiliki Ayam Bakar Nusantara?
+      - lihat semua lokasi toko
+      - seluruh cabang Ayam Bakar Nusantara
+      - semua outletnya dimana aja?
+      - tolong list semua tempat Ayam Bakar Nusantara
+      - info seluruh gerai ABN
+      - ada berapa cabang sih?
+      - tampilkan seluruh lokasi outlet
 
   - intent: list_products
     examples: |
@@ -202,6 +215,11 @@ nlu:
       - Penasaran nih, semua produknya apa aja ya? Termasuk minuman juga.
       - Bisa tampilkan seluruh pilihan menu yang ada?
       - Saya ingin browse semua opsi menu yang ditawarkan.
+      - tolong kasih lihat semua pilihan makanan
+      - daftar minuman lengkapnya
+      - semua item di menu ada apa aja?
+      - katalog produknya dong
+      - menu apa saja yang ada?
 
   - intent: product_recommendations
     examples: |
@@ -244,6 +262,9 @@ nlu:
       - Budget saya terbatas banget nih, ada rekomendasi [paket super hemat](product_name) tapi tetap enak dan ngenyangin buat mahasiswa?
       - Kalau mau [makanan penutup](product_name) yang khas Indonesia banget dan Instagrammable, apa ya rekomendasinya?
       - Minuman pendamping [ayam bakar original](product_name) yang paling pas apa ya selain es teh manis? Mungkin [jus kedondong](product_name)?
+      - sarankan [menu pembuka](product_name) yang ringan
+      - kalau untuk [anak-anak](product_name) apa rekomendasinya?
+      - ada saran [paket hemat](product_name) buat keluarga?
 
   - intent: affirm
     examples: |
@@ -286,6 +307,12 @@ nlu:
       - Siap, laksanakan segera komandan!
       - Ya, itu yang saya maksud, bukan yang lain.
       - Cocok!
+      - Kuns
+      - Lanjut
+      - Ya, silakan
+      - Boleh banget
+      - Iya, saya mengkonfirmasi
+      - Konfirm
 
   - intent: deny
     examples: |
@@ -322,6 +349,12 @@ nlu:
       - Nggak, bukan yang itu.
       - Tolong jangan proses yang itu.
       - Saya berubah pikiran, gak jadi.
+      - Nggak jadi, makasih
+      - Gak usah, terima kasih
+      - Saya tidak ingin itu
+      - Batalkan saja
+      - Jangan lakukan
+      - Stop
 
   - intent: goodbye
     examples: |
@@ -355,6 +388,12 @@ nlu:
       - Cukup sekian dulu dari saya, selamat istirahat, bye!
       - Terima kasih banyak atas pelayanannya, saya undur diri dulu.
       - Sip, nanti saya kontak lagi kalau ada perlu. Daah!
+      - makasih, saya cabut
+      - sudah selesai, terima kasih
+      - sampai bertemu besok
+      - saya pamit
+      - oke, bye
+      - terima kasih, sampai jumpa
 
   - intent: inform_product_name
     examples: |
@@ -378,6 +417,10 @@ nlu:
       - Iya, yang [ayam goreng lengkuas](product_name) itu.
       - Maksudnya [paket keluarga hemat C](product_name).
       - Yang [jus mangga kweni](product_name).
+      - saya pilih [es teh manis jumbo](product_name)
+      - yang [paket nasi ayam](product_name) itu
+      - [soto betawi](product_name) aja
+      - tadi yang [kopi susu](product_name)
 
   - intent: inform_product_name_from_recommendation
     examples: |
@@ -399,3 +442,56 @@ nlu:
       - Untuk yang direkomendasikan tadi, saya pilih [ayam taliwang utuh](product_name).
       - Yang [es campur Nusantara](product_name) itu aja, kelihatannya komplit.
       - Tertarik sama [paket bukber C](product_name) yang ada di daftar rekomendasi.
+      - pilihan saya [ayam kremes](product_name) dari saranmu
+      - yang [sate padang](product_name) tadi
+      - mau lihat info lebih lanjut tentang [jus sirsak](product_name)
+      - saya tertarik sama [paket hemat pelajar](product_name)
+
+  - intent: inform_shop_name
+    examples: |
+      - maksud saya [MyAyam](shop_name)
+      - itu loh [Ayam Bakar Mama Zain](shop_name)
+      - namanya [Toko Enak](shop_name)
+      - [ABN Karawaci](shop_name)
+      - saya mau cari yang [cabang Bintaro](shop_name)
+      - tokonya yang [Pusat](shop_name)
+      - yang di [Gading Serpong](shop_name) itu
+      - [Cabang Veteran](shop_name) saja
+      - saya pilih [Toko Ayam Pak Kumis](shop_name)
+      - oh yang [Outlet Cikini](shop_name)
+      - [Nusantara Jaya](shop_name)
+      - yang saya maksud [Cabang Bogor](shop_name)
+
+  - intent: out_of_scope
+    examples: |
+      - bagaimana cuaca hari ini?
+      - siapa presiden indonesia?
+      - apa ibukota prancis?
+      - ceritakan sebuah lelucon
+      - kamu bisa masak?
+      - berapa umurmu?
+      - apa arti kehidupan?
+      - tolong pesankan saya tiket pesawat
+      - mainkan lagu untuk saya
+      - apa warna langit?
+      - siapa pemain bola terbaik dunia?
+      - film apa yang bagus untuk ditonton malam ini?
+      - kenapa bumi itu bulat?
+      - bagaimana cara membuat kue? (kecuali jika ini resep Ayam Bakar Nusantara)
+      - sejarah perang dunia kedua
+      - kurs mata uang hari ini
+      - asdfghjkl
+      - random text
+      - kamu siapa ya?
+      - ?????
+      - saya suka makan bakso, kamu suka?
+      - apa kamu punya hobi?
+      - menurutmu alien itu ada?
+      - kapan manusia akan ke mars?
+      - jual mobil bekas gak?
+      - bisa benerin AC?
+      - apa pendapatmu tentang politik?
+      - berita terbaru hari ini apa?
+      - tolong terjemahkan ini ke bahasa inggris
+      - kamu dibuat oleh siapa? (jika bukan bagian dari bot_challenge)
+      - apa itu blackhole?

@@ -9,12 +9,17 @@ intents:
   - search_shop:
       use_entities:
         - shop_name
+  - inform_shop_name:
+      use_entities:
+        - shop_name
+  - list_shops
   - product_recommendations
   - affirm
   - deny
   - inform_product_name
   - inform_product_name_from_recommendation
   - list_products
+  - out_of_scope
 
 entities:
   - product_name
@@ -37,6 +42,7 @@ slots:
 actions:
   - action_search_product_api
   - action_search_shop_api
+  - action_list_shops_api
   - action_default_fallback
   - action_recommend_products
   - action_show_product_detail
@@ -44,8 +50,10 @@ actions:
   - utter_greet
   - utter_goodbye
   - utter_ask_product_name_slot
+  - utter_ask_shop_name_slot
   - utter_acknowledge_search
   - utter_acknowledge_shop_search
+  - utter_showing_all_shops
   - utter_give_recommendations
   - utter_affirm
   - utter_deny
@@ -60,12 +68,13 @@ actions:
   - utter_product_clarified_searching_now
   - utter_showing_all_products
   - utter_no_products_available
+  - utter_out_of_scope
 
 responses:
   utter_greet:
     - text: "Halo! Ada yang bisa saya bantu untuk Ayam Bakar Nusantara?"
     - text: "Hai! Selamat datang di Ayam Bakar Nusantara, ada yang bisa dibantu?"
-    - text: "Selamat {time_of_day}! Siap membantu Anda di Ayam Bakar Nusantara."
+    - text: "Selamat datang! Saya siap membantu Anda di Ayam Bakar Nusantara."
     - text: "Salam dari Ayam Bakar Nusantara! Ada yang bisa saya bantu hari ini?"
     - text: "Hai kak! Ada yang perlu bantuan terkait Ayam Bakar Nusantara?"
     - text: "Halo, senang bertemu dengan Anda! Mau tanya apa soal Ayam Bakar Nusantara?"
@@ -85,6 +94,13 @@ responses:
     - text: "Nama produk yang ingin dicari apa ya, kak?"
     - text: "Bisa sebutkan nama produknya?"
 
+  utter_ask_shop_name_slot:
+    - text: "Toko apa yang ingin Anda cari namanya?"
+    - text: "Boleh tahu nama toko yang Anda maksud?"
+    - text: "Anda mencari informasi toko apa ya?"
+    - text: "Nama toko yang ingin dicari apa ya, kak?"
+    - text: "Bisa sebutkan nama tokonya?"
+
   utter_acknowledge_search:
     - text: "Baik, saya carikan informasi produknya untuk Anda..."
     - text: "Oke, sebentar ya, saya cek dulu produknya..."
@@ -100,6 +116,11 @@ responses:
     - text: "Segera saya carikan info tokonya untuk Anda."
     - text: "Sip, saya cek dulu ya info tokonya."
     - text: "Mohon tunggu sebentar, saya carikan detail tokonya."
+
+  utter_showing_all_shops:
+    - text: "Tentu! Berikut adalah daftar semua toko Ayam Bakar Nusantara:"
+    - text: "Siap! Ini dia semua toko yang tersedia:"
+    - text: "Baik, ini dia daftar lengkap toko kami:"
 
   utter_give_recommendations:
     - text: "Tentu! Saya carikan beberapa produk rekomendasi terbaik untuk Anda ya."
@@ -203,6 +224,12 @@ responses:
     - text: "Mohon maaf, sepertinya saat ini belum ada produk yang terdaftar atau tersedia."
     - text: "Maaf, untuk saat ini kami belum memiliki daftar produk yang bisa ditampilkan."
     - text: "Duh, sepertinya daftar produknya masih kosong nih."
+
+  utter_out_of_scope:
+    - text: "Maaf, saya hanya bisa memberikan informasi seputar Ayam Bakar Nusantara. Ada lagi yang bisa saya bantu terkait menu atau toko kami?"
+    - text: "Hmm, sepertinya itu di luar topik Ayam Bakar Nusantara. Mungkin ada pertanyaan lain tentang menu atau toko kami?"
+    - text: "Saya tidak dilatih untuk menjawab pertanyaan itu. Saya bisa bantu carikan info menu, rekomendasi menu, dan informasi dari toko yang terdaftar di website Ayam Bakar Nusantara"
+    - text: "Waduh, saya kurang paham maksudnya. Ada yang bisa dibantu terkait Ayam Bakar Nusantara?"
 
 session_config:
   session_expiration_time: 60

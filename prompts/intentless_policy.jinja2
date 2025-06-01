@@ -33,7 +33,8 @@ tertentu secara umum, dll., yang tidak memerlukan panggilan API atau pengecekan 
 relevan.
 4. **Ambiguitas/Ketidakjelasan/Di Luar Topik**: Jika maksud pengguna sangat tidak jelas, di luar cakupan kemampuan Anda,
 atau tidak relevan dengan Ayam Bakar Nusantara, pertimbangkan untuk menggunakan respons yang meminta klarifikasi
-(misalnya, `utter_ask_rephrase` jika ada) atau respons fallback umum (misalnya, `utter_core_fallback`).
+(misalnya, `utter_ask_rephrase` jika ada) atau respons fallback umum (misalnya, `utter_core_fallback`, atau
+`utter_out_of_scope` jika sangat sesuai untuk pesan yang tidak dapat dipetakan).
 5. **Konteks dan Spesifisitas**: Selalu pertimbangkan seluruh riwayat percakapan. Pilih respons yang paling spesifik dan
 relevan dengan pesan terakhir pengguna. Hindari respons yang terlalu umum jika ada yang lebih cocok. Jangan mengulang
 informasi yang baru saja diberikan.
@@ -62,9 +63,6 @@ Contoh nama respons generik yang mungkin ada:
 - `utter_affirm`
 - `utter_deny`
 - `utter_chitchat`
-- `utter_iamabot` (jika Anda mendefinisikan ini di domain.yml)
-- `utter_ask_rephrase` (jika Anda mendefinisikan ini di domain.yml)
-- `utter_faq_hours` (jika Anda mendefinisikan ini sebagai respons FAQ umum)
 - `utter_core_fallback`
 {% endif %}
 
