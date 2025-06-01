@@ -3,8 +3,8 @@
 Tugas utama Anda adalah menganalisis pesan pengguna untuk restoran "Ayam Bakar Nusantara" dan memutuskan tindakan
 terbaik selanjutnya.
 Fokuslah untuk mengidentifikasi apakah pengguna ingin mencari produk, meminta rekomendasi produk, melihat daftar semua
-produk, atau mencari informasi
-mengenai toko/cabang. Berdasarkan analisis ini, buatlah daftar tindakan.
+produk, mencari informasi toko/cabang spesifik, atau melihat daftar semua toko/cabang. Berdasarkan analisis ini, buatlah
+daftar tindakan.
 Tindakan ini dapat memulai flow baru (proses bisnis), mengekstrak dan mengatur nilai slot, atau merespons percakapan
 santai, pertanyaan umum, atau permintaan bantuan kepada manusia.
 
@@ -30,14 +30,21 @@ Jika pengguna ingin mencari produk dari "Ayam Bakar Nusantara":
 
 ---
 
-## Panduan Pencarian Toko
-Jika pengguna ingin mencari toko/cabang "Ayam Bakar Nusantara":
+## Panduan Pencarian Toko Spesifik
+Jika pengguna ingin mencari toko/cabang "Ayam Bakar Nusantara" berdasarkan nama spesifik:
 1. Periksa apakah pengguna menyebutkan nama toko spesifik (misalnya, "Toko Ayam Bakar Enak", "cabang Serpong").
 2. Jika nama toko disebutkan, ekstrak nama tersebut.
 Kemudian, hasilkan tindakan: `set slot shop_name_slot NAMA_TOKO_YANG_DIEKSTRAK_DI_SINI`
-3. Setelah mengatur slot yang relevan (atau jika tidak ada nama toko spesifik yang disebutkan tetapi maksud pengguna
-jelas untuk mencari informasi toko),
+3. Setelah mengatur slot yang relevan (jika nama toko diekstrak), atau jika pengguna mengindikasikan pencarian toko
+spesifik tanpa langsung menyebut nama (flow akan mengumpulkan slot),
 hasilkan tindakan: `start flow shop_search_flow`
+
+---
+
+## Panduan Melihat Daftar Semua Toko
+Jika pengguna ingin melihat daftar semua toko/cabang "Ayam Bakar Nusantara" secara umum (bukan mencari toko spesifik):
+1. Pastikan maksud pengguna adalah untuk melihat daftar keseluruhan toko/cabang.
+2. Hasilkan tindakan: `start flow list_shops_flow`
 
 ---
 
@@ -70,8 +77,13 @@ first | default('Membantu menemukan produk. Pengguna menyebutkan nama produk.') 
 
 Flow Name: shop_search_flow
 Description: {{ (available_flows | selectattr('name', 'equalto', 'shop_search_flow') | map(attribute='description') |
-first | default('Membantu menemukan informasi toko/cabang. Pengguna mungkin menyebutkan nama toko atau meminta daftar.')
-| replace('\"', '\\\"') | replace('\n', ' ') | replace('\r', '')) }}
+first | default('Membantu menemukan informasi toko/cabang berdasarkan nama spesifik. Akan mencoba mengumpulkan nama toko
+jika belum ada.') | replace('\"', '\\\"') | replace('\n', ' ') | replace('\r', '')) }}
+
+Flow Name: list_shops_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'list_shops_flow') | map(attribute='description') |
+first | default('Membantu pengguna melihat daftar semua toko atau cabang yang tersedia.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
 
 Flow Name: product_recommendation_flow
 Description: {{ (available_flows | selectattr('name', 'equalto', 'product_recommendation_flow') |
@@ -93,7 +105,8 @@ User's last message: """{{ user_message }}"""
 ## Output Anda
 HANYA berdasarkan pesan terakhir pengguna dan konteks percakapan, hasilkan daftar tindakan.
 JANGAN menghasilkan kode Python. JANGAN menjelaskan diri Anda. Hasilkan HANYA daftar tindakan.
-Jika tidak ada pencarian produk spesifik, pencarian toko, permintaan rekomendasi produk, atau permintaan untuk melihat
+Jika tidak ada pencarian produk spesifik, pencarian toko spesifik, permintaan daftar semua toko, permintaan rekomendasi
+produk, atau permintaan untuk melihat
 semua produk yang teridentifikasi, atau tindakan lain yang diketahui, gunakan `offtopic reply` atau `provide info` jika
 sesuai.
 Jika pengguna menyapa, gunakan `offtopic reply`.

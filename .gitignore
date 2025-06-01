@@ -1,6 +1,6 @@
+.vscode/
 .env
 .venv
 models/*
 __pycache__/
 .rasa
-.vscode

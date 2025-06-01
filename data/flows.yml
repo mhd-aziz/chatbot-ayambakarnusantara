@@ -9,10 +9,17 @@ flows:
       - action: action_search_product_api
 
   shop_search_flow:
-    description: Flow ini digunakan ketika pengguna ingin mencari informasi tentang toko atau cabang restoran Ayam Bakar Nusantara, baik secara umum maupun berdasarkan nama toko. Asisten akan memberikan informasi toko yang relevan.
+    description: Flow ini digunakan ketika pengguna ingin mencari informasi tentang toko atau cabang Ayam Bakar Nusantara berdasarkan nama spesifik. Asisten akan mencoba mengumpulkan nama toko jika belum disebutkan.
     steps:
+      - collect: shop_name_slot
       - action: utter_acknowledge_shop_search
       - action: action_search_shop_api
+
+  list_shops_flow:
+    description: Flow ini diaktifkan ketika pengguna meminta daftar semua toko atau cabang Ayam Bakar Nusantara yang tersedia.
+    steps:
+      - action: utter_showing_all_shops
+      - action: action_list_shops_api
 
   product_recommendation_flow:
     description: Flow ini diaktifkan ketika pengguna meminta rekomendasi produk dari Ayam Bakar Nusantara. Asisten akan memberikan daftar produk yang direkomendasikan, misalnya berdasarkan popularitas atau rating tertinggi.
@@ -24,4 +31,5 @@ flows:
   list_products_flow:
     description: Flow ini digunakan ketika pengguna meminta untuk melihat daftar semua produk yang tersedia di Ayam Bakar Nusantara.
     steps:
+      - action: utter_showing_all_products
       - action: action_list_products_api

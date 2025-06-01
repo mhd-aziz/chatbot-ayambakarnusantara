@@ -33,17 +33,31 @@ stories:
       - intent: goodbye
       - action: utter_goodbye
 
-  - story: Pengguna mencari semua toko yang tersedia
+  - story: Pengguna ingin melihat daftar semua toko yang tersedia
     steps:
-      - intent: search_shop
-      - action: utter_acknowledge_shop_search
-      - action: action_search_shop_api
+      - intent: list_shops
+      - action: utter_showing_all_shops
+      - action: action_list_shops_api
 
-  - story: Pengguna mencari toko berdasarkan nama toko
+  - story: Pengguna mencari toko berdasarkan nama toko yang valid
     steps:
       - intent: search_shop
         entities:
           - shop_name: "Ayam Bakar Mama Zain"
+      - slot_was_set:
+          - shop_name_slot: "Ayam Bakar Mama Zain"
+      - action: utter_acknowledge_shop_search
+      - action: action_search_shop_api
+
+  - story: Pengguna mencari toko, awalnya tidak spesifik, lalu memberikan nama toko setelah ditanya
+    steps:
+      - intent: search_shop
+      - action: utter_ask_shop_name_slot
+      - intent: inform_shop_name
+        entities:
+          - shop_name: "MyAyam"
+      - slot_was_set:
+          - shop_name_slot: "MyAyam"
       - action: utter_acknowledge_shop_search
       - action: action_search_shop_api
 
@@ -97,7 +111,7 @@ stories:
     steps:
       - intent: search_product
         entities:
-          - product_name: "ayam"
+          - product_name: "tumpeng"
       - action: utter_acknowledge_search
       - action: action_search_product_api
       - intent: deny
@@ -116,4 +130,5 @@ stories:
   - story: Pengguna ingin melihat daftar semua produk
     steps:
       - intent: list_products
+      - action: utter_showing_all_products
       - action: action_list_products_api

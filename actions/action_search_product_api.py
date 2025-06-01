@@ -25,7 +25,6 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
             product_search_term = tracker.get_slot("product_name_slot")
 
         if not product_search_term:
-            # Pesan ini mungkin juga ingin Anda sesuaikan ke Bahasa Inggris nanti
             dispatcher.utter_message(text="Produk apa yang ingin Anda cari?")
             return [SlotSet("product_name_slot", None)]
 
@@ -45,7 +44,7 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
                             api_products = response_data["data"]["products"]
                             if not api_products:
                                 dispatcher.utter_message(
-                                    text=f"Maaf, saya tidak menemukan produk dengan nama yang mirip '{product_search_term}'.")  # Pertimbangkan terjemahan
+                                    text=f"Maaf, saya tidak menemukan produk dengan nama yang mirip '{product_search_term}'.")
                                 return [SlotSet("product_name_slot", None)]
 
                             for product in api_products:
