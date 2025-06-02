@@ -25,6 +25,14 @@ intents:
   - list_products
   - out_of_scope
   - check_order_status
+  - check_payment_status
+  - ask_how_to_order_online
+  - ask_how_to_pay_online
+  - ask_how_to_pay_at_store
+  - ask_how_to_contact_seller
+  - bot_challenge
+  - chitchat
+  - ask_capabilities
 
 entities:
   - product_name
@@ -53,6 +61,7 @@ actions:
   - action_show_product_detail
   - action_list_products_api
   - action_check_order_status
+  - action_check_payment_status
   - utter_greet
   - utter_goodbye
   - utter_ask_product_name_slot
@@ -81,180 +90,375 @@ actions:
   - utter_order_status_detail
   - utter_api_error
   - utter_auth_error
+  - utter_payment_status_intro
+  - utter_explain_order_online
+  - utter_explain_pay_online
+  - utter_explain_pay_at_store
+  - utter_explain_how_to_contact_seller
+  - utter_bot_challenge
+  - utter_ask_capabilities
 
 responses:
   utter_greet:
-    - text: "Halo! Ada yang bisa saya bantu untuk Ayam Bakar Nusantara?"
-    - text: "Hai! Selamat datang di Ayam Bakar Nusantara, ada yang bisa dibantu?"
-    - text: "Selamat datang! Saya siap membantu Anda di Ayam Bakar Nusantara."
-    - text: "Salam dari Ayam Bakar Nusantara! Ada yang bisa saya bantu hari ini?"
-    - text: "Hai kak! Ada yang perlu bantuan terkait Ayam Bakar Nusantara?"
-    - text: "Halo, senang bertemu dengan Anda! Mau tanya apa soal Ayam Bakar Nusantara?"
+    - text: "Halo! 👋 Ada yang bisa saya bantu seputar Ayam Bakar Nusantara hari ini? Jangan ragu untuk bertanya ya!"
+    - text: "Hai! Selamat datang di asisten virtual Ayam Bakar Nusantara. Siap membantu Anda menemukan info menu, toko, atau pesanan. Ada yang bisa saya bantu?"
+    - text: "Selamat datang kembali di Ayam Bakar Nusantara! 😊 Saya di sini untuk melayani semua pertanyaan Anda. Mau cari apa hari ini?"
+    - text: "Salam hangat dari Ayam Bakar Nusantara! 🔥 Ada yang bisa saya bantu? Mungkin cari menu favorit atau info toko terdekat?"
 
   utter_goodbye:
-    - text: "Baik, sampai jumpa lagi! Semoga harimu menyenangkan."
-    - text: "Senang bisa membantu Anda. Sampai jumpa kembali!"
-    - text: "Terima kasih sudah mampir ke Ayam Bakar Nusantara! Sampai jumpa."
-    - text: "Oke, hati-hati di jalan ya. Sampai bertemu lagi!"
-    - text: "Kalau begitu, sampai ketemu di lain waktu ya. Terima kasih!"
-    - text: "Sip, jangan sungkan untuk kembali jika ada pertanyaan. Bye!"
+    - text: "Baik, sampai jumpa lagi ya! Semoga harimu menyenangkan dan penuh dengan kelezatan Ayam Bakar Nusantara! 😉"
+    - text: "Senang bisa membantu Anda hari ini. Sampai jumpa kembali di lain waktu! Jangan lupa mampir lagi ya."
+    - text: "Terima kasih sudah menghubungi Ayam Bakar Nusantara! Sampai jumpa dan selamat menikmati sisa harimu! 👋"
+    - text: "Kalau begitu, sampai ketemu di lain waktu ya. Terima kasih atas waktunya. Jika ada apa-apa lagi, saya selalu di sini!"
+    - text: "Sip, jangan sungkan untuk kembali jika ada pertanyaan atau ingin memesan lagi. Bye-bye! 🍗"
 
   utter_ask_product_name_slot:
-    - text: "Produk apa yang ingin Anda cari namanya?"
-    - text: "Boleh tahu nama produk yang Anda maksud?"
-    - text: "Anda mencari produk apa ya?"
-    - text: "Nama produk yang ingin dicari apa ya, kak?"
-    - text: "Bisa sebutkan nama produknya?"
+    - text: "Tentu, dengan senang hati! Produk Ayam Bakar Nusantara apa nih yang lagi Anda cari namanya? Sebutkan saja ya."
+    - text: "Boleh banget! Biar saya bantu carikan, bisa tolong sebutkan nama produk yang Anda maksud?"
+    - text: "Anda mencari produk spesifik ya? Kasih tahu saya nama produknya dong, biar langsung saya cek."
+    - text: "Nama produk yang ingin dicari apa ya, kak? Semakin detail, semakin cepat saya temukan infonya untuk Anda."
+    - text: "Siap! Bisa sebutkan nama produknya? Saya akan segera carikan informasinya untuk Anda."
 
   utter_ask_shop_name_slot:
-    - text: "Toko apa yang ingin Anda cari namanya?"
-    - text: "Boleh tahu nama toko yang Anda maksud?"
-    - text: "Anda mencari informasi toko apa ya?"
-    - text: "Nama toko yang ingin dicari apa ya, kak?"
-    - text: "Bisa sebutkan nama tokonya?"
+    - text: "Oke, siap! Toko atau cabang Ayam Bakar Nusantara mana nih yang ingin Anda ketahui informasinya? Sebutkan namanya ya."
+    - text: "Boleh tahu nama toko yang Anda maksud? Saya akan bantu carikan detail lokasinya untuk Anda."
+    - text: "Anda mencari informasi toko tertentu ya? Boleh kasih tahu saya nama tokonya?"
+    - text: "Nama toko atau cabang yang ingin dicari apa ya, kak? Misalnya 'Ayam Bakar Nusantara Bintaro' atau 'Toko Enak'."
+    - text: "Tentu! Bisa sebutkan nama tokonya? Saya akan segera cek dan berikan infonya."
 
   utter_acknowledge_search:
-    - text: "Baik, saya carikan informasi produknya untuk Anda..."
-    - text: "Oke, sebentar ya, saya cek dulu produknya..."
-    - text: "Siap! Saya cari dulu ya produknya..."
-    - text: "Tunggu sebentar, saya sedang mencari info produk tersebut."
-    - text: "Oke, sedang saya proses pencarian produknya."
-    - text: "Mohon ditunggu, info produknya segera saya tampilkan."
+    - text: "Baik, saya langsung carikan informasi produknya untuk Anda ya. Mohon tunggu sebentar..."
+    - text: "Oke, saya mengerti. Sebentar ya, saya cek dulu ketersediaan dan detail produknya di sistem kami..."
+    - text: "Siap! Saya segera proses pencarian produknya untuk Anda. Tidak akan lama kok!"
+    - text: "Tunggu sebentar ya, saya sedang menjelajahi daftar menu kami untuk menemukan produk tersebut. Segera kembali dengan hasilnya!"
+    - text: "Oke, permintaan Anda sedang saya proses. Saya sedang mencari info produk tersebut di database kami."
+    - text: "Mohon ditunggu sejenak, info produknya segera saya tampilkan untuk Anda. Saya usahakan secepat mungkin!"
 
   utter_acknowledge_shop_search:
-    - text: "Baik, saya carikan informasi tokonya untuk Anda..."
-    - text: "Oke, sedang saya cari data tokonya ya."
-    - text: "Siap! Saya bantu cek informasi tokonya."
-    - text: "Segera saya carikan info tokonya untuk Anda."
-    - text: "Sip, saya cek dulu ya info tokonya."
-    - text: "Mohon tunggu sebentar, saya carikan detail tokonya."
+    - text: "Baik, saya langsung carikan informasi tokonya untuk Anda. Mohon bersabar sebentar ya..."
+    - text: "Oke, sedang saya cari data tokonya di sistem kami. Semoga cepat ketemu ya!"
+    - text: "Siap! Saya bantu cek informasi lengkap mengenai toko yang Anda maksud. Ditunggu ya."
+    - text: "Segera saya carikan info tokonya untuk Anda. Saya akan pastikan informasinya akurat dan terkini."
+    - text: "Sip, saya cek dulu ya info tokonya. Semoga semua detail yang Anda butuhkan ada."
+    - text: "Mohon tunggu sebentar, saya sedang menelusuri daftar cabang kami untuk menemukan detail toko yang Anda cari."
 
   utter_showing_all_shops:
-    - text: "Tentu! Berikut adalah daftar semua toko Ayam Bakar Nusantara:"
-    - text: "Siap! Ini dia semua toko yang tersedia:"
-    - text: "Baik, ini dia daftar lengkap toko kami:"
+    - text: "Tentu saja! Dengan senang hati, berikut adalah daftar semua toko dan cabang Ayam Bakar Nusantara yang tersebar:"
+    - text: "Siap! Ini dia semua toko Ayam Bakar Nusantara yang bisa Anda kunjungi. Pilih yang paling dekat ya!"
+    - text: "Baik, ini dia daftar lengkap toko kami. Semoga ada yang lokasinya strategis untuk Anda."
+    - text: "Dengan senang hati! Kami punya beberapa cabang, ini daftar lengkapnya untuk Anda:"
 
   utter_give_recommendations:
-    - text: "Tentu! Saya carikan beberapa produk rekomendasi terbaik untuk Anda ya."
-    - text: "Siap! Ini dia beberapa rekomendasi produk favorit dari Ayam Bakar Nusantara."
-    - text: "Oke, berikut beberapa pilihan yang mungkin Anda suka:"
-    - text: "Dengan senang hati! Saya akan berikan beberapa rekomendasi menu spesial kami."
-    - text: "Boleh banget! Ini beberapa rekomendasi dari kami yang paling top."
-    - text: "Pasti! Coba cek beberapa menu andalan kami berikut ini ya."
+    - text: "Tentu! Saya punya beberapa jagoan nih. Saya carikan beberapa produk rekomendasi terbaik dari Ayam Bakar Nusantara khusus untuk Anda ya."
+    - text: "Siap! Ini dia beberapa rekomendasi produk favorit pelanggan dan yang paling sering jadi rebutan di Ayam Bakar Nusantara. Semoga cocok di lidah Anda!"
+    - text: "Oke, berdasarkan menu-menu andalan kami, berikut beberapa pilihan yang mungkin Anda suka. Dijamin bikin nagih!"
+    - text: "Dengan senang hati! Saya akan berikan beberapa rekomendasi menu spesial kami yang wajib Anda coba. Siap-siap tergiur ya!"
+    - text: "Boleh banget! Ini beberapa rekomendasi dari kami yang paling top dan sering dapat pujian. Penasaran?"
+    - text: "Pasti! Coba cek beberapa menu andalan kami berikut ini ya. Siapa tahu ada yang jadi favorit baru Anda!"
 
   utter_affirm:
-    - text: "Baik!"
-    - text: "Oke, siap laksanakan!"
-    - text: "Dimengerti."
-    - text: "Sip, saya lanjutkan."
-    - text: "Tentu saja!"
-    - text: "Oke, siap!"
-    - text: "Ya, benar."
-    - text: "Baiklah."
+    - text: "Baik! Siap laksanakan sesuai permintaan Anda."
+    - text: "Oke, kapten! Saya mengerti dan akan segera melanjutkan."
+    - text: "Dimengerti sepenuhnya. Saya akan proses sekarang."
+    - text: "Sip, saya lanjutkan sesuai arahan. Tidak masalah!"
+    - text: "Tentu saja! Dengan senang hati saya lakukan."
+    - text: "Oke, siap! Mari kita lanjutkan ke langkah berikutnya."
+    - text: "Ya, benar sekali. Saya konfirmasi."
+    - text: "Baiklah, kalau begitu kita lanjutkan ya."
 
   utter_deny:
-    - text: "Baik, dibatalkan kalau begitu."
-    - text: "Oke, tidak jadi ya."
-    - text: "Tidak masalah, saya mengerti."
-    - text: "Oke, saya hentikan."
-    - text: "Baik, permintaan Anda saya batalkan."
-    - text: "Oh, oke, tidak jadi."
-    - text: "Nggak jadi deh kalau gitu."
+    - text: "Baik, permintaan Anda saya batalkan kalau begitu. Tidak masalah."
+    - text: "Oke, tidak jadi ya. Jika ada ripikir, kasih tahu saya lagi ya."
+    - text: "Tidak masalah, saya mengerti sepenuhnya. Permintaan dibatalkan."
+    - text: "Oke, saya hentikan prosesnya sesuai keinginan Anda."
+    - text: "Baik, permintaan Anda sudah saya batalkan. Ada hal lain yang bisa saya bantu?"
+    - text: "Oh, oke, tidak jadi. Siap jika Anda berubah pikiran nanti."
+    - text: "Nggak jadi deh kalau gitu. Oke, saya batalkan ya."
 
   utter_chitchat:
-    - text: "Oke, ada lagi yang bisa saya bantu terkait menu Ayam Bakar Nusantara?"
-    - text: "Baiklah. Apakah ada pertanyaan seputar produk kami yang lain?"
-    - text: "Ada hal lain yang ingin ditanyakan atau dipesan?"
-    - text: "Sip. Masih ada yang bisa dibantu?"
-    - text: "Oke, kalau ada pertanyaan lain, jangan ragu ya."
-    - text: "Baik, ada lagi yang ingin diketahui?"
-    - text: "Ada lagi yang bisa saya lakukan untuk Anda?"
+    - text: "Oke, mantap! Selain itu, ada lagi yang bisa saya bantu terkait menu lezat Ayam Bakar Nusantara atau info lainnya?"
+    - text: "Baiklah. Apakah ada pertanyaan seputar produk kami yang lain yang ingin Anda ketahui?"
+    - text: "Ada hal lain yang ingin ditanyakan atau mungkin langsung mau pesan? Saya siap membantu!"
+    - text: "Sip. Masih ada yang bisa dibantu? Jangan ragu untuk bertanya apa saja ya."
+    - text: "Baik, ada lagi yang ingin diketahui? Saya masih di sini untuk Anda."
+    - text: "Ada lagi yang bisa saya lakukan untuk Anda? Saya senang membantu!"
 
   utter_provide_info_general:
-    - text: "Tentu, apa yang ingin Anda ketahui lebih lanjut dari kami?"
-    - text: "Saya akan coba bantu carikan informasinya. Ada detail spesifik yang Anda butuhkan?"
-    - text: "Boleh, silakan tanyakan apa saja mengenai Ayam Bakar Nusantara."
-    - text: "Tentu saja! Info apa yang Anda perlukan?"
-    - text: "Dengan senang hati. Mau tanya soal apa?"
+    - text: "Tentu, dengan senang hati! Apa nih yang ingin Anda ketahui lebih lanjut dari Ayam Bakar Nusantara? Saya coba carikan infonya."
+    - text: "Saya akan coba bantu carikan informasinya. Ada detail spesifik yang Anda butuhkan? Semakin detail, semakin baik!"
+    - text: "Boleh banget! Silakan tanyakan apa saja mengenai Ayam Bakar Nusantara. Mulai dari menu sampai lokasi toko."
+    - text: "Tentu saja! Info apa yang Anda perlukan hari ini? Saya siap membantu Anda."
+    - text: "Dengan senang hati. Mau tanya soal apa? Saya akan berikan informasi terlengkap yang saya punya."
 
   utter_human_handoff_initiated:
-    - text: "Baik, saya akan coba sambungkan Anda dengan tim customer service kami. Mohon tunggu sebentar."
-    - text: "Oke, saya bantu proses untuk berbicara dengan agen manusia kami ya."
-    - text: "Mohon tunggu sebentar, Anda akan segera terhubung dengan tim support."
-    - text: "Siap, saya teruskan ke tim kami ya agar bisa dibantu lebih lanjut."
-    - text: "Agar mendapatkan bantuan lebih spesifik, saya hubungkan dengan tim kami ya."
+    - text: "Baik, saya mengerti Anda butuh bantuan lebih lanjut. Saya akan coba sambungkan Anda dengan tim customer service kami yang ramah. Mohon tunggu sebentar ya."
+    - text: "Oke, agar pertanyaan Anda bisa ditangani lebih personal, saya bantu proses untuk berbicara dengan agen manusia kami ya. Sebentar saya carikan yang tersedia."
+    - text: "Mohon tunggu sebentar, Anda akan segera terhubung dengan tim support kami yang akan membantu Anda secara langsung. Terima kasih atas kesabarannya."
+    - text: "Siap, saya teruskan permintaan Anda ke tim kami ya agar bisa dibantu lebih lanjut dan lebih detail. Mohon bersabar sejenak."
+    - text: "Agar mendapatkan bantuan lebih spesifik dan solusi terbaik, saya akan hubungkan Anda dengan tim customer support kami. Mohon tunggu ya."
 
   utter_core_fallback:
-    - text: "Maaf, sepertinya saya agak bingung. Bisa Anda ulangi atau sampaikan dengan cara lain?"
-    - text: "Hmm, saya belum mengerti maksud Anda. Mungkin bisa coba tanyakan hal lain terkait Ayam Bakar Nusantara?"
-    - text: "Waduh, saya tidak paham. Bisa diperjelas lagi pertanyaannya?"
-    - text: "Sepertinya saya belum dilatih untuk itu. Ada hal lain yang bisa saya bantu?"
-    - text: "Maaf, saya kurang menangkap maksud Anda. Bisa coba gunakan kata kunci lain?"
-    - text: "Duh, saya bingung nih. Boleh diulang pertanyaannya dengan lebih sederhana?"
-    - text: "Sepertinya saya belum bisa menjawab itu. Mungkin ada pertanyaan lain tentang Ayam Bakar Nusantara?"
+    - text: "Maaf nih, sepertinya saya agak bingung dengan maksud Anda. Bisa Anda coba ulangi pertanyaannya atau sampaikan dengan cara yang sedikit berbeda? Saya masih belajar soalnya. 😊"
+    - text: "Hmm, saya belum sepenuhnya mengerti maksud Anda. Mungkin bisa coba tanyakan hal lain terkait menu, promo, atau toko Ayam Bakar Nusantara? Saya akan berusaha lebih baik!"
+    - text: "Waduh, maaf sekali, sepertinya saya tidak paham. Bisa diperjelas lagi pertanyaannya? Saya akan coba fokus untuk mengerti."
+    - text: "Sepertinya saya belum dilatih untuk itu, nih. Tapi jangan khawatir, saya bisa bantu soal informasi produk, rekomendasi, lokasi toko, cara pesan, cara bayar, dan cek status pesanan/pembayaran. Ada yang cocok?"
+    - text: "Maaf, saya kurang menangkap maksud Anda. Bisa coba gunakan kata kunci lain yang lebih spesifik terkait Ayam Bakar Nusantara? Saya siap membantu jika itu dalam jangkauan saya."
+    - text: "Sepertinya saya belum bisa menjawab pertanyaan itu. Namun, saya bisa bantu Anda dengan informasi seputar menu Ayam Bakar Nusantara, mencari toko, memberikan rekomendasi, menjelaskan cara pesan dan bayar, atau mengecek status pesanan/pembayaran Anda. Ada yang bisa saya bantu dari daftar itu?"
 
   utter_ask_after_recommendations:
-    - text: "Ada dari rekomendasi tersebut yang menarik perhatian Anda?"
-    - text: "Apakah ada produk dari daftar ini yang ingin Anda ketahui lebih lanjut?"
-    - text: "Bagaimana dengan rekomendasi tadi? Ada yang Anda suka?"
-    - text: "Dari pilihan tadi, ada yang bikin penasaran?"
-    - text: "Gimana rekomendasinya? Ada yang cocok?"
+    - text: "Nah, itu dia beberapa rekomendasi dari saya. Ada dari produk-produk tersebut yang menarik perhatian Anda dan ingin diketahui lebih lanjut?"
+    - text: "Bagaimana dengan daftar rekomendasi tadi? Apakah ada produk dari sana yang ingin Anda ketahui detailnya lebih dalam?"
+    - text: "Bagaimana dengan rekomendasi tadi? Ada yang bikin Anda penasaran atau langsung pengen coba? Kasih tahu saya ya!"
+    - text: "Dari pilihan-pilihan tadi, ada yang bikin Anda tertarik? Saya bisa berikan info lebih lengkap jika Anda mau."
+    - text: "Gimana rekomendasinya? Ada yang cocok dengan selera Anda? Saya siap berikan detailnya jika ada yang Anda pilih."
 
   utter_ask_which_recommendation_detail:
-    - text: "Baik, produk yang mana dari rekomendasi tadi yang ingin Anda ketahui lebih lanjut? Sebutkan namanya."
-    - text: "Oke, produk mana yang Anda pilih dari rekomendasi tersebut?"
-    - text: "Silakan sebutkan nama produk dari rekomendasi yang ingin Anda lihat detailnya."
-    - text: "Sip, produk yang mana yang mau dilihat infonya lebih detail?"
-    - text: "Dari rekomendasi itu, produk apa yang Anda maksud?"
+    - text: "Baik! Produk yang mana nih dari rekomendasi tadi yang ingin Anda ketahui lebih lanjut informasinya? Sebutkan saja namanya, nanti saya carikan detailnya."
+    - text: "Oke, siap! Produk mana yang Anda pilih dari daftar rekomendasi tersebut untuk saya tampilkan detailnya?"
+    - text: "Silakan sebutkan nama produk dari rekomendasi yang tadi saya berikan, yang ingin Anda lihat detail lengkapnya. Saya tunggu ya!"
 
   utter_offer_other_help_after_recommendation_deny:
-    - text: "Baiklah. Apakah ada hal lain yang bisa saya bantu carikan untuk Anda?"
-    - text: "Oke, tidak masalah. Mungkin Anda ingin mencari produk lain atau informasi toko?"
-    - text: "Saya mengerti. Ada lagi yang bisa saya bantu?"
-    - text: "Oke, kalau begitu. Ada lagi yang ingin ditanyakan?"
-    - text: "Tidak apa-apa. Mungkin ada hal lain yang bisa saya bantu?"
+    - text: "Baiklah, tidak masalah sama sekali. Apakah ada hal lain yang bisa saya bantu carikan untuk Anda? Mungkin produk lain atau info berbeda?"
+    - text: "Oke, saya mengerti. Tidak masalah. Mungkin Anda ingin mencari produk lain secara spesifik, atau butuh informasi tentang toko kami?"
+    - text: "Tidak apa-apa. Selera orang beda-beda. 😊 Mungkin ada hal lain yang bisa saya bantu? Jangan ragu bertanya ya."
 
   utter_clarify_product_ambiguity:
-    - text: "Hmm, maksud Anda [Produk A] atau [Produk B]? Mohon sebutkan salah satu."
-    - text: "Untuk 'ayam', apakah maksud Anda [ayam bakar original] atau mungkin [ayam goreng kremes]?"
-    - text: "Saya menemukan beberapa jenis 'ayam'. Apakah Anda mencari [ayam penyet] atau [ayam geprek]?"
-    - text: "Untuk produk tersebut, yang Anda maksud lebih spesifik [Produk A] atau [Produk B] ya?"
-    - text: "Ada beberapa pilihan untuk '[kata kunci ambigu]', misalnya [Produk X] atau [Produk Y]. Yang mana yang Anda maksud?"
+    - text: "Hmm, sepertinya ada beberapa pilihan untuk itu. Maksud Anda lebih ke [Produk A] atau mungkin [Produk B]? Mohon sebutkan salah satu agar saya tidak salah."
+    - text: "Untuk kata kunci '{text}', saya menemukan beberapa opsi nih. Misalnya, apakah maksud Anda [ayam bakar original] atau mungkin [ayam goreng kremes]? Tolong pilih salah satu ya."
+    - text: "Saya menemukan beberapa jenis produk yang cocok dengan '{text}'. Apakah Anda mencari [ayam penyet] atau lebih tertarik dengan [ayam geprek]? Bisa bantu saya perjelas?"
+    - text: "Untuk produk tersebut, yang Anda maksud lebih spesifik yang mana ya? Apakah [Produk A] atau [Produk B]? Biar saya carikan yang paling pas."
+    - text: "Ada beberapa pilihan untuk '{text}' yang Anda sebutkan, misalnya [Produk X] atau [Produk Y]. Yang mana nih yang paling sesuai dengan yang Anda cari?"
 
   utter_product_clarified_searching_now:
-    - text: "Oke, saya carikan {product_name_slot} untuk Anda sekarang."
-    - text: "Baik, dimengerti. Saya akan mencari {product_name_slot}."
-    - text: "Siap! Info untuk {product_name_slot} segera tampil."
-    - text: "Oke, {product_name_slot} ya. Saya carikan infonya."
+    - text: "Oke, terima kasih atas klarifikasinya! Saya carikan informasi untuk **{product_name_slot}** untuk Anda sekarang juga."
+    - text: "Baik, dimengerti. Saya akan segera mencari detail lengkap untuk **{product_name_slot}**."
+    - text: "Siap! Info untuk **{product_name_slot}** segera saya tampilkan. Mohon tunggu sebentar ya."
+    - text: "Oke, **{product_name_slot}** ya. Saya langsung proses pencarian infonya untuk Anda."
 
   utter_showing_all_products:
-    - text: "Tentu! Berikut adalah daftar produk yang kami miliki:"
-    - text: "Siap! Ini dia semua produk yang tersedia di Ayam Bakar Nusantara:"
-    - text: "Baik, ini dia daftar lengkap produk kami:"
+    - text: "Tentu! Dengan senang hati, berikut adalah daftar semua produk lezat yang kami miliki di Ayam Bakar Nusantara. Silakan dilihat-lihat!"
+    - text: "Siap! Ini dia semua produk yang tersedia di Ayam Bakar Nusantara. Semoga ada yang jadi favorit Anda ya!"
+    - text: "Baik, ini dia daftar lengkap produk kami. Dari hidangan utama sampai minuman segar, semuanya ada di sini!"
+    - text: "Dengan senang hati! Kami punya banyak pilihan menu, ini daftar lengkapnya untuk Anda. Selamat memilih!"
 
   utter_no_products_available:
-    - text: "Mohon maaf, sepertinya saat ini belum ada produk yang terdaftar atau tersedia."
-    - text: "Maaf, untuk saat ini kami belum memiliki daftar produk yang bisa ditampilkan."
-    - text: "Duh, sepertinya daftar produknya masih kosong nih."
+    - text: "Mohon maaf sekali, sepertinya saat ini belum ada produk yang terdaftar di sistem kami atau mungkin stoknya sedang kosong. Silakan coba cek lagi nanti ya."
+    - text: "Maaf, untuk saat ini kami belum memiliki daftar produk yang bisa ditampilkan. Tim kami sedang berusaha memperbarui daftarnya. Terima kasih atas pengertiannya."
+    - text: "Duh, sepertinya daftar produknya masih kosong nih. Mohon maaf atas ketidaknyamanannya. Mungkin bisa coba tanyakan rekomendasi atau menu favorit?"
+    - text: "Yah, sayang sekali, data produk kami sepertinya belum tersedia saat ini. Kami akan segera perbarui. Ada hal lain yang bisa saya bantu?"
 
   utter_out_of_scope:
-    - text: "Maaf, saya hanya bisa memberikan informasi seputar Ayam Bakar Nusantara. Ada lagi yang bisa saya bantu terkait menu atau toko kami?"
-    - text: "Hmm, sepertinya itu di luar topik Ayam Bakar Nusantara. Mungkin ada pertanyaan lain tentang menu atau toko kami?"
-    - text: "Saya tidak dilatih untuk menjawab pertanyaan itu. Saya bisa bantu carikan info menu, rekomendasi menu, dan informasi dari toko yang terdaftar di website Ayam Bakar Nusantara"
-    - text: "Waduh, saya kurang paham maksudnya. Ada yang bisa dibantu terkait Ayam Bakar Nusantara?"
+    - text: "Maaf, saya adalah asisten virtual Ayam Bakar Nusantara, jadi saya hanya bisa memberikan informasi seputar produk, toko, cara pesan, cara bayar, dan status pesanan/pembayaran kami. Saya juga bisa menjelaskan kemampuan saya jika Anda bertanya! Ada lagi yang bisa saya bantu terkait hal tersebut?"
+    - text: "Hmm, sepertinya itu di luar topik Ayam Bakar Nusantara. Mungkin ada pertanyaan lain tentang menu spesial kami, lokasi cabang, cara melakukan pemesanan, atau mungkin Anda ingin tahu apa saja yang bisa saya lakukan? Saya akan senang membantu!"
+    - text: "Saya tidak dilatih untuk menjawab pertanyaan itu. Namun, saya ahli dalam hal Ayam Bakar Nusantara! Saya bisa bantu carikan info menu, rekomendasi menu, informasi dari toko, cek status pembayaran dan status pesanan. Saya juga bisa menjelaskan cara pesan online, cara bayar, cara menghubungi penjual, dan apa saja kemampuan saya. Ada yang bisa saya bantu dari daftar itu?"
+    - text: "Waduh, saya kurang paham maksudnya. Ada yang bisa dibantu terkait Ayam Bakar Nusantara? Saya bisa bantu info menu, toko, cara pesan, cara bayar, status pesanan/pembayaran Anda, cara chat dengan penjual, atau menjelaskan kemampuan saya."
+    - text: "Untuk hal tersebut, saya belum bisa bantu. Tapi kalau soal Ayam Bakar Nusantara, atau ingin tahu apa saja yang bisa saya lakukan, tanya saja!"
 
   utter_ask_order_id:
-    - text: "Boleh tahu ID pesanan yang ingin Anda cek?"
+    - text: "Tentu, saya bantu cek. Boleh tahu ID pesanan yang ingin Anda periksa statusnya?"
+    - text: "Siap! Untuk mengecek status pesanan, bisa tolong sebutkan nomor ID pesanannya?"
+    - text: "Agar saya bisa bantu, mohon informasikan ID pesanan Anda ya."
+
   utter_no_orders_found:
-    - text: "Sepertinya belum ada pesanan aktif untuk Anda saat ini."
+    - text: "Setelah saya cek, sepertinya belum ada pesanan aktif yang tercatat atas nama Anda saat ini. Mungkin Anda belum melakukan pemesanan atau pesanan sebelumnya sudah selesai?"
+    - text: "Data pesanan Anda tidak berhasil saya temukan di sistem kami. Mungkin Anda bisa pastikan lagi ID pesanannya, atau bisa jadi belum ada pesanan yang dibuat."
+    - text: "Saya sudah mencari, namun tidak menemukan adanya pesanan untuk akun Anda. Apakah Anda yakin sudah melakukan pemesanan dan login dengan akun yang benar?"
+    - text: "Hmm, sepertinya tidak ada riwayat pesanan yang bisa saya tampilkan untuk Anda saat ini. Mau coba pesan sekarang?"
+
   utter_orders_found_intro:
-    - text: "Berikut adalah status pesanan Anda:"
+    - text: "Oke, berhasil! Berikut adalah status pesanan Anda yang saya temukan di sistem:"
+    - text: "Ini dia informasi pesanan yang berhasil saya temukan untuk Anda. Semoga sesuai ya!"
+    - text: "Oke, saya tampilkan status pesanan Anda ya. Silakan dicek detailnya."
+    - text: "Ada kabar baik! Saya menemukan data pesanan Anda. Ini dia rinciannya:"
+
   utter_order_status_detail:
-    - text: "Pesanan {orderId} ({shopName}): {orderStatus}"
+    - text: "Untuk pesanan dengan ID **{orderId}** di **{shopName}**, statusnya saat ini adalah: **{orderStatus}**."
+    - text: "Pesanan Anda nomor **{orderId}** dari **{shopName}** sekarang dalam status: **{orderStatus}**."
+
   utter_api_error:
-    - text: "Maaf, terjadi kesalahan saat mencoba mengambil status pesanan Anda. Silakan coba lagi nanti."
+    - text: "Maaf, sepertinya sedang terjadi sedikit gangguan teknis saat saya mencoba mengambil data pesanan Anda. Mohon kesabarannya dan silakan coba lagi dalam beberapa saat."
+    - text: "Duh, sepertinya ada kendala di sistem kami saat mengambil data pesanan. Tim teknis kami sedang berusaha mengatasinya. Mohon coba beberapa saat lagi ya."
+
   utter_auth_error:
-    - text: "Maaf, saya tidak bisa mengakses informasi pesanan Anda. Pastikan Anda sudah login."
+    - text: "Maaf, saya tidak bisa mengakses informasi pesanan atau pembayaran Anda karena sepertinya Anda belum terautentikasi. Pastikan Anda sudah login ke akun Ayam Bakar Nusantara Anda ya."
+    - text: "Untuk melihat info pesanan atau pembayaran, Anda perlu login terlebih dahulu agar saya bisa memastikan ini benar-benar Anda. Silakan login dan coba lagi."
+
+  utter_payment_status_intro:
+    - text: "Baik, saya segera cek status pembayaran untuk semua pesanan Anda. Mohon tunggu sebentar ya..."
+    - text: "Oke, mari kita lihat bersama status pembayaran untuk pesanan-pesanan Anda. Saya akan tampilkan informasinya."
+    - text: "Siap! Ini dia informasi status pembayaran untuk pesanan Anda yang berhasil saya temukan. Silakan diperiksa."
+    - text: "Segera saya tampilkan detail status pembayaran untuk setiap pesanan Anda. Semoga informasinya membantu!"
+
+  utter_explain_order_online:
+    - text: |
+        Tentu! Memesan Ayam Bakar Nusantara secara online itu mudah dan praktis. Berikut adalah panduan lengkap langkah demi langkah untuk Anda:
+        1.  **Kunjungi Website Resmi Kami**: Langkah pertama adalah membuka browser Anda dan kunjungi situs kami di **www.ayambakarnusantara.main-tech.site**. Di sana Anda akan menemukan semua menu dan informasi terbaru.
+        2.  **Pilih Menu Favorit Anda**: Jelajahi berbagai pilihan menu lezat kami. Klik pada item yang Anda inginkan untuk melihat detailnya, lalu tambahkan ke keranjang belanja Anda. Anda bisa menambahkan sebanyak yang Anda mau!
+        3.  **Checkout dan Pilih Metode Pembayaran**: Setelah selesai memilih, pergi ke halaman keranjang atau checkout. Di sini Anda akan diminta untuk mengonfirmasi pesanan Anda. Anda juga akan diberi pilihan untuk metode pembayaran: apakah mau langsung **bayar online** atau memilih **bayar di toko** saat Anda mengambil pesanan.
+        4.  **Penting: Pengambilan di Toko**: Mohon diingat bahwa untuk saat ini, semua pesanan yang dilakukan melalui website kami adalah untuk **diambil sendiri di toko (pickup)** yang telah Anda pilih saat proses pemesanan. Kami belum menyediakan layanan pengantaran langsung dari website.
+        5.  **Selesaikan Pesanan**: Ikuti instruksi selanjutnya untuk menyelesaikan pesanan Anda. Anda akan menerima konfirmasi setelah pesanan berhasil dibuat.
+        6.  **Berikan Ulasan (Opsional tapi Dihargai)**: Setelah Anda mengambil dan menikmati hidangan kami, kami akan sangat berterima kasih jika Anda bersedia meluangkan waktu sejenak untuk memberikan ulasan atau feedback untuk toko kami. Masukan Anda sangat berharga!
+        Selamat menikmati kemudahan memesan dari Ayam Bakar Nusantara! Jika ada pertanyaan lebih lanjut selama proses, jangan ragu untuk bertanya kepada saya.
+    - text: |
+        Pesan online di Ayam Bakar Nusantara itu simpel banget, kak! Saya jelaskan ya biar makin gampang:
+        -   Pertama-tama, buka dulu ya website kita di **www.ayambakarnusantara.main-tech.site**. Tampilannya ramah pengguna kok!
+        -   Nah, di sana kakak bisa lihat-lihat semua menu andalan kita. Kalau ada yang bikin ngiler, langsung aja klik dan masukkan ke keranjang. Jangan lupa cek juga promo-promo yang mungkin lagi ada!
+        -   Udah puas pilih-pilih? Langsung aja ke bagian checkout. Di situ nanti ada pilihan penting nih: mau bayarnya langsung online biar praktis, atau mau bayar nanti pas ambil di toko. Pilih yang paling nyaman buat kakak.
+        -   Satu hal yang perlu diingat nih, kak: semua pesanan dari website ini sistemnya **ambil sendiri di toko (pickup)** ya. Jadi, nanti kakak datang ke cabang yang sudah dipilih buat ambil pesanannya. Kita belum ada layanan delivery langsung dari website.
+        -   Kalau semua sudah oke, tinggal selesaikan deh pesanannya. Nanti dapat konfirmasi kok.
+        -   Oh iya, kalau nanti sudah selesai menikmati ayam bakar kita yang lezat, boleh dong minta tolong kasih ulasan buat toko kita. Biar kita makin semangat! 😉
+        Gimana, mudah kan? Kalau ada yang bingung, tanya saya lagi aja ya!
+    - text: |
+        Mau pesan Ayam Bakar Nusantara tanpa perlu antri? Gampang banget caranya kalau lewat online! Ini dia tutorial singkatnya buat kamu:
+        Langkah 1: Buka situs resmi kami di **www.ayambakarnusantara.main-tech.site**. Jangan sampai salah alamat ya!
+        Langkah 2: Kamu bisa langsung lihat-lihat menu lengkap kami di sana. Ada foto-fotonya juga biar makin tergoda. Kalau sudah ketemu yang pas di hati (dan di perut!), tinggal tambahkan ke keranjang belanjamu.
+        Langkah 3: Setelah itu, kamu akan masuk ke proses checkout. Di sini, kamu bisa pilih mau bayar dengan cara apa. Ada opsi untuk bayar langsung secara online menggunakan metode pembayaran digital, atau kalau kamu lebih suka, bisa juga pilih bayar di toko pas kamu datang ambil pesanan. Fleksibel kan?
+        Langkah 4: Nah, ini yang penting banget buat diingat: semua pesanan yang kamu buat lewat website ini harus **diambil sendiri di cabang toko** yang sudah kamu pilih ya. Jadi, belum bisa diantar ke rumah atau kantor. Pastikan kamu pilih cabang yang paling gampang kamu jangkau.
+        Langkah 5: Setelah semua beres, konfirmasi pesananmu. Tinggal tunggu kabar dari kami kapan pesananmu siap diambil.
+        Langkah 6 (Bonus!): Kalau sudah menikmati pesananmu, jangan lupa ya kasih feedback atau ulasan buat kami. Pendapatmu sangat berarti buat kami jadi lebih baik lagi!
+        Semoga jelas ya penjelasannya! Kalau masih ada yang mau ditanyakan, jangan sungkan!
+
+  utter_explain_pay_online:
+    - text: |
+        Jika Anda memilih untuk melakukan pembayaran secara online saat memesan melalui website kami di **www.ayambakarnusantara.main-tech.site**, berikut adalah penjelasan lengkap mengenai prosesnya agar transaksi Anda lancar dan aman:
+        1.  **Pilih Opsi "Bayar Online"**: Setelah Anda selesai memilih semua menu yang diinginkan dan masuk ke halaman checkout, Anda akan menemukan opsi metode pembayaran. Pastikan Anda memilih "Bayar Online" atau opsi serupa yang menunjukkan pembayaran digital.
+        2.  **Pilih Metode Pembayaran Digital**: Setelah memilih bayar online, sistem kami akan menampilkan berbagai metode pembayaran digital yang kami dukung. Ini umumnya mencakup:
+            * **Transfer Bank melalui Virtual Account (VA)**: Anda bisa melakukan transfer ke nomor VA yang unik untuk pesanan Anda dari berbagai bank besar seperti BCA, Mandiri, BRI, BNI, dan lainnya.
+            * **E-wallet (Dompet Digital)**: Kami biasanya mendukung pembayaran melalui e-wallet populer seperti GoPay, OVO, Dana, ShopeePay, LinkAja, dan sejenisnya.
+            * **Kartu Kredit/Debit**: Tergantung pada integrasi payment gateway kami, pembayaran menggunakan kartu kredit (Visa, Mastercard) atau kartu debit online mungkin juga tersedia.
+        3.  **Ikuti Instruksi Pembayaran**: Setiap metode pembayaran akan memiliki instruksi spesifik. Misalnya, untuk VA, Anda akan mendapatkan nomor VA dan instruksi transfer. Untuk e-wallet, Anda mungkin perlu scan QR code atau diarahkan ke aplikasi e-wallet Anda. Ikuti semua petunjuk dengan cermat.
+        4.  **Selesaikan Pembayaran Tepat Waktu**: Beberapa metode pembayaran online memiliki batas waktu. Pastikan Anda menyelesaikan pembayaran sebelum batas waktu tersebut agar pesanan Anda tidak otomatis dibatalkan.
+        5.  **Konfirmasi Pembayaran**: Setelah pembayaran berhasil, sistem payment gateway biasanya akan memberikan konfirmasi otomatis, dan status pembayaran di pesanan Anda akan diperbarui. Anda juga mungkin menerima notifikasi dari kami.
+        6.  **Pesanan Diproses**: Setelah pembayaran Anda terkonfirmasi lunas, toko yang Anda pilih akan mulai memproses dan menyiapkan pesanan Anda.
+        7.  **Pengambilan di Toko**: Ingat, meskipun pembayaran dilakukan online, pesanan tetap harus **diambil sendiri di cabang toko** yang telah Anda pilih saat pemesanan. Kami belum menyediakan layanan pengantaran untuk pesanan dari website.
+        8.  **Tidak Ada Diskon Tambahan**: Perlu diketahui bahwa tidak ada diskon atau potongan harga tambahan yang berlaku secara spesifik hanya karena Anda memilih metode pembayaran online melalui website kami. Harga yang tertera adalah harga final (belum termasuk pajak jika ada).
+        Semoga penjelasan ini membantu! Jika ada pertanyaan lebih lanjut mengenai metode pembayaran online tertentu, jangan ragu untuk bertanya.
+    - text: |
+        Anda ingin tahu cara bayar online untuk pesanan Ayam Bakar Nusantara di **www.ayambakarnusantara.main-tech.site**? Siap, saya jelaskan detailnya!
+        Jadi, setelah Anda selesai belanja dan sampai di tahap pembayaran, lalu Anda memilih opsi "Bayar Online", ini yang akan terjadi:
+        -   **Pilihan Beragam**: Anda akan disuguhi berbagai pilihan cara bayar digital. Mau transfer antar bank? Bisa pakai Virtual Account. Lebih suka pakai saldo GoPay, OVO, atau Dana? Tentu bisa! Kadang, kalau sistemnya mendukung, bayar pakai kartu kredit atau debit juga jadi pilihan. Lengkap kan?
+        -   **Ikuti Alurnya**: Nah, setiap cara bayar itu ada langkah-langkahnya sendiri. Misalnya kalau Virtual Account, nanti ada nomor rekening khusus buat pesanan Anda. Kalau e-wallet, biasanya tinggal scan QR atau nanti diarahkan ke aplikasinya. Gampang kok, tinggal ikuti saja petunjuk yang muncul di layar.
+        -   **Jangan Sampai Telat**: Beberapa metode pembayaran online itu ada batas waktunya lho. Jadi, usahakan bayar sebelum waktunya habis ya, biar pesanannya nggak keburu dibatalin sistem.
+        -   **Konfirmasi Otomatis**: Begitu pembayaran Anda sukses, biasanya langsung ada konfirmasi dari sistem pembayaran, dan status pesanan Anda juga akan berubah. Jadi, Anda nggak perlu khawatir.
+        -   **Toko Siap Memasak**: Setelah lunas, tim di toko langsung deh gercep nyiapin pesanan Anda.
+        -   **Ambil Sendiri Ya**: Ini penting nih, Kak. Meskipun bayarnya online, pesanannya tetap harus diambil sendiri di toko yang sudah Kakak pilih. Kita belum ada layanan antar kalau pesen dari website.
+        -   **Harga Tetap Sama**: Oh iya, bayar online ini nggak ada diskon khusus tambahan ya. Harganya sama saja seperti yang tertera.
+        Gimana, cukup jelas kan? Kalau ada yang mau ditanya lagi soal bayar online, saya siap bantu!
+    - text: |
+        Pembayaran online di website kami **www.ayambakarnusantara.main-tech.site** itu aman dan banyak pilihannya! Biar nggak bingung, ini saya kasih panduannya:
+        Jadi, pas kamu udah selesai pilih-pilih menu dan mau bayar, terus kamu klik "Bayar Online", nanti kamu bakal lihat beberapa opsi:
+        1.  **Transfer via Virtual Account (VA)**: Ini kayak transfer biasa, tapi ke nomor rekening khusus yang dibuat cuma buat pesananmu itu. Biasanya bisa dari berbagai bank besar.
+        2.  **E-Wallet (Dompet Digital)**: Kalau kamu punya GoPay, OVO, Dana, ShopeePay, atau yang lainnya, bisa banget dipakai di sini. Praktis, tinggal scan atau hubungkan akun.
+        3.  **Kartu Kredit/Debit**: Untuk yang punya kartu, opsi ini juga sering tersedia, tergantung dari penyedia layanan pembayaran yang bekerja sama dengan kami.
+        Setelah kamu pilih mau pakai cara yang mana, nanti akan ada petunjuknya di layar. Ikuti saja langkah-langkahnya sampai selesai. Pastikan kamu bayar sebelum batas waktu yang ditentukan ya, kalau ada.
+        Begitu pembayaranmu berhasil, statusnya akan otomatis terupdate, dan toko akan langsung menyiapkan pesananmu.
+        Tapi ingat ya, semua pesanan dari website ini untuk **diambil sendiri di toko**, belum bisa diantar. Dan untuk pembayaran online ini, tidak ada diskon tambahan khusus.
+        Semoga membantu ya! Ada pertanyaan lain soal pembayaran?
+
+  utter_explain_pay_at_store:
+    - text: |
+        Tentu saja! Jika Anda lebih memilih untuk "Bayar di Toko" setelah melakukan pemesanan melalui website kami di **www.ayambakarnusantara.main-tech.site**, berikut adalah panduan lengkapnya untuk Anda:
+        1.  **Pilih Opsi "Bayar di Toko" saat Checkout**: Ketika Anda menyelesaikan pesanan di website, pastikan Anda memilih opsi "Bayar di Toko" atau "Bayar di Tempat" sebagai metode pembayaran Anda.
+        2.  **Konfirmasi Pesanan**: Setelah memilih opsi tersebut, selesaikan proses pemesanan di website. Anda akan menerima nomor pesanan atau konfirmasi bahwa pesanan Anda telah kami terima dan akan diproses.
+        3.  **Tunggu Pesanan Disiapkan**: Tim kami di cabang yang Anda pilih akan segera menyiapkan pesanan Anda. Anda bisa memantau status pesanan Anda. Jika Anda bertanya kepada saya, saya juga bisa bantu cek status pesanan jika Anda memberikan ID pesanannya.
+        4.  **Notifikasi "Siap Diambil"**: Ketika pesanan Anda sudah selesai disiapkan dan siap untuk diambil, Anda akan menerima notifikasi (jika sistem kami mendukungnya) atau status pesanan Anda akan berubah menjadi "Siap Diambil".
+        5.  **Kunjungi Toko yang Dipilih**: Setelah pesanan siap, silakan datang langsung ke cabang Ayam Bakar Nusantara yang telah Anda pilih saat melakukan pemesanan.
+        6.  **Informasikan Pesanan Anda di Kasir**: Sampaikan kepada staf kasir kami bahwa Anda ingin mengambil pesanan online dan sebutkan nomor pesanan Anda atau nama yang digunakan saat memesan.
+        7.  **Lakukan Pembayaran di Kasir**: Di kasir, Anda bisa melakukan pembayaran menggunakan berbagai metode yang kami terima di toko, yaitu:
+            * **Uang Tunai (Cash)**
+            * **Kartu Debit** (dari berbagai bank)
+            * **Kartu Kredit** (Visa, Mastercard, dan lainnya yang kami terima)
+            * **QRIS**: Anda bisa melakukan pembayaran menggunakan aplikasi e-wallet (GoPay, OVO, Dana, ShopeePay, LinkAja, dll.) atau aplikasi mobile banking yang mendukung scan QRIS.
+        8.  **Ambil Pesanan Anda**: Setelah pembayaran berhasil diselesaikan, staf kami akan menyerahkan pesanan lezat Anda.
+        Pastikan Anda datang mengambil pesanan sesuai jam operasional toko ya. Selamat menikmati hidangan Ayam Bakar Nusantara!
+    - text: |
+        Kalau Kakak lebih suka bayar langsung di toko pas ambil pesanan dari **www.ayambakarnusantara.main-tech.site**, caranya gampang banget kok! Ini dia:
+        -   Pas pesan di website, jangan lupa pilih "Bayar di Toko" ya.
+        -   Nanti kalau pesanan Kakak sudah jadi dan siap diambil, statusnya bakal berubah. Kakak bisa cek statusnya ke saya juga.
+        -   Kalau sudah siap, langsung aja meluncur ke toko Ayam Bakar Nusantara yang sudah Kakak pilih.
+        -   Di kasir, tinggal bilang mau ambil pesanan online, kasih tahu nomor pesanannya atau nama Kakak.
+        -   Nah, buat bayarnya, kita terima banyak cara:
+            💸 **Uang Tunai**: Kalau suka yang klasik.
+            💳 **Kartu Debit/Kredit**: Gesek aja, praktis!
+            📱 **QRIS**: Punya GoPay, OVO, Dana, atau mobile banking? Scan aja QRIS-nya, beres!
+        -   Begitu bayar, makanan enak langsung jadi milik Kakak!
+        Ingat, tetap harus diambil sendiri ya pesanannya. Semoga jelas ya, Kak!
+    - text: |
+        Memilih bayar di toko saat pesan online di **www.ayambakarnusantara.main-tech.site** itu pilihan yang nyaman! Ini langkah-langkahnya:
+        1.  Waktu kamu checkout di website, pastikan kamu pilih opsi "Bayar di Toko".
+        2.  Selesaikan pesananmu. Nanti kamu dapat nomor order.
+        3.  Tim kami akan siapkan pesananmu. Kamu bisa tunggu sampai statusnya jadi "Siap Diambil".
+        4.  Kalau sudah siap, langsung aja datang ke cabang yang kamu pilih.
+        5.  Di kasir, bilang mau ambil pesanan dan sebutkan nomormu.
+        6.  Untuk bayarnya, kamu bisa pakai:
+            * Duit cash.
+            * Kartu debit atau kartu kredit.
+            * Atau scan QRIS pakai e-wallet favoritmu (GPay, OVO, DANA, ShopeePay, dan banyak lagi!).
+        7.  Setelah bayar, pesananmu langsung bisa dibawa pulang.
+        Jangan lupa, semua pesanan diambil sendiri ya. Gampang kan? Selamat menikmati!
+
+  utter_explain_how_to_contact_seller:
+    - text: |
+        Tentu! Jika Anda ingin menghubungi atau chat langsung dengan penjual/toko di Ayam Bakar Nusantara, Anda bisa melakukannya melalui website kami di **www.ayambakarnusantara.main-tech.site**. Berikut adalah dua cara utama yang bisa Anda ikuti:
+
+        **Cara Pertama: Jika Anda sudah memiliki Pesanan dengan Toko Tersebut**
+        1.  **Login ke Akun Anda**: Pastikan Anda sudah login ke akun Anda di website kami.
+        2.  **Akses Riwayat atau Detail Pesanan**: Pergi ke bagian "Riwayat Pesanan" atau temukan pesanan spesifik yang ingin Anda diskusikan di bagian "Detail Pesanan".
+        3.  **Kunjungi Halaman Detail Toko dari Pesanan**: Di dalam detail pesanan tersebut, biasanya akan ada tautan atau tombol seperti **"Kunjungi Toko"** atau nama toko yang bisa diklik. Ini akan membawa Anda ke halaman profil atau detail dari toko tempat Anda memesan.
+        4.  **Temukan Tombol Chat**: Di halaman detail toko tersebut, carilah tombol dengan tulisan seperti **"Chat Penjual"**, "Hubungi Penjual", atau ikon chat (biasanya berbentuk balon percakapan).
+        5.  **Mulai Percakapan**: Klik tombol tersebut, dan Anda akan diarahkan ke halaman atau fitur chat. Di sana, Anda bisa langsung mengetik dan mengirimkan pesan atau pertanyaan Anda kepada penjual.
+
+        **Cara Kedua: Jika Anda Ingin Menghubungi Toko Secara Umum (Belum Ada Pesanan atau Terkait Hal Lain)**
+        1.  **Cari Toko**: Gunakan fitur pencarian toko di website kami untuk menemukan toko atau cabang Ayam Bakar Nusantara yang ingin Anda hubungi. Anda bisa mencari berdasarkan nama atau lokasi.
+        2.  **Masuk ke Halaman Detail Toko**: Setelah menemukan toko yang dimaksud, klik untuk masuk ke halaman detail atau profil toko tersebut.
+        3.  **Cari Tombol Chat**: Sama seperti cara pertama, di halaman detail toko ini, carilah tombol **"Chat Penjual"**, "Hubungi Toko", atau ikon chat.
+        4.  **Mulai Percakapan**: Klik tombol tersebut untuk membuka fitur chat dan Anda bisa langsung berkomunikasi dengan pihak toko.
+
+        Setelah Anda mengirimkan pesan, mohon bersabar menunggu respons dari penjual ya, karena mereka mungkin juga sedang melayani pelanggan lain. Semoga berhasil menghubungi penjual! Jika ada kesulitan, beri tahu saya.
+    - text: |
+        Mau ngobrol langsung sama penjualnya di **www.ayambakarnusantara.main-tech.site**? Gampang kok, ada dua jalur utama nih:
+
+        **Jalur 1: Lewat Pesanan yang Sudah Ada**
+        Kalau kamu mau tanya soal pesanan yang udah kamu buat:
+        1.  Buka dulu detail pesananmu itu.
+        2.  Dari situ, nanti ada pilihan buat "Kunjungi Toko". Klik aja itu.
+        3.  Nah, pas udah di halaman tokonya, cari deh tombol "Chat Penjual". Tinggal klik, terus ketik pesanmu!
+
+        **Jalur 2: Langsung dari Info Toko**
+        Kalau mau tanya-tanya umum ke satu toko, belum ada pesanan, atau mau tanya soal lain:
+        1.  Cari dulu toko yang kamu mau di website kita.
+        2.  Kalau udah ketemu, buka halaman detail atau profil tokonya.
+        3.  Di halaman itu, pasti ada tombol "Chat Penjual" atau gambar ikon pesan. Klik itu!
+
+        Udah deh, setelah itu kamu bisa langsung ketik pertanyaanmu. Penjualnya bakal balas secepatnya. Gampang kan? Semoga infonya membantu ya!
+    - text: |
+        Untuk bisa chat atau menghubungi penjual di platform Ayam Bakar Nusantara melalui **www.ayambakarnusantara.main-tech.site**, Anda bisa ikuti langkah-langkah praktis ini:
+
+        Anda punya dua opsi utama untuk memulai percakapan:
+
+        **Opsi A: Melalui Halaman Detail Pesanan Anda** (jika pertanyaan terkait pesanan spesifik)
+        1.  Pastikan Anda sudah login, lalu navigasi ke riwayat pesanan Anda dan pilih pesanan yang relevan.
+        2.  Di detail pesanan, cari tautan atau tombol yang bertuliskan "Kunjungi Toko". Ini akan membawa Anda ke halaman informasi detail toko yang menangani pesanan tersebut.
+        3.  Pada halaman detail toko itu, Anda akan melihat tombol "Chat Penjual". Klik tombol ini.
+        4.  Sebuah jendela atau halaman chat akan terbuka, memungkinkan Anda untuk langsung mengirim pesan ke penjual.
+
+        **Opsi B: Langsung Melalui Halaman Detail Toko** (untuk pertanyaan umum ke toko)
+        1.  Gunakan fitur pencarian di website kami untuk menemukan toko yang Anda tuju.
+        2.  Buka halaman detail toko tersebut.
+        3.  Di halaman profil toko, temukan dan klik tombol "Chat Penjual".
+        4.  Anda akan langsung diarahkan ke fitur chat untuk memulai percakapan.
+
+        Setelah Anda mengirimkan pesan, penjual akan berusaha merespons secepat mungkin. Silakan sampaikan pertanyaan atau kebutuhan Anda dengan jelas ya!
+
+  utter_bot_challenge:
+    - text: "Saya adalah asisten virtual Ayam Bakar Nusantara! Saya di sini untuk membantu Anda dengan informasi seputar menu, toko, pesanan, dan lainnya. Ada yang bisa saya bantu?"
+    - text: "Anda sedang berbicara dengan bot Ayam Bakar Nusantara. Saya dirancang untuk memberikan informasi dan membantu menjawab pertanyaan Anda tentang produk dan layanan kami."
+    - text: "Perkenalkan, saya bot Ayam Bakar Nusantara! Siap melayani pertanyaan Anda seputar kelezatan ayam bakar kami dan informasi lainnya. 😊"
+
+  utter_ask_capabilities:
+    - text: "Saya adalah asisten virtual Ayam Bakar Nusantara! Saya bisa membantu Anda dengan beberapa hal:\n- Mencari produk dan melihat detailnya\n- Mencari informasi toko atau cabang kami\n- Memberikan rekomendasi produk\n- Melihat daftar semua produk atau semua toko\n- Menjelaskan cara memesan online, cara bayar (online/di toko), dan cara menghubungi penjual\n- Mengecek status pesanan dan pembayaran Anda (jika Anda sudah login)\n\nAda yang spesifik ingin Anda tanyakan atau coba?"
+    - text: "Tentu! Sebagai asisten Ayam Bakar Nusantara, saya dapat:\n1. Memberikan informasi detail tentang menu-menu kami.\n2. Membantu Anda menemukan lokasi toko Ayam Bakar Nusantara terdekat.\n3. Memberikan rekomendasi menu spesial.\n4. Menampilkan daftar lengkap produk dan toko.\n5. Menjawab pertanyaan umum seputar cara pemesanan, pembayaran, dan kontak penjual.\n6. Membantu Anda mengecek status pesanan dan pembayaran.\n\nSilakan tanyakan apa yang ingin Anda ketahui!"
+    - text: "Saya bisa membantu Anda terkait banyak hal di Ayam Bakar Nusantara! Misalnya, saya bisa carikan info menu, kasih rekomendasi ayam bakar paling top, bantu cari alamat toko, jelaskan cara order online, cara bayar, sampai cara chat ke penjualnya langsung. Kalau Anda sudah pesan, saya juga bisa bantu cek status order atau pembayarannya. Mau coba yang mana?"
 
 session_config:
   session_expiration_time: 60

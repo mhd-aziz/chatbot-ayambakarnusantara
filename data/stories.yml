@@ -21,6 +21,7 @@ stories:
           - product_name: "Ayam Bakar Madu"
       - slot_was_set:
           - product_name_slot: "Ayam Bakar Madu"
+      - action: utter_acknowledge_search
       - action: action_search_product_api
 
   - story: Sapaan oleh pengguna
@@ -137,3 +138,209 @@ stories:
     steps:
       - intent: check_order_status
       - action: action_check_order_status
+
+  - story: Pengguna ingin mengecek status pembayaran
+    steps:
+      - intent: check_payment_status
+      - action: action_check_payment_status
+
+  - story: Pengguna bertanya cara pesan online
+    steps:
+      - intent: ask_how_to_order_online
+      - action: utter_explain_order_online
+
+  - story: Pengguna bertanya cara bayar online
+    steps:
+      - intent: ask_how_to_pay_online
+      - action: utter_explain_pay_online
+
+  - story: Pengguna bertanya cara bayar di toko
+    steps:
+      - intent: ask_how_to_pay_at_store
+      - action: utter_explain_pay_at_store
+
+  - story: Pengguna bertanya cara menghubungi penjual
+    steps:
+      - intent: ask_how_to_contact_seller
+      - action: utter_explain_how_to_contact_seller
+
+  - story: Sapaan lalu bertanya identitas bot dan basa-basi
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+      - intent: chitchat
+      - action: utter_chitchat
+
+  - story: Sapaan, basa-basi pujian, lalu selamat tinggal
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna mencari produk lalu bertanya cara pesan online
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_product
+        entities:
+          - product_name: "Paket Ayam Bakar Keluarga"
+      - slot_was_set:
+          - product_name_slot: "Paket Ayam Bakar Keluarga"
+      - action: utter_acknowledge_search
+      - action: action_search_product_api
+      - intent: ask_how_to_order_online
+      - action: utter_explain_order_online
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Minta rekomendasi, diselingi tanya identitas bot, lalu lanjut lihat detail produk
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+      - intent: affirm
+      - action: utter_ask_which_recommendation_detail
+      - intent: inform_product_name_from_recommendation
+        entities:
+          - product_name: "Iga Bakar Madu"
+      - slot_was_set:
+          - product_name_slot: "Iga Bakar Madu"
+      - action: action_show_product_detail
+      - intent: chitchat
+      - action: utter_chitchat
+
+  - story: Pengguna bertanya cara bayar di toko lalu cara kontak penjual dan basa-basi
+    steps:
+      - intent: ask_how_to_pay_at_store
+      - action: utter_explain_pay_at_store
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: ask_how_to_contact_seller
+      - action: utter_explain_how_to_contact_seller
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna hanya melakukan chitchat lalu pergi
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna menanyakan identitas bot di awal percakapan
+    steps:
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+      - intent: greet
+      - action: utter_greet
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+
+  - story: Alur kompleks - sapa, cari produk, tidak ada, tanya rekomendasi, pilih, tanya cara bayar, lalu pergi
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_product
+        entities:
+          - product_name: "Es Krim Cokelat"
+      - slot_was_set:
+          - product_name_slot: "Es Krim Cokelat"
+      - action: utter_acknowledge_search
+      - action: action_search_product_api
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+      - intent: affirm
+      - action: utter_ask_which_recommendation_detail
+      - intent: inform_product_name_from_recommendation
+        entities:
+          - product_name: "Ayam Bakar Original"
+      - slot_was_set:
+          - product_name_slot: "Ayam Bakar Original"
+      - action: action_show_product_detail
+      - intent: ask_how_to_pay_online
+      - action: utter_explain_pay_online
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Sapaan lalu tanya kemampuan bot dan lanjut cari produk
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_capabilities
+      - action: utter_ask_capabilities
+      - intent: search_product
+        entities:
+          - product_name: "Sate Ayam"
+      - slot_was_set:
+          - product_name_slot: "Sate Ayam"
+      - action: utter_acknowledge_search
+      - action: action_search_product_api
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna langsung bertanya kemampuan bot lalu berterima kasih
+    steps:
+      - intent: ask_capabilities
+      - action: utter_ask_capabilities
+      - intent: chitchat
+      - action: utter_chitchat
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Setelah mencari toko, pengguna bertanya kemampuan bot lalu minta daftar produk
+    steps:
+      - intent: search_shop
+        entities:
+          - shop_name: "Cabang Pusat"
+      - slot_was_set:
+          - shop_name_slot: "Cabang Pusat"
+      - action: utter_acknowledge_shop_search
+      - action: action_search_shop_api
+      - intent: ask_capabilities
+      - action: utter_ask_capabilities
+      - intent: list_products
+      - action: utter_showing_all_products
+      - action: action_list_products_api
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: Pengguna bertanya kemampuan bot di tengah alur rekomendasi
+    steps:
+      - intent: product_recommendations
+      - action: utter_give_recommendations
+      - action: action_recommend_products
+      - action: utter_ask_after_recommendations
+      - intent: ask_capabilities
+      - action: utter_ask_capabilities
+      - intent: affirm
+      - action: utter_ask_which_recommendation_detail
+      - intent: inform_product_name_from_recommendation
+        entities:
+          - product_name: "Pepes Jamur"
+      - slot_was_set:
+          - product_name_slot: "Pepes Jamur"
+      - action: action_show_product_detail
+      - intent: chitchat
+      - action: utter_chitchat
