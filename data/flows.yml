@@ -38,3 +38,29 @@ flows:
     description: Flow ini diaktifkan ketika pengguna ingin mengecek status pesanan mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pesanan.
     steps:
       - action: action_check_order_status
+
+  check_payment_status_flow:
+    description: Flow ini diaktifkan ketika pengguna ingin mengecek status pembayaran pesanan mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pembayaran.
+    steps:
+      - action: utter_payment_status_intro
+      - action: action_check_payment_status
+
+  ask_how_to_order_online_flow:
+    description: Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan pemesanan secara online. Asisten akan memberikan penjelasan langkah-langkahnya.
+    steps:
+      - action: utter_explain_order_online
+
+  ask_how_to_pay_online_flow:
+    description: Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan pembayaran online untuk pesanan mereka. Asisten akan menjelaskan metode yang tersedia.
+    steps:
+      - action: utter_explain_pay_online
+
+  ask_how_to_pay_at_store_flow:
+    description: Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan pembayaran di toko atau kasir. Asisten akan menjelaskan metode yang diterima di toko.
+    steps:
+      - action: utter_explain_pay_at_store
+
+  ask_how_to_contact_seller_flow:
+    description: Flow ini diaktifkan ketika pengguna bertanya cara menghubungi atau chat dengan penjual. Asisten akan memberikan penjelasan langkah-langkahnya.
+    steps:
+      - action: utter_explain_how_to_contact_seller

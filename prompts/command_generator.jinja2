@@ -2,7 +2,8 @@
 Tugas utama Anda adalah menganalisis pesan pengguna untuk restoran "Ayam Bakar Nusantara" dan memutuskan tindakan
 terbaik selanjutnya.
 Fokuslah untuk mengidentifikasi apakah pengguna ingin mencari produk, meminta rekomendasi produk, melihat daftar semua
-produk, mencari informasi toko/cabang spesifik, melihat daftar semua toko/cabang, atau mengecek status pesanan.
+produk, mencari informasi toko/cabang spesifik, melihat daftar semua toko/cabang, mengecek status pesanan, mengecek
+status pembayaran, bertanya tentang cara pemesanan dan pembayaran, atau bertanya cara menghubungi penjual.
 Berdasarkan analisis ini, buatlah daftar tindakan.
 Tindakan ini dapat memulai flow baru (proses bisnis), mengekstrak dan mengatur nilai slot, atau merespons percakapan
 santai, pertanyaan umum, atau permintaan bantuan kepada manusia.
@@ -72,6 +73,41 @@ Jika pengguna ingin mengecek status pesanan mereka:
 
 ---
 
+## Panduan Mengecek Status Pembayaran
+Jika pengguna ingin mengecek status pembayaran pesanan mereka:
+1. Pastikan maksud pengguna adalah untuk mengetahui status pembayaran dari pesanan yang sudah ada.
+2. Hasilkan tindakan: `start flow check_payment_status_flow`
+
+---
+
+## Panduan Cara Pesan Online
+Jika pengguna bertanya tentang cara melakukan pemesanan secara online:
+1. Pastikan maksud pengguna adalah untuk mengetahui langkah-langkah pemesanan online.
+2. Hasilkan tindakan: `start flow ask_how_to_order_online_flow`
+
+---
+
+## Panduan Cara Bayar Online
+Jika pengguna bertanya tentang cara melakukan pembayaran online untuk pesanan mereka:
+1. Pastikan maksud pengguna adalah untuk mengetahui metode dan proses pembayaran online.
+2. Hasilkan tindakan: `start flow ask_how_to_pay_online_flow`
+
+---
+
+## Panduan Cara Bayar di Toko
+Jika pengguna bertanya tentang cara melakukan pembayaran di toko atau kasir:
+1. Pastikan maksud pengguna adalah untuk mengetahui metode dan proses pembayaran di toko.
+2. Hasilkan tindakan: `start flow ask_how_to_pay_at_store_flow`
+
+---
+
+## Panduan Cara Menghubungi Penjual
+Jika pengguna bertanya tentang cara menghubungi atau chat dengan penjual:
+1. Pastikan maksud pengguna adalah untuk mengetahui langkah-langkah menghubungi penjual.
+2. Hasilkan tindakan: `start flow ask_how_to_contact_seller_flow`
+
+---
+
 ## Konteks Percakapan
 Flow yang Relevan:
 Flow Name: product_search_flow
@@ -105,6 +141,37 @@ map(attribute='description') | first | default('Flow ini diaktifkan ketika pengg
 mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pesanan.') | replace('\"', '\\\"') |
 replace('\n', ' ') | replace('\r', '')) }}
 
+Flow Name: check_payment_status_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'check_payment_status_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna ingin mengecek status pembayaran
+pesanan mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pembayaran.') | replace('\"',
+'\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
+Flow Name: ask_how_to_order_online_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'ask_how_to_order_online_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan
+pemesanan secara online. Asisten akan memberikan penjelasan langkah-langkahnya.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
+Flow Name: ask_how_to_pay_online_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'ask_how_to_pay_online_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan
+pembayaran online untuk pesanan mereka. Asisten akan menjelaskan metode yang tersedia.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
+Flow Name: ask_how_to_pay_at_store_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'ask_how_to_pay_at_store_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna bertanya tentang cara melakukan
+pembayaran di toko atau kasir. Asisten akan menjelaskan metode yang diterima di toko.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
+Flow Name: ask_how_to_contact_seller_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'ask_how_to_contact_seller_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna bertanya cara menghubungi atau chat
+dengan penjual. Asisten akan memberikan penjelasan langkah-langkahnya.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
 
 Current Conversation (User is 'U', Assistant is 'A'):
 {{ current_conversation | replace('USER:', 'U:') | replace('AI:', 'A:') }}
@@ -117,7 +184,9 @@ User's last message: """{{ user_message }}"""
 HANYA berdasarkan pesan terakhir pengguna dan konteks percakapan, hasilkan daftar tindakan.
 JANGAN menghasilkan kode Python. JANGAN menjelaskan diri Anda. Hasilkan HANYA daftar tindakan.
 Jika tidak ada pencarian produk spesifik, pencarian toko spesifik, permintaan daftar semua toko, permintaan rekomendasi
-produk, permintaan untuk melihat semua produk, atau permintaan untuk mengecek status pesanan yang teridentifikasi, atau
+produk, permintaan untuk melihat semua produk, permintaan untuk mengecek status pesanan, permintaan untuk mengecek
+status pembayaran, permintaan untuk cara pesan online, permintaan untuk cara bayar online, permintaan untuk cara
+bayar di toko, atau permintaan untuk cara menghubungi penjual yang teridentifikasi, atau
 tindakan lain yang diketahui, gunakan `offtopic reply` atau `provide info` jika
 sesuai.
 Jika pengguna menyapa, gunakan `offtopic reply`.

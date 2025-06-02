@@ -12,6 +12,8 @@ rules:
       - action: utter_goodbye
 
   - rule: Jalankan pencarian produk dengan acknowledgment ketika intent search_product terdeteksi
+    condition:
+      - active_loop: null
     steps:
       - intent: search_product
       - action: utter_acknowledge_search
@@ -45,3 +47,43 @@ rules:
     steps:
       - intent: check_order_status
       - action: action_check_order_status
+
+  - rule: Jalankan pengecekan status pembayaran ketika diminta
+    steps:
+      - intent: check_payment_status
+      - action: action_check_payment_status
+
+  - rule: Jelaskan cara pesan online
+    steps:
+      - intent: ask_how_to_order_online
+      - action: utter_explain_order_online
+
+  - rule: Jelaskan cara bayar online
+    steps:
+      - intent: ask_how_to_pay_online
+      - action: utter_explain_pay_online
+
+  - rule: Jelaskan cara bayar di toko
+    steps:
+      - intent: ask_how_to_pay_at_store
+      - action: utter_explain_pay_at_store
+
+  - rule: Jelaskan cara menghubungi penjual
+    steps:
+      - intent: ask_how_to_contact_seller
+      - action: utter_explain_how_to_contact_seller
+
+  - rule: Respon tantangan bot
+    steps:
+      - intent: bot_challenge
+      - action: utter_bot_challenge
+
+  - rule: Respon untuk basa-basi umum
+    steps:
+      - intent: chitchat
+      - action: utter_chitchat
+
+  - rule: Jelaskan kemampuan bot
+    steps:
+      - intent: ask_capabilities
+      - action: utter_ask_capabilities

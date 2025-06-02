@@ -6,7 +6,6 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.types import DomainDict
-
 from .action_constants import API_ROOT_URL
 
 
@@ -17,13 +16,11 @@ class ActionListProductsAPI(Action):
     async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict
                   ) -> List[Dict[Text, Any]]:
 
-        # Endpoint untuk mendapatkan semua produk
         request_url = f"{API_ROOT_URL}/product"
         print(f"Requesting all products from URL: {request_url}")
 
         all_products_details = []
 
-        # Pesan awal sebelum memuat
         dispatcher.utter_message(
             text="Baik, saya carikan daftar semua produk yang tersedia...")
 
@@ -52,7 +49,6 @@ class ActionListProductsAPI(Action):
                                     "rating_count": product.get("ratingCount", 0)
                                 })
 
-                            # Urutkan berdasarkan rating terbaik (opsional, tapi konsisten dengan search)
                             if all_products_details:
                                 all_products_details.sort(
                                     key=lambda x: (
@@ -102,8 +98,6 @@ class ActionListProductsAPI(Action):
             return []
 
         if all_products_details:
-            # Batasi jumlah produk yang ditampilkan untuk menghindari pesan terlalu panjang
-            # Anda bisa menambahkan paginasi di masa mendatang jika perlu
             products_to_display = all_products_details[:10]
 
             message_parts = [
@@ -118,7 +112,6 @@ class ActionListProductsAPI(Action):
                 part += "\n"
                 part += f"  Harga: Rp {product_detail['price']}\n"
                 part += f"  Kategori: {product_detail['category']}\n"
-                # part += f"  Stok: {product_detail['stock']}\n" # Mungkin tidak perlu ditampilkan semua untuk daftar umum
                 if product_detail['image_url']:
                     part += f"  Foto: {product_detail['image_url']}\n"
                 if avg_rating >= 4.5 and rating_count >= 3:
@@ -132,7 +125,7 @@ class ActionListProductsAPI(Action):
                     f"\n...dan {len(all_products_details) - 10} produk lainnya.")
 
             dispatcher.utter_message(text="".join(message_parts))
-        # Jika tidak ada produk setelah semua proses (seharusnya sudah ditangani di atas)
+
         elif not all_products_details:
             dispatcher.utter_message(
                 text="Maaf, saat ini tidak ada produk yang dapat ditampilkan.")
