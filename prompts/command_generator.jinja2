@@ -1,10 +1,9 @@
-{# Template Jinja2 untuk CompactLLMCommandGenerator - Fokus pada Output Daftar Tindakan #}
 ## Deskripsi Tugas
 Tugas utama Anda adalah menganalisis pesan pengguna untuk restoran "Ayam Bakar Nusantara" dan memutuskan tindakan
 terbaik selanjutnya.
 Fokuslah untuk mengidentifikasi apakah pengguna ingin mencari produk, meminta rekomendasi produk, melihat daftar semua
-produk, mencari informasi toko/cabang spesifik, atau melihat daftar semua toko/cabang. Berdasarkan analisis ini, buatlah
-daftar tindakan.
+produk, mencari informasi toko/cabang spesifik, melihat daftar semua toko/cabang, atau mengecek status pesanan.
+Berdasarkan analisis ini, buatlah daftar tindakan.
 Tindakan ini dapat memulai flow baru (proses bisnis), mengekstrak dan mengatur nilai slot, atau merespons percakapan
 santai, pertanyaan umum, atau permintaan bantuan kepada manusia.
 
@@ -55,8 +54,6 @@ disebutkan).
 2. Jika pengguna menyebutkan kategori atau jenis produk tertentu untuk rekomendasi (misalnya "rekomendasi ayam bakar",
 "rekomendasi minuman"), NLU akan mencoba mengekstrak informasi ini sebagai entitas.
 3. Utamanya, hasilkan tindakan: `start flow product_recommendation_flow`
-(Biarkan aksi `action_recommend_products` yang dipanggil oleh flow ini yang menangani logika pengambilan rekomendasi,
-yang mungkin dapat memanfaatkan entitas yang telah diekstrak oleh NLU dari pesan pengguna).
 
 ---
 
@@ -65,6 +62,13 @@ Jika pengguna ingin melihat daftar semua produk, katalog lengkap, atau semua men
 Nusantara" secara umum (bukan mencari produk spesifik):
 1. Pastikan maksud pengguna adalah untuk melihat daftar keseluruhan produk.
 2. Hasilkan tindakan: `start flow list_products_flow`
+
+---
+
+## Panduan Mengecek Status Pesanan
+Jika pengguna ingin mengecek status pesanan mereka:
+1. Pastikan maksud pengguna adalah untuk mengetahui status pesanan yang sudah ada.
+2. Hasilkan tindakan: `start flow check_order_status_flow`
 
 ---
 
@@ -95,6 +99,13 @@ Description: {{ (available_flows | selectattr('name', 'equalto', 'list_products_
 first | default('Membantu pengguna melihat daftar semua produk yang tersedia.') | replace('\"', '\\\"') | replace('\n',
 ' ') | replace('\r', '')) }}
 
+Flow Name: check_order_status_flow
+Description: {{ (available_flows | selectattr('name', 'equalto', 'check_order_status_flow') |
+map(attribute='description') | first | default('Flow ini diaktifkan ketika pengguna ingin mengecek status pesanan
+mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pesanan.') | replace('\"', '\\\"') |
+replace('\n', ' ') | replace('\r', '')) }}
+
+
 Current Conversation (User is 'U', Assistant is 'A'):
 {{ current_conversation | replace('USER:', 'U:') | replace('AI:', 'A:') }}
 
@@ -106,8 +117,8 @@ User's last message: """{{ user_message }}"""
 HANYA berdasarkan pesan terakhir pengguna dan konteks percakapan, hasilkan daftar tindakan.
 JANGAN menghasilkan kode Python. JANGAN menjelaskan diri Anda. Hasilkan HANYA daftar tindakan.
 Jika tidak ada pencarian produk spesifik, pencarian toko spesifik, permintaan daftar semua toko, permintaan rekomendasi
-produk, atau permintaan untuk melihat
-semua produk yang teridentifikasi, atau tindakan lain yang diketahui, gunakan `offtopic reply` atau `provide info` jika
+produk, permintaan untuk melihat semua produk, atau permintaan untuk mengecek status pesanan yang teridentifikasi, atau
+tindakan lain yang diketahui, gunakan `offtopic reply` atau `provide info` jika
 sesuai.
 Jika pengguna menyapa, gunakan `offtopic reply`.
 

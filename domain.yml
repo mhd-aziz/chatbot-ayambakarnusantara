@@ -16,10 +16,15 @@ intents:
   - product_recommendations
   - affirm
   - deny
-  - inform_product_name
-  - inform_product_name_from_recommendation
+  - inform_product_name:
+      use_entities:
+        - product_name
+  - inform_product_name_from_recommendation:
+      use_entities:
+        - product_name
   - list_products
   - out_of_scope
+  - check_order_status
 
 entities:
   - product_name
@@ -47,6 +52,7 @@ actions:
   - action_recommend_products
   - action_show_product_detail
   - action_list_products_api
+  - action_check_order_status
   - utter_greet
   - utter_goodbye
   - utter_ask_product_name_slot
@@ -69,6 +75,12 @@ actions:
   - utter_showing_all_products
   - utter_no_products_available
   - utter_out_of_scope
+  - utter_ask_order_id
+  - utter_no_orders_found
+  - utter_orders_found_intro
+  - utter_order_status_detail
+  - utter_api_error
+  - utter_auth_error
 
 responses:
   utter_greet:
@@ -230,6 +242,19 @@ responses:
     - text: "Hmm, sepertinya itu di luar topik Ayam Bakar Nusantara. Mungkin ada pertanyaan lain tentang menu atau toko kami?"
     - text: "Saya tidak dilatih untuk menjawab pertanyaan itu. Saya bisa bantu carikan info menu, rekomendasi menu, dan informasi dari toko yang terdaftar di website Ayam Bakar Nusantara"
     - text: "Waduh, saya kurang paham maksudnya. Ada yang bisa dibantu terkait Ayam Bakar Nusantara?"
+
+  utter_ask_order_id:
+    - text: "Boleh tahu ID pesanan yang ingin Anda cek?"
+  utter_no_orders_found:
+    - text: "Sepertinya belum ada pesanan aktif untuk Anda saat ini."
+  utter_orders_found_intro:
+    - text: "Berikut adalah status pesanan Anda:"
+  utter_order_status_detail:
+    - text: "Pesanan {orderId} ({shopName}): {orderStatus}"
+  utter_api_error:
+    - text: "Maaf, terjadi kesalahan saat mencoba mengambil status pesanan Anda. Silakan coba lagi nanti."
+  utter_auth_error:
+    - text: "Maaf, saya tidak bisa mengakses informasi pesanan Anda. Pastikan Anda sudah login."
 
 session_config:
   session_expiration_time: 60
