@@ -495,3 +495,14 @@ nlu:
       - tolong terjemahkan ini ke bahasa inggris
       - kamu dibuat oleh siapa? (jika bukan bagian dari bot_challenge)
       - apa itu blackhole?
+
+  - intent: check_order_status
+    examples: |
+      - cek status pesanan saya
+      - bagaimana pesanan saya?
+      - status order terakhir
+      - pesanan saya sudah sampai mana?
+      - lihat status pesanan
+      - mau cek orderan
+      - info pesanan
+

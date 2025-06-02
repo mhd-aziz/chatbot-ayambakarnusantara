@@ -61,7 +61,7 @@ stories:
       - action: utter_acknowledge_shop_search
       - action: action_search_shop_api
 
-  - story: Pengguna meminta rekomendasi produk (alur dasar yang mengarah ke pertanyaan)
+  - story: Pengguna meminta rekomendasi produk
     steps:
       - intent: product_recommendations
       - action: utter_give_recommendations
@@ -132,3 +132,8 @@ stories:
       - intent: list_products
       - action: utter_showing_all_products
       - action: action_list_products_api
+
+  - story: Pengguna ingin mengecek status pesanan
+    steps:
+      - intent: check_order_status
+      - action: action_check_order_status

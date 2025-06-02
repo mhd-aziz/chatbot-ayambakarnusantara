@@ -33,3 +33,8 @@ flows:
     steps:
       - action: utter_showing_all_products
       - action: action_list_products_api
+
+  check_order_status_flow:
+    description: Flow ini diaktifkan ketika pengguna ingin mengecek status pesanan mereka. Asisten akan memanggil action untuk mengambil dan menampilkan informasi pesanan.
+    steps:
+      - action: action_check_order_status
