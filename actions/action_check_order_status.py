@@ -1,4 +1,3 @@
-# actions/action_check_order_status.py
 import aiohttp
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker

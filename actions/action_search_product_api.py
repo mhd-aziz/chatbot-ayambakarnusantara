@@ -1,4 +1,3 @@
-# actions/action_search_product_api.py
 import aiohttp
 import urllib.parse
 from typing import Any, Text, Dict, List
@@ -8,12 +7,12 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.types import DomainDict
 
-from .action_constants import API_ROOT_URL  # Impor konstanta
+from .action_constants import API_ROOT_URL  
 
 
-class ActionSearchProductAPI(Action):  # Nama kelas diubah
+class ActionSearchProductAPI(Action): 
     def name(self) -> Text:
-        return "action_search_product_api"  # Nama action untuk Rasa diubah
+        return "action_search_product_api"  
 
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict
@@ -72,13 +71,13 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
                             print(
                                 f"API product reported an error for search term '{product_search_term}': {api_message}")
                             dispatcher.utter_message(
-                                text=f"Info dari server: {api_message}")  # Pertimbangkan terjemahan
+                                text=f"Info dari server: {api_message}") 
                             return [SlotSet("product_name_slot", None)]
                         else:
                             print(
                                 f"API product response format issue for search term '{product_search_term}': {response_data}")
                             dispatcher.utter_message(
-                                text="Format respons API produk tidak sesuai.")  # Pertimbangkan terjemahan
+                                text="Format respons API produk tidak sesuai.")
                             return [SlotSet("product_name_slot", None)]
                     else:
                         print(
@@ -86,7 +85,6 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
                         error_text = await response.text()
                         print(f"API product error response: {error_text}")
                         dispatcher.utter_message(
-                            # Pertimbangkan terjemahan
                             text=f"Maaf, gagal mengambil data produk dari server (status: {response.status})."
                         )
                         return [SlotSet("product_name_slot", None)]
@@ -94,25 +92,25 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
             print(
                 f"Connection Error calling product API for search term '{product_search_term}': {e}")
             dispatcher.utter_message(
-                text="Maaf, tidak dapat terhubung ke layanan produk. Periksa koneksi Anda.")  # Pertimbangkan terjemahan
+                text="Maaf, tidak dapat terhubung ke layanan produk. Periksa koneksi Anda.") 
             return [SlotSet("product_name_slot", None)]
         except aiohttp.ContentTypeError as e:
             print(
                 f"Content Type Error from product API for search term '{product_search_term}' (not JSON?): {e}")
             dispatcher.utter_message(
-                text="Maaf, ada masalah dengan format data dari layanan produk.")  # Pertimbangkan terjemahan
+                text="Maaf, ada masalah dengan format data dari layanan produk.")  
             return [SlotSet("product_name_slot", None)]
         except Exception as e:
             print(
                 f"An unexpected error occurred for product search term '{product_search_term}': {e}")
             dispatcher.utter_message(
-                text="Maaf, terjadi kesalahan yang tidak terduga saat memproses permintaan produk Anda.")  # Pertimbangkan terjemahan
+                text="Maaf, terjadi kesalahan yang tidak terduga saat memproses permintaan produk Anda.") 
             return [SlotSet("product_name_slot", None)]
 
         if found_products_details:
             products_to_display = found_products_details[:5]
             message_parts = [
-                f"Berikut produk yang kami temukan untuk '{product_search_term}':\n"]  # Pertimbangkan terjemahan
+                f"Berikut produk yang kami temukan untuk '{product_search_term}':\n"] 
 
             for product_detail in products_to_display:
                 part = f"\n- **{product_detail['name']}**"
@@ -134,6 +132,6 @@ class ActionSearchProductAPI(Action):  # Nama kelas diubah
 
             if len(found_products_details) > 5:
                 message_parts.append(
-                    f"\nDan {len(found_products_details) - 5} produk lainnya.")  # Pertimbangkan terjemahan
+                    f"\nDan {len(found_products_details) - 5} produk lainnya.") 
             dispatcher.utter_message(text="".join(message_parts))
         return [SlotSet("product_name_slot", None)]
