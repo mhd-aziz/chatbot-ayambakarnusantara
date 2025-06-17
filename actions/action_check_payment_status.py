@@ -1,7 +1,5 @@
-# actions/action_check_payment_status.py
 import aiohttp
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
@@ -33,7 +31,6 @@ class ActionCheckPaymentStatus(Action):
             return "Gagal"
         elif status_lower == "expired":
             return "Kedaluwarsa"
-        # Tambahkan status lain jika ada
         return f"Status: {status.capitalize() if status else 'Tidak Diketahui'}"
 
     async def run(
@@ -65,7 +62,6 @@ class ActionCheckPaymentStatus(Action):
                                 dispatcher.utter_message(
                                     template="utter_payment_status_intro")
                                 displayed_orders = 0
-                                # Batasi untuk tidak terlalu banyak pesan
                                 for order in orders[:5]:
                                     payment_details = order.get(
                                         "paymentDetails")
@@ -74,7 +70,7 @@ class ActionCheckPaymentStatus(Action):
                                     shop_name = order.get("shopRingkas", {}).get(
                                         "shopName", "Toko tidak diketahui")
                                     items_desc_list = [item.get('name', 'item') for item in order.get(
-                                        'items', [])[:2]]  # Ambil maks 2 item pertama
+                                        'items', [])[:2]]
                                     items_desc = ", ".join(items_desc_list)
                                     if len(order.get('items', [])) > 2:
                                         items_desc += " dll."
@@ -116,20 +112,18 @@ class ActionCheckPaymentStatus(Action):
                                         text="\n".join(message_parts))
                                     displayed_orders += 1
 
-                                # Jika semua order terfilter (misal tidak ada paymentDetails)
                                 if displayed_orders == 0 and orders:
                                     dispatcher.utter_message(
                                         text="Tidak ada detail pembayaran yang bisa ditampilkan untuk pesanan Anda saat ini.")
                                 elif not orders:
-                                    # Bisa juga template baru: utter_no_payment_info_found
                                     dispatcher.utter_message(
                                         template="utter_no_orders_found")
 
-                            else:  # Tidak ada pesanan
+                            else:
                                 dispatcher.utter_message(
                                     template="utter_no_orders_found")
 
-                        else:  # success == false
+                        else:
                             error_message_from_api = response_data.get(
                                 "message", "Gagal mengambil data pesanan.")
                             print(
@@ -145,7 +139,6 @@ class ActionCheckPaymentStatus(Action):
                         print(
                             f"{self.name()}: API returned {response.status} (Unauthorized/Forbidden).")
                         dispatcher.utter_message(template="utter_auth_error")
-                    else:  # Error status lain
                         error_text = await response.text()
                         print(
                             f"{self.name()}: API request failed with status: {response.status}, response: {error_text}")

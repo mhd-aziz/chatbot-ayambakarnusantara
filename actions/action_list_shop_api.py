@@ -1,12 +1,9 @@
-# actions/action_list_shops_api.py
 import aiohttp
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.types import DomainDict
-
 from .action_constants import API_ROOT_URL
 
 
@@ -18,12 +15,11 @@ class ActionListShopsAPI(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: DomainDict
     ) -> List[Dict[Text, Any]]:
 
-        request_url = f"{API_ROOT_URL}/shop"  # Endpoint untuk semua toko
+        request_url = f"{API_ROOT_URL}/shop"
         print(f"Requesting all shops data from URL: {request_url}")
 
         found_shops_details = []
 
-        # Pesan awal sebelum memuat, bisa ditambahkan utter_ di domain
         dispatcher.utter_message(
             text="Baik, saya carikan daftar semua toko yang tersedia...")
 
@@ -37,7 +33,7 @@ class ActionListShopsAPI(Action):
                             if not api_shops:
                                 dispatcher.utter_message(
                                     text="Maaf, saat ini tidak ada toko yang terdaftar.")
-                                return []  # Tidak perlu SlotSet jika tidak ada slot yang diurus action ini secara khusus
+                                return []
 
                             for shop in api_shops:
                                 found_shops_details.append({

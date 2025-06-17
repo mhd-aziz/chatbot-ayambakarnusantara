@@ -193,6 +193,35 @@ nlu:
       - info seluruh gerai ABN
       - ada berapa cabang sih?
       - tampilkan seluruh lokasi outlet
+      - kasih tau semua alamat cabang dong
+      - pengen tau daftar semua cabang yang ada
+      - bisa liatin semua toko kalian?
+      - tolong tampilkan daftar gerai
+      - dimana aja bisa nemu ayam bakar nusantara?
+      - mau tau semua lokasi
+      - list semua cabang resmi
+      - tolong berikan daftar seluruh outlet
+      - cabang-cabangnya di kota mana aja?
+      - saya mau lihat list toko
+      - perlihatkan semua cabang
+      - list alamat semua toko
+      - lokasi semua toko kalian dimana?
+      - bisa sebutkan semua cabang?
+      - tampilkan semua lokasi ABN
+      - info gerai lengkap
+      - daftar semua outlet yang buka
+      - mau lihat semua cabang yang tersedia
+      - tunjukkan list toko
+      - ada di mana saja gerai kalian?
+      - tolong daftar semua toko yang ada
+      - kasih info semua toko
+      - bisa kasih daftar cabang?
+      - semua cabang ayam bakar nusantara
+      - lihat daftar toko lengkap
+      - tampilkan seluruh gerai
+      - info semua outlet dong
+      - mau daftar semua cabang
+      - list lengkap toko
 
   - intent: list_products
     examples: |
@@ -220,6 +249,30 @@ nlu:
       - semua item di menu ada apa aja?
       - katalog produknya dong
       - menu apa saja yang ada?
+      - kasih lihat daftar menu lengkap
+      - tunjukin semua menunya
+      - apa aja isi menunya?
+      - saya mau lihat semua menu
+      - tampilkan menu lengkap
+      - tolong list semua menu
+      - menu kalian ada apa aja?
+      - pengen liat semua yang dijual
+      - list seluruh produk
+      - tolong tampilkan semua menu makanan
+      - bisa lihat katalog menu?
+      - daftar harga dan menu
+      - menu komplit
+      - tunjukkan daftar menu
+      - perlihatkan semua menu
+      - saya mau tau semua menu yang ada
+      - apa saja menu andalan?
+      - kasih liat semua makanan
+      - tolong berikan daftar menu
+      - semua menu yang ada
+      - list menu lengkap
+      - tolong perlihatkan menu lengkapnya
+      - lihat semua pilihan menu
+      - tampilkan semua item menu
 
   - intent: product_recommendations
     examples: |
@@ -265,6 +318,12 @@ nlu:
       - sarankan [menu pembuka](product_name) yang ringan
       - kalau untuk [anak-anak](product_name) apa rekomendasinya?
       - ada saran [paket hemat](product_name) buat keluarga?
+      - yang paling laris apa?
+      - tolong sarankan menu
+      - menu yang paling joss apa?
+      - ada saran makanan?
+      - yang paling direkomendasikan apa?
+      - enaknya makan apa ya?
 
   - intent: affirm
     examples: |
@@ -313,6 +372,10 @@ nlu:
       - Boleh banget
       - Iya, saya mengkonfirmasi
       - Konfirm
+      - yup
+      - bener
+      - haah
+      - okey
 
   - intent: deny
     examples: |
@@ -355,6 +418,15 @@ nlu:
       - Batalkan saja
       - Jangan lakukan
       - Stop
+      - tidak usah
+      - gajadi
+      - batalkan
+      - bukan
+      - salah
+      - tidak, terima kasih
+      - jangan deh
+      - ngga
+      - tidak jadi
 
   - intent: goodbye
     examples: |
@@ -394,6 +466,16 @@ nlu:
       - saya pamit
       - oke, bye
       - terima kasih, sampai jumpa
+      - udahan
+      - selesai
+      - gitu aja dulu
+      - sampai nanti
+      - saya off dulu
+      - thanks, bye
+      - ok, thx, bye
+      - makasih, dadah
+      - sudah cukup
+      - pamit undur diri
 
   - intent: inform_product_name
     examples: |
@@ -421,6 +503,29 @@ nlu:
       - yang [paket nasi ayam](product_name) itu
       - [soto betawi](product_name) aja
       - tadi yang [kopi susu](product_name)
+      - [cah kangkung](product_name)
+      - yang [sayur asem](product_name)
+      - maksudnya [tempe mendoan](product_name)
+      - [iga bakar](product_name)
+      - oh, yang [es campur](product_name)
+      - [jus alpukat](product_name)
+      - [nasi putih](product_name)
+      - [sambal matah](product_name)
+      - yang saya mau [ayam penyet](product_name)
+      - produknya itu [bebek goreng crispy](product_name)
+      - [es jeruk](product_name) ya
+      - yang [karedok](product_name)
+      - [gurame pesmol](product_name)
+      - namanya [es dawet](product_name)
+      - [otak-otak bakar](product_name)
+      - [perkedel jagung](product_name)
+      - [lumpia semarang](product_name)
+      - [mie goreng](product_name)
+      - oh, itu [kwetiau siram](product_name)
+      - saya mau [capcay kuah](product_name)
+      - yang [fuyunghai](product_name)
+      - maksud saya [udang saus padang](product_name)
+      - [cumi goreng tepung](product_name)
 
   - intent: inform_product_name_from_recommendation
     examples: |
@@ -446,6 +551,30 @@ nlu:
       - yang [sate padang](product_name) tadi
       - mau lihat info lebih lanjut tentang [jus sirsak](product_name)
       - saya tertarik sama [paket hemat pelajar](product_name)
+      - yang [iga bakar](product_name) dari rekomendasi itu
+      - coba info [bebek goreng](product_name) yang direkomendasikan
+      - yang nomor dua, [gurame asam manis](product_name)
+      - saya mau [sayur asem](product_name) dari saran tadi
+      - pilih [paket A](product_name) dari rekomendasi
+      - yang [soto ayam](product_name)
+      - kayaknya [es kelapa muda](product_name) seger
+      - yang [nasi uduk komplit](product_name) aja
+      - info [cumi saus tiram](product_name) dong
+      - jelaskan [tahu gejrot](product_name) dari saranmu
+      - saya mau yang [ayam penyet sambal ijo](product_name)
+      - lihat detail [kerak telor](product_name) yang tadi
+      - pilih [es pisang ijo](product_name)
+      - yang [paket rame-rame](product_name)
+      - aku mau [sate maranggi](product_name) dari daftar itu
+      - [ayam bakar taliwang](product_name) aja
+      - yang [sop iga sapi](product_name) kelihatannya enak
+      - info lebih lanjut soal [es kuwut bali](product_name)
+      - mau yang [paket hemat B](product_name)
+      - yang [bakwan jagung](product_name) tadi
+      - aku pilih [nasi liwet](product_name)
+      - detail [pempek kapal selam](product_name) dong
+      - yang [rujak cingur](product_name) itu
+      - saya mau [tempe mendoan](product_name)
 
   - intent: inform_shop_name
     examples: |
@@ -461,6 +590,42 @@ nlu:
       - oh yang [Outlet Cikini](shop_name)
       - [Nusantara Jaya](shop_name)
       - yang saya maksud [Cabang Bogor](shop_name)
+      - tokonya [ABN Sudirman](shop_name)
+      - yang [cabang Depok](shop_name)
+      - maksudnya [Ayam Bakar Nusantara cabang Bekasi](shop_name)
+      - [cabang Kelapa Gading](shop_name)
+      - yang di [area Menteng](shop_name)
+      - [cabang Surabaya](shop_name)
+      - tokonya yang di [Bandung](shop_name)
+      - oh yang [cabang Yogyakarta](shop_name)
+      - maksudnya [outlet Semarang](shop_name)
+      - yang di [dekat stasiun](shop_name)
+      - [ABN Plaza Indonesia](shop_name)
+      - yang di [Mall Taman Anggrek](shop_name)
+      - [cabang Pondok Indah](shop_name)
+      - [Ayam Bakar Nusantara cabang Cilandak](shop_name)
+      - tokonya yang [Rawamangun](shop_name)
+      - yang di [Sunter](shop_name)
+      - [cabang Pluit](shop_name)
+      - [outlet PIK](shop_name)
+      - maksudnya [toko di Grand Indonesia](shop_name)
+      - yang [cabang Medan](shop_name)
+      - [ABN Makassar](shop_name)
+      - [cabang Palembang](shop_name)
+      - yang di [Denpasar](shop_name)
+      - [outlet Kuta](shop_name)
+      - tokonya yang di [Jalan Sabang](shop_name)
+      - yang di [Tebet](shop_name)
+      - [cabang Cibubur](shop_name)
+      - [Ayam Bakar Nusantara Jatinangor](shop_name)
+      - yang [cabang Margonda](shop_name)
+      - [outlet di rest area](shop_name)
+      - maksudnya [toko di bandara](shop_name)
+      - yang [cabang Tangerang Kota](shop_name)
+      - [ABN BSD](shop_name)
+      - [cabang Cikokol](shop_name)
+      - yang [dekat kampus UMN](shop_name)
+      - [outlet Summarecon Mall Serpong](shop_name)
 
   - intent: out_of_scope
     examples: |
@@ -493,6 +658,25 @@ nlu:
       - berita terbaru hari ini apa?
       - tolong terjemahkan ini ke bahasa inggris
       - apa itu blackhole?
+      - harga saham bbca berapa?
+      - tolong buatkan puisi
+      - siapa penemu bola lampu?
+      - kapan indonesia merdeka?
+      - ceritakan tentang dirimu
+      - apa film favoritmu?
+      - kamu tinggal dimana?
+      - tolong hitung 123 * 456
+      - apa jadwal kereta api besok?
+      - ibukota australia apa?
+      - ada lowongan kerja?
+      - tolong carikan saya hotel
+      - apa bedanya kucing dan anjing?
+      - cara install windows 11
+      - resep rendang padang
+      - kenapa air laut asin?
+      - tolong tuliskan email untuk bos saya
+      - apa itu inflasi?
+      - bagaimana cara kerja internet?
 
   - intent: check_order_status
     examples: |
@@ -503,6 +687,48 @@ nlu:
       - lihat status pesanan
       - mau cek orderan
       - info pesanan
+      - orderan saya gimana kabarnya?
+      - status pesanan terakhir saya apa?
+      - tolong cek order saya
+      - pesanan saya udah diproses belum?
+      - lacak pesanan saya
+      - status pengiriman pesanan
+      - bagaimana status orderan saya?
+      - cek status order
+      - pesanan saya sudah jadi?
+      - mau tau status pesanan
+      - info order terakhir
+      - apakah pesanan saya sedang diantar?
+      - pesanan saya sudah siap diambil?
+      - status pesananku
+      - cek order
+      - lihat progres pesanan
+      - info status pesanan
+      - order saya statusnya apa?
+      - gimana progres orderan saya?
+      - pesanan saya sudah dikonfirmasi?
+      - tolong lihat status order saya
+      - cek status pengiriman
+      - mau cek progres pesanan
+      - orderan saya sudah dikirim?
+      - status pesanan saya sekarang
+      - cek status pesanan terakhir
+      - pesanan saya sedang apa?
+      - status orderan
+      - lihat status orderan terakhir
+      - gimana kabar pesanan saya?
+      - tolong update status pesanan
+      - pesanan saya sudah siap?
+      - mau lihat status order
+      - order saya dimana sekarang?
+      - lacak pengiriman
+      - status order saya gimana?
+      - info status order
+      - cek pesanan
+      - tolong lacak pesanan saya
+      - pesanan saya sudah sampai?
+      - lihat pesanan saya
+      - mau cek status orderan terakhir
 
   - intent: check_payment_status
     examples: |
@@ -516,6 +742,44 @@ nlu:
       - payment status saya gimana?
       - mau cek pembayaran
       - histori pembayaran
+      - pembayaran saya sudah masuk?
+      - status pembayaran saya apa?
+      - cek status bayar
+      - apakah pembayaran saya berhasil?
+      - lihat status pembayaran terakhir
+      - info payment
+      - pembayaran saya sudah dikonfirmasi?
+      - status bayar pesanan
+      - mau tau status pembayaran
+      - cek konfirmasi pembayaran
+      - apakah sudah lunas?
+      - status lunas atau belum?
+      - lihat histori pembayaran saya
+      - pembayaran terakhir saya gimana?
+      - cek payment status
+      - info status pembayaran
+      - status pembayaran order saya
+      - tolong cek pembayaran saya
+      - pembayaran saya sukses atau gagal?
+      - mau cek status pembayaran terakhir
+      - status payment orderan saya
+      - lihat status pembayaran pesanan
+      - info pembayaran saya
+      - cek status payment
+      - histori payment
+      - status bayar saya
+      - pembayaran saya gimana?
+      - apakah order saya sudah lunas?
+      - status konfirmasi pembayaran
+      - mau lihat status bayar
+      - cek histori pembayaran
+      - status pembayaran pesanan terakhir
+      - info bayar
+      - pembayaran saya sudah diterima?
+      - cek status pembayaran order
+      - status pembayaran saya gimana ya?
+      - tolong cek status pembayaran
+      - cek lunas
 
   - intent: ask_how_to_order_online
     examples: |
@@ -534,6 +798,39 @@ nlu:
       - saya belum pernah pesan online di sini, caranya?
       - apa saja yang harus saya lakukan untuk pesan online?
       - apakah ada layanan pesan antar? bagaimana caranya?
+      - tolong jelaskan cara order via web
+      - gimana prosedur pesan online?
+      - panduan order online
+      - cara melakukan pemesanan online
+      - saya ingin memesan secara daring, bagaimana?
+      - bagaimana cara saya order dari website?
+      - jelaskan langkah pemesanan online
+      - proses order online seperti apa?
+      - cara pesan makanan online
+      - mau order online, gimana?
+      - tolong pandu saya cara pesan online
+      - bagaimana tata cara pesan online?
+      - alur pemesanan online
+      - step-step order online
+      - cara beli online
+      - gimana cara pesen dari rumah?
+      - jelaskan cara pemesanan daring
+      - saya mau order pickup, caranya?
+      - bagaimana cara pesan untuk diambil sendiri?
+      - proses pesan online gimana?
+      - tolong beri tahu cara order online
+      - bagaimana saya bisa memesan lewat internet?
+      - cara order di website gimana?
+      - pandu saya pesan online
+      - gimana cara order online di sini?
+      - jelaskan cara order
+      - mau pesan, gimana caranya?
+      - bisa pesan dari sini?
+      - cara ordernya gimana?
+      - pesan online bisa?
+      - ada cara pesan online?
+      - gimana cara pesan?
+      - tolong dong cara pesannya
 
   - intent: ask_how_to_pay_online
     examples: |
@@ -552,6 +849,39 @@ nlu:
       - apakah menerima pembayaran via gopay, ovo, atau dana?
       - cara bayar pakai kartu kredit online?
       - amankah pembayaran online di sini?
+      - pilihan pembayaran online apa aja?
+      - bisa bayar online?
+      - cara bayar via internet
+      - jelaskan metode pembayaran digital
+      - gimana cara bayar pakai virtual account?
+      - terima pembayaran apa saja untuk online?
+      - bayar online nya lewat apa?
+      - proses pembayaran online
+      - panduan bayar online
+      - cara bayar pesanan daring
+      - bagaimana saya membayar online?
+      - opsi pembayaran online
+      - bisa bayar pakai shopeepay?
+      - bayar online gimana caranya?
+      - cara bayar non-tunai
+      - metode pembayaran yang tersedia online
+      - jelaskan cara bayar daring
+      - saya mau bayar online, gimana?
+      - tata cara pembayaran online
+      - alur bayar online
+      - step-step bayar online
+      - cara bayar digitalnya gimana?
+      - bisa bayar pakai QRIS online?
+      - apa bisa bayar pakai m-banking?
+      - pandu saya cara bayar online
+      - gimana cara selesaikan pembayaran online?
+      - jelaskan opsi pembayaran online
+      - cara bayar pesanan via website
+      - bayarnya bisa online?
+      - gimana cara bayar pesanan saya?
+      - bayar online gimana sih?
+      - bisa bayar via apa aja?
+      - cara bayarnya gimana?
 
   - intent: ask_how_to_pay_at_store
     examples: |
@@ -570,6 +900,39 @@ nlu:
       - bayar di store bisa pakai apa aja?
       - kalau pickup, bayarnya gimana?
       - saya pilih bayar di tempat, prosedurnya?
+      - di toko terima pembayaran apa saja?
+      - cara bayar kalau ambil di tempat
+      - bisa bayar cash?
+      - terima kartu debit?
+      - bisa gesek kartu kredit?
+      - bayar di kasir pakai apa?
+      - panduan bayar di tempat
+      - jelaskan cara bayar di outlet
+      - metode pembayaran di gerai
+      - kalau bayar di toko, gimana?
+      - opsi bayar di toko
+      - tata cara pembayaran di kasir
+      - bayar di tempat gimana caranya?
+      - saya mau bayar tunai, bisa?
+      - bisa bayar pakai e-wallet di kasir?
+      - terima pembayaran non-tunai di toko?
+      - metode pembayaran untuk pickup
+      - alur bayar di toko
+      - step-step bayar di kasir
+      - cara bayar saat ambil pesanan
+      - pandu saya cara bayar di toko
+      - di kasir bisa bayar pakai apa aja?
+      - jelaskan opsi bayar di toko
+      - kalau ambil sendiri bayarnya gimana?
+      - bisa bayar di tempat?
+      - cara bayar di lokasi
+      - bayar langsung bisa?
+      - gimana cara bayar di kasir?
+      - bayar di toko bisa pakai apa?
+      - terima pembayaran apa di toko?
+      - metode pembayaran di toko apa?
+      - bayar di outlet
+      - cara bayar tunai
 
   - intent: ask_how_to_contact_seller
     examples: |
@@ -588,6 +951,39 @@ nlu:
       - bagaimana cara saya chat ke toko?
       - kalau mau complain ke penjual gimana?
       - pengen nanya ketersediaan barang langsung ke penjual
+      - cara kontak toko gimana?
+      - bisa ngobrol sama penjual?
+      - gimana cara chat ke outlet?
+      - saya mau hubungi toko, caranya?
+      - panduan menghubungi penjual
+      - jelaskan cara chat dengan seller
+      - bagaimana cara kirim pesan ke toko?
+      - fitur chat penjual dimana?
+      - cara bertanya ke penjual
+      - mau kontak seller
+      - gimana cara saya bisa ngobrol sama penjual?
+      - alur chat dengan penjual
+      - step-step hubungi penjual
+      - saya mau tanya langsung ke toko
+      - cara chat ke gerai
+      - ada nomor yang bisa dihubungi?
+      - bagaimana cara saya kontak toko?
+      - mau tanya ke seller
+      - bisa chat sama tokonya langsung?
+      - cara chat seller gimana?
+      - pandu saya cara chat penjual
+      - gimana cara kontak penjualnya?
+      - jelaskan cara menghubungi toko
+      - saya mau chat penjual
+      - cara ngontak penjual gimana?
+      - mau tanya ke toko langsung
+      - fitur chat nya dimana?
+      - kontak toko
+      - cara ngobrol sama seller
+      - hubungi penjual
+      - chat penjual
+      - kontak seller
+      - tanya penjual
 
   - intent: bot_challenge
     examples: |
@@ -605,6 +1001,40 @@ nlu:
       - ini teh siapa?
       - saya bicara dengan siapa?
       - apakah kamu AI?
+      - ini beneran bot?
+      - saya sedang berbicara dengan siapa?
+      - kamu program komputer ya?
+      - ini mesin atau orang?
+      - apakah saya sedang chat dengan robot?
+      - kamu itu apa sih?
+      - identitas kamu apa?
+      - kamu bukan manusia kan?
+      - ini otomatis kan?
+      - saya ngobrol sama AI ya?
+      - siapa yang membuat kamu?
+      - kamu ini program apa?
+      - jelaskan tentang dirimu
+      - ini jawaban otomatis?
+      - siapa di balik chat ini?
+      - kamu punya nama?
+      - kamu robot kan?
+      - ini bot ya?
+      - apakah ini AI?
+      - saya lagi ngomong sama siapa?
+      - kamu ini siapa sih?
+      - kamu ini beneran ada?
+      - kamu nyata atau tidak?
+      - ini balasan dari bot?
+      - kamu itu sejenis apa?
+      - siapa namamu?
+      - kamu itu asisten virtual?
+      - apakah kamu kecerdasan buatan?
+      - kamu itu chatbot?
+      - siapa yang jawab ini?
+      - ini dibalas oleh siapa?
+      - kamu itu aplikasi ya?
+      - kamu ini sistem?
+      - kamu ini apa sebenarnya?
 
   - intent: chitchat
     examples: |
@@ -645,6 +1075,19 @@ nlu:
       - gak papa
       - lagi ngapain?
       - lagi sibuk gak?
+      - oh gitu
+      - oke, noted
+      - mantap jiwa
+      - keren banget
+      - bagus
+      - sipp
+      - okelah
+      - paham
+      - yoi
+      - noted
+      - wah keren
+      - hahaha
+      - wkwkwk
 
   - intent: ask_capabilities
     examples: |
@@ -668,3 +1111,31 @@ nlu:
       - menu bantuan
       - daftar perintah
       - apa yang bisa kamu lakukan untuk ayam bakar nusantara?
+      - kamu bisa bantu apa?
+      - apa saja fiturmu?
+      - kemampuanmu apa saja?
+      - tolong jelaskan apa yang bisa kamu lakukan
+      - kamu bisa apa?
+      - apa saja yang bisa ditanyakan?
+      - fungsi kamu apa saja?
+      - jelaskan fitur-fiturmu
+      - apa saja yang bisa kamu bantu?
+      - menu help
+      - bantuan
+      - daftar command
+      - command list
+      - apa saja yang bisa saya lakukan di sini?
+      - tunjukkan kemampuanmu
+      - tolong jelaskan fiturmu
+      - apa saja fungsimu?
+      - kamu bisa bantu saya dengan apa?
+      - apa yang dapat kamu lakukan?
+      - jelaskan apa saja yang bisa kamu lakukan
+      - apa saja yang bisa saya tanya?
+      - kamu bisa bantu apa saja?
+      - menu
+      - tolong bantuan
+      - list fitur
+      - apa saja yang bisa kamu kerjakan untuk saya?
+      - apa saja bantuan yang tersedia?
+      - tolong list kemampuanmu

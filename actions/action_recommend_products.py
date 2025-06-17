@@ -1,4 +1,3 @@
-# actions/action_recommend_products.py
 import aiohttp
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
@@ -6,7 +5,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.types import DomainDict
 
-from .action_constants import API_ROOT_URL 
+from .action_constants import API_ROOT_URL
 
 
 class ActionRecommendProducts(Action):
@@ -88,11 +87,11 @@ class ActionRecommendProducts(Action):
             reverse=True
         )
 
-        products_to_display = recommended_products_details[:3]
+        products_to_display = recommended_products_details
 
         if products_to_display:
             message_parts = [
-                f"Berikut beberapa {user_query_context} rekomendasi terbaik dari kami:\n"]
+                f"Berikut semua {user_query_context} rekomendasi terbaik dari kami:\n"]
             for product in products_to_display:
                 part = f"\n- **{product['name']}**"
                 avg_rating = product.get('average_rating', 0.0)
@@ -110,10 +109,6 @@ class ActionRecommendProducts(Action):
                 elif avg_rating >= 4.0 and rating_count >= 1:
                     part += "  👍 *Rating produk ini bagus!*\n"
                 message_parts.append(part)
-
-            if len(recommended_products_details) > 3:
-                message_parts.append(
-                    f"\nDan {len(recommended_products_details) - 3} {user_query_context} lain yang juga bagus.")
 
             dispatcher.utter_message(text="".join(message_parts))
         else:

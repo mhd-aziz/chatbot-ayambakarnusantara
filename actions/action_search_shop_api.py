@@ -1,4 +1,3 @@
-# actions/action_search_shop_api.py
 import aiohttp
 import urllib.parse
 from typing import Any, Text, Dict, List

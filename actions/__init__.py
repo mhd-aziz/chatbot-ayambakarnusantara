@@ -1,5 +1,3 @@
-# actions/__init__.py
-
 from .action_search_product_api import ActionSearchProductAPI
 from .action_search_shop_api import ActionSearchShopAPI
 from .action_recommend_products import ActionRecommendProducts

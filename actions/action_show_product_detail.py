@@ -1,13 +1,10 @@
-# actions/action_show_product_detail.py
 import aiohttp
 import urllib.parse
 from typing import Any, Text, Dict, List
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from rasa_sdk.types import DomainDict
-
 from .action_constants import API_ROOT_URL
 
 
@@ -37,7 +34,6 @@ class ActionShowProductDetail(Action):
         try:
             encoded_search_term = urllib.parse.quote_plus(
                 product_name_to_detail)
-            # URL untuk mencari produk berdasarkan nama untuk mendapatkan ID-nya
             search_url = f"{API_ROOT_URL}/product?searchByName={encoded_search_term}"
             print(f"Mencari ID produk dengan URL: {search_url}")
 
@@ -48,17 +44,15 @@ class ActionShowProductDetail(Action):
                         if search_data.get("success") and "data" in search_data and "products" in search_data["data"]:
                             api_products = search_data["data"]["products"]
                             if api_products:
-                                # Cari produk yang namanya paling cocok (case-insensitive)
                                 for prod in api_products:
                                     if prod.get("name", "").lower() == product_name_to_detail.lower():
                                         product_id_found = prod.get("_id")
                                         break
-                                # Jika tidak ada yang cocok persis, ambil ID produk pertama dari hasil pencarian
                                 if not product_id_found:
                                     product_id_found = api_products[0].get(
                                         "_id")
 
-                                if not product_id_found:  # Seharusnya tidak terjadi jika api_products tidak kosong
+                                if not product_id_found:
                                     print(
                                         f"Tidak ditemukan ID untuk produk '{product_name_to_detail}' dari hasil pencarian.")
                             else:
@@ -76,11 +70,10 @@ class ActionShowProductDetail(Action):
                     text=f"Maaf, saya tidak bisa menemukan detail untuk produk '{product_name_to_detail}'. Mungkin nama produknya kurang spesifik atau tidak ada?")
                 return [SlotSet("product_name_slot", None)]
 
-            # Gunakan ID yang ditemukan untuk mengambil detail produk
             detail_url = f"{API_ROOT_URL}/product/{product_id_found}"
             print(f"Mengambil detail produk dari URL: {detail_url}")
 
-            async with aiohttp.ClientSession() as session:  # Sesi baru untuk request detail
+            async with aiohttp.ClientSession() as session:
                 async with session.get(detail_url) as detail_response:
                     if detail_response.status == 200:
                         detail_data = await detail_response.json()

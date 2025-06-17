@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  assistant:
+    image: europe-west3-docker.pkg.dev/rasa-releases/rasa-pro/rasa-pro:3.12.14
+    container_name: rasa_ayambakarnusantara
+    volumes:
+      - .:/app
+    command:
+      - 'run'
+    ports:
+      - '5005:5005'
+    env_file:
+      - .env
+    user: root
+
+  action_server:
+    image: europe-west3-docker.pkg.dev/rasa-releases/rasa-pro/rasa-pro:3.12.14
+    container_name: actions_ayambakarnusantara
+    volumes:
+      - .:/app
+    command:
+      - 'run'
+      - 'actions'
+    ports: 
+      - '5055:5055'
+    env_file:
+      - .env
+    user: root
